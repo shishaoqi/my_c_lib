@@ -1,0 +1,11 @@
+1.c: ll=-1, lr=-1
+2.c: ll=0,  lr=-1
+3.c; ll=1,  lr=-1
+
+4.c: ll=-1, lr=0
+5.c: ll=0,  lr=0
+6.c: ll=1,  lr=0
+
+7.c: ll=-1, lr=1
+8.c: ll=0,  lr=1
+9.c; ll=1,  lr=1

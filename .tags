@@ -1,0 +1,691 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ANY	.\exception.c	/^exception ANY = { "ANY" };$/;"	v
+AddArrayToSet	.\set.c	/^void AddArrayToSet(setADT set, void *array, int n)$/;"	f
+AddERef	.\set.c	/^static void AddERef(setADT set, void *ep)$/;"	f	file:
+AddElementToIterator	.\set.c	/^static void AddElementToIterator(void *np, void *clientData)$/;"	f	file:
+AddElementToIterator	.\symtab.c	/^static void AddElementToIterator(string key, void *value, void *clientData)$/;"	f	file:
+AddIntElement	.\set.c	/^void AddIntElement(setADT set, int element)$/;"	f
+AddPtrElement	.\set.c	/^void AddPtrElement(setADT set, void *element)$/;"	f
+AddSegment	.\xdisplay.c	/^static void AddSegment(int x0, int y0, int x1, int y1)$/;"	f	file:
+AddToIteratorList	.\iterator2.c	/^void AddToIteratorList(iteratorADT iterator, void *ep)$/;"	f
+ArcCmd	.\xmanager.h	/^   ArcCmd,$/;"	e	enum:__anon14
+ArcMessage	.\xmanager.c	/^static void ArcMessage(string args)$/;"	f	file:
+BSTData	.\bst.c	/^static bstDataT *BSTData(bstADT bst, treeT t)$/;"	f	file:
+BSTData	.\bst_save.c	/^static bstDataT *BSTData(bstADT bst, treeT t)$/;"	f	file:
+BSTLeftChild	.\bst.c	/^void *BSTLeftChild(bstADT bst, void *np)$/;"	f
+BSTLeftChild	.\bst_save.c	/^void *BSTLeftChild(bstADT bst, void *np)$/;"	f
+BSTRightChild	.\bst.c	/^void *BSTRightChild(bstADT bst, void *np)$/;"	f
+BSTRightChild	.\bst_save.c	/^void *BSTRightChild(bstADT bst, void *np)$/;"	f
+BSTRoot	.\bst.c	/^void *BSTRoot(bstADT bst)$/;"	f
+BSTRoot	.\bst_save.c	/^void *BSTRoot(bstADT bst)$/;"	f
+Bold	.\extgraph.h	149;"	d
+BorderPixels	.\xdisplay.c	49;"	d	file:
+CharCmpFn	.\cmpfn.c	/^int CharCmpFn(const void *p1, const void *p2)$/;"	f
+CharExchFn	.\cmpfn.c	/^void CharExchFn(void *p1, void *p2)$/;"	f
+CharToString	.\strlib.c	/^string CharToString(char ch)$/;"	f
+ClearCmd	.\xmanager.h	/^   ClearCmd,$/;"	e	enum:__anon14
+ClearMessage	.\xmanager.c	/^static void ClearMessage(string args)$/;"	f	file:
+ClientTimeout	.\xmanager.c	89;"	d	file:
+CommandBufferSize	.\xmanager.h	24;"	d
+Concat	.\strlib.c	/^string Concat(string s1, string s2)$/;"	f
+ConvertToLowerCase	.\strlib.c	/^string ConvertToLowerCase(string s)$/;"	f
+ConvertToUpperCase	.\strlib.c	/^string ConvertToUpperCase(string s)$/;"	f
+CopyString	.\strlib.c	/^string CopyString(string s)$/;"	f
+CreateString	.\strlib.c	/^static string CreateString(int len)$/;"	f	file:
+DefaultFont	.\xdisplay.c	52;"	d	file:
+DefaultSize	.\graphics.c	46;"	d	file:
+DefineColor	.\graphics.c	/^void DefineColor(string name,$/;"	f
+DeleteBSTNode	.\bst.c	/^bool DeleteBSTNode(bstADT bst, void *kp)$/;"	f
+DeleteBSTNode	.\bst_save.c	/^bool DeleteBSTNode(bstADT bst, void *kp)$/;"	f
+DeleteERef	.\set.c	/^static void DeleteERef(setADT set, void *ep)$/;"	f	file:
+DeleteIntElement	.\set.c	/^void DeleteIntElement(setADT set, int element)$/;"	f
+DeletePtrElement	.\set.c	/^void DeletePtrElement(setADT set, void *element)$/;"	f
+Delete_FixLeftImbalance	.\bst.c	/^static int Delete_FixLeftImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+Delete_FixLeftImbalance	.\bst_save.c	/^static int Delete_FixLeftImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+Delete_FixRightImbalance	.\bst.c	/^static int Delete_FixRightImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+Delete_FixRightImbalance	.\bst_save.c	/^static int Delete_FixRightImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+Dequeue	.\queue.c	/^queueElementT Dequeue(queueADT queue){$/;"	f
+Dequeue	.\queuelist.c	/^queueElementT Dequeue(queueADT queue){$/;"	f
+DesiredHeight	.\graphics.c	45;"	d	file:
+DesiredWidth	.\graphics.c	44;"	d	file:
+DisplayFontMetrics	.\xdisplay.c	/^void DisplayFontMetrics(double *pAscent, double *pDescent, double *pHeight)$/;"	f
+DisplayPolygon	.\xdisplay.c	/^static void DisplayPolygon(void)$/;"	f	file:
+DoubleCmpFn	.\cmpfn.c	/^int DoubleCmpFn(const void *p1, const void *p2)$/;"	f
+DoubleExchFn	.\cmpfn.c	/^void DoubleExchFn(void *p1, void *p2)$/;"	f
+DrawArc	.\graphics.c	/^void DrawArc(double r, double start, double sweep)$/;"	f
+DrawEllipticalArc	.\graphics.c	/^void DrawEllipticalArc(double rx, double ry,$/;"	f
+DrawLine	.\graphics.c	/^void DrawLine(double dx, double dy)$/;"	f
+DrawTextString	.\graphics.c	/^void DrawTextString(string text)$/;"	f
+ES_EvalBody	.\exception.h	158;"	d
+ES_Exception	.\exception.h	159;"	d
+ES_Initialize	.\exception.h	157;"	d
+ETooManyExceptClauses	.\exception.h	152;"	d
+EUnhandledException	.\exception.h	153;"	d
+EnableIteration	.\iterator2.c	/^void EnableIteration(void *collection, newIteratorFnT newFn)$/;"	f
+EndFilledRegion	.\graphics.c	/^void EndFilledRegion(void)$/;"	f
+EndRegionCmd	.\xmanager.h	/^   EndRegionCmd,$/;"	e	enum:__anon14
+EndRegionMessage	.\xmanager.c	/^static void EndRegionMessage(string args)$/;"	f	file:
+Enqueue	.\queue.c	/^void Enqueue(queueADT queue, queueElementT element)$/;"	f
+Enqueue	.\queuelist.c	/^void Enqueue(queueADT queue, queueElementT element){$/;"	f
+Enter	.\symtab.c	/^void Enter(symtabADT table, string key, void *value)$/;"	f
+Epsilon	.\xdisplay.c	61;"	d	file:
+Error	.\genlib.c	/^void Error(string msg, ...)$/;"	f
+ErrorException	.\exception.c	/^exception ErrorException = { "ErrorException" };$/;"	v
+ErrorExitStatus	.\genlib.c	23;"	d	file:
+ExitGraphics	.\graphics.c	/^void ExitGraphics(void)$/;"	f
+ExitGraphicsCmd	.\xmanager.h	/^   ExitGraphicsCmd$/;"	e	enum:__anon14
+ExpandStack	.\stack.c	/^static void ExpandStack(stackADT stack)$/;"	f	file:
+FALSE	.\genlib.h	/^       typedef enum {FALSE, TRUE} bool;$/;"	e	enum:__anon15
+FALSE	.\genlib.h	58;"	d
+FD_CLR	.\xcompat.h	39;"	d
+FD_CLR	.\xcompat.h	45;"	d
+FD_ISSET	.\xcompat.h	40;"	d
+FD_ISSET	.\xcompat.h	46;"	d
+FD_SET	.\xcompat.h	38;"	d
+FD_SET	.\xcompat.h	44;"	d
+FD_ZERO	.\xcompat.h	37;"	d
+FD_ZERO	.\xcompat.h	43;"	d
+FOPEN_MAX	.\xcompat.h	33;"	d
+FindBSTNode	.\bst.c	/^void *FindBSTNode(bstADT bst, void *kp)$/;"	f
+FindBSTNode	.\bst_save.c	/^void *FindBSTNode(bstADT bst, void *kp)$/;"	f
+FindCell	.\symtab.c	/^static cellT *FindCell(cellT *cp, string key)$/;"	f	file:
+FindChar	.\strlib.c	/^int FindChar(char ch, string text, int start)$/;"	f
+FindColorName	.\graphics.c	/^static int FindColorName(string name)$/;"	f	file:
+FindHandler	.\exception.c	/^static context_block *FindHandler(exception *e)$/;"	f	file:
+FindString	.\strlib.c	/^int FindString(string str, string text, int start)$/;"	f
+FixLeftImbalance	.\bst.c	/^static void FixLeftImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+FixLeftImbalance	.\bst_save.c	/^static void FixLeftImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+FixRightImbalance	.\bst.c	/^static void FixRightImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+FixRightImbalance	.\bst_save.c	/^static void FixRightImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+FloatCmpFn	.\cmpfn.c	/^int FloatCmpFn(const void *p1, const void *p2)$/;"	f
+FloatExchFn	.\cmpfn.c	/^void FloatExchFn(void *p1, void *p2)$/;"	f
+FontMetricsCmd	.\xmanager.h	/^   FontMetricsCmd,$/;"	e	enum:__anon14
+FontMetricsMessage	.\xmanager.c	/^static void FontMetricsMessage(string args)$/;"	f	file:
+ForceRedraw	.\xdisplay.c	/^static void ForceRedraw(void)$/;"	f	file:
+FreeBST	.\bst.c	/^void FreeBST(bstADT bst, nodeFnT freeNodeFn)$/;"	f
+FreeBST	.\bst_save.c	/^void FreeBST(bstADT bst, nodeFnT freeNodeFn)$/;"	f
+FreeBlock	.\genlib.c	/^void FreeBlock(void *ptr)$/;"	f
+FreeBucketChain	.\symtab.c	/^static void FreeBucketChain(cellT *cp)$/;"	f	file:
+FreeIterator	.\iterator1.c	/^void FreeIterator(iteratorADT iterator)$/;"	f
+FreeIterator	.\iterator2.c	/^void FreeIterator(iteratorADT iterator)$/;"	f
+FreeNodeFn	.\set.c	/^static void FreeNodeFn(void *np, void *clientData)$/;"	f	file:
+FreeQueue	.\queue.c	/^void FreeQueue(queueADT queue){$/;"	f
+FreeQueue	.\queuelist.c	/^void FreeQueue(queueADT queue){$/;"	f
+FreeSet	.\set.c	/^void FreeSet(setADT set)$/;"	f
+FreeStack	.\stack.c	/^void FreeStack(stackADT stack)$/;"	f
+FreeStack	.\stacklist.c	/^void FreeStack(stackADT stack)$/;"	f
+FreeSymbolTable	.\symtab.c	/^void FreeSymbolTable(symtabADT table)$/;"	f
+Freescanner	.\scanadt.c	/^void Freescanner(scannerADT scanner)$/;"	f
+GCFgBg	.\xdisplay.c	62;"	d	file:
+GLDegrees	.\glibrary.c	/^double GLDegrees(double radians)$/;"	f
+GLMax	.\glibrary.c	/^int GLMax(int x, int y)$/;"	f
+GLMaxF	.\glibrary.c	/^double GLMaxF(double x, double y)$/;"	f
+GLMin	.\glibrary.c	/^int GLMin(int x, int y)$/;"	f
+GLMinF	.\glibrary.c	/^double GLMinF(double x, double y)$/;"	f
+GLRadians	.\glibrary.c	/^double GLRadians(double degrees)$/;"	f
+GLRound	.\glibrary.c	/^int GLRound(double x)$/;"	f
+GetBlock	.\genlib.c	/^void *GetBlock(size_t nbytes)$/;"	f
+GetCompareFunction	.\set.c	/^cmpFnT GetCompareFunction(setADT set)$/;"	f
+GetCurrentException	.\exception.h	257;"	d
+GetCurrentX	.\graphics.c	/^double GetCurrentX(void)$/;"	f
+GetCurrentY	.\graphics.c	/^double GetCurrentY(void)$/;"	f
+GetEraseMode	.\graphics.c	/^bool GetEraseMode(void)$/;"	f
+GetExceptionName	.\exception.h	255;"	d
+GetExceptionValue	.\exception.h	256;"	d
+GetFont	.\graphics.c	/^string GetFont(void)$/;"	f
+GetFontAscent	.\graphics.c	/^double GetFontAscent(void)$/;"	f
+GetFontDescent	.\graphics.c	/^double GetFontDescent(void)$/;"	f
+GetFontHeight	.\graphics.c	/^double GetFontHeight(void)$/;"	f
+GetFullScreenHeight	.\graphics.c	/^double GetFullScreenHeight(void)$/;"	f
+GetFullScreenWidth	.\graphics.c	/^double GetFullScreenWidth(void)$/;"	f
+GetHeightCmd	.\xmanager.h	/^   GetHeightCmd,$/;"	e	enum:__anon14
+GetInteger	.\simpio.c	/^int GetInteger(void)$/;"	f
+GetLine	.\simpio.c	/^string GetLine(void)$/;"	f
+GetLong	.\simpio.c	/^long GetLong(void)$/;"	f
+GetMouseCmd	.\xmanager.h	/^   GetMouseCmd,$/;"	e	enum:__anon14
+GetMouseMessage	.\xmanager.c	/^static void GetMouseMessage(string args)$/;"	f	file:
+GetMouseX	.\graphics.c	/^double GetMouseX(void)$/;"	f
+GetMouseY	.\graphics.c	/^double GetMouseY(void)$/;"	f
+GetPenColor	.\graphics.c	/^string GetPenColor(void)$/;"	f
+GetPointSize	.\graphics.c	/^int GetPointSize(void)$/;"	f
+GetQueueElement	.\queue.c	/^queueElementT GetQueueElement(queueADT queue, int index){$/;"	f
+GetQueueElement	.\queuelist.c	/^queueElementT GetQueueElement(queueADT queue, int index)$/;"	f
+GetReal	.\simpio.c	/^double GetReal(void)$/;"	f
+GetScannerSpaceOption	.\scanadt.c	/^spaceOptionT GetScannerSpaceOption(scannerADT scanner)$/;"	f
+GetSetClass	.\set.c	/^setClassT GetSetClass(setADT set)$/;"	f
+GetStackElement	.\stack.c	/^stackElementT GetStackElement(stackADT stack, int index)$/;"	f
+GetStackElement	.\stacklist.c	/^stackElementT GetStackElement(stackADT stack, int index)$/;"	f
+GetStyle	.\graphics.c	/^int GetStyle(void)$/;"	f
+GetWidthCmd	.\xmanager.h	/^   GetWidthCmd,$/;"	e	enum:__anon14
+GetWindowHeight	.\graphics.c	/^double GetWindowHeight(void)$/;"	f
+GetWindowTitle	.\graphics.c	/^string GetWindowTitle(void)$/;"	f
+GetWindowWidth	.\graphics.c	/^double GetWindowWidth(void)$/;"	f
+GetXResolution	.\graphics.c	/^double GetXResolution(void)$/;"	f
+GetYResolution	.\graphics.c	/^double GetYResolution(void)$/;"	f
+HandlerExists	.\exception.c	/^bool HandlerExists(exception *e)$/;"	f
+HasColor	.\graphics.c	/^bool HasColor(void)$/;"	f
+Hash	.\symtab.c	/^static int Hash(string s, int nBuckets)$/;"	f	file:
+IgnoreSpaces	.\scanadt.h	/^typedef enum {PreserveSpaces, IgnoreSpaces} spaceOptionT;$/;"	e	enum:__anon3
+InOrder	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	e	enum:__anon1
+InchesX	.\xdisplay.c	/^static double InchesX(int x)$/;"	f	file:
+InchesY	.\xdisplay.c	/^static double InchesY(int y)$/;"	f	file:
+InitCheck	.\graphics.c	/^static void InitCheck(void)$/;"	f	file:
+InitColors	.\graphics.c	/^static void InitColors(void)$/;"	f	file:
+InitForEach	.\foreach.c	/^void InitForEach(void *ep, void *collection)$/;"	f
+InitGC	.\xdisplay.c	/^static void InitGC(void)$/;"	f	file:
+InitGraphics	.\graphics.c	/^void InitGraphics(void)$/;"	f
+InitGraphicsState	.\graphics.c	/^static void InitGraphicsState(void)$/;"	f	file:
+InitSetNodeFn	.\set.c	/^static void InitSetNodeFn(void *np, void *kp, void *clientData)$/;"	f	file:
+InitialBufferSize	.\simpio.c	22;"	d	file:
+InitialStackSize	.\stack.c	9;"	d	file:
+InsertBSTNode	.\bst.c	/^int InsertBSTNode(bstADT bst, void *kp, void *clientData)$/;"	f
+InsertBSTNode	.\bst_save.c	/^int InsertBSTNode(bstADT bst, void *kp, void *clientData)$/;"	f
+InsertKey	.\iterator1.c	/^static void InsertKey(string key, void *value, void *clientData)$/;"	f	file:
+InstallFont	.\graphics.c	/^static void InstallFont(void)$/;"	f	file:
+IntCmpFn	.\cmpfn.c	/^int IntCmpFn(const void *p1, const void *p2)$/;"	f
+IntExchFn	.\cmpfn.c	/^void IntExchFn(void *p1, void *p2)$/;"	f
+IntSet	.\set.h	/^typedef enum { IntSet, PtrSet } setClassT;$/;"	e	enum:__anon12
+IntegerToString	.\strlib.c	/^string IntegerToString(int n)$/;"	f
+Intersection	.\set.c	/^setADT Intersection(setADT s1, setADT s2)$/;"	f
+IsIntElement	.\set.c	/^bool IsIntElement(setADT set, int element)$/;"	f
+IsPtrment	.\set.c	/^bool IsPtrment(setADT set, void *element)$/;"	f
+IsSubset	.\set.c	/^bool IsSubset(setADT s1, setADT s2)$/;"	f
+Italic	.\extgraph.h	150;"	d
+IteratorPassword	.\iterator2.c	23;"	d	file:
+IthChar	.\strlib.c	/^char IthChar(string s, int i)$/;"	f
+LineCmd	.\xmanager.h	/^   LineCmd,$/;"	e	enum:__anon14
+LineMessage	.\xmanager.c	/^static void LineMessage(string args)$/;"	f	file:
+LongCmpFn	.\cmpfn.c	/^int LongCmpFn(const void *p1, const void *p2)$/;"	f
+LongExchFn	.\cmpfn.c	/^void LongExchFn(void *p1, void *p2)$/;"	f
+LonglongCmpFn	.\cmpfn.c	/^int LonglongCmpFn(const void *p1, const void *p2)$/;"	f
+Lookup	.\symtab.c	/^void *Lookup(symtabADT table, string key)$/;"	f
+MainEventLoop	.\xmanager.c	/^static void MainEventLoop(void)$/;"	f	file:
+MapBST	.\bst.c	/^void MapBST(nodeFnT fn, bstADT bst, OrderT order, void *clientData)$/;"	f
+MapBST	.\bst_save.c	/^void MapBST(nodeFnT fn, bstADT bst, OrderT order, void *clientData)$/;"	f
+MapSymbolTable	.\symtab.c	/^void MapSymbolTable(symtabFnT fn, symtabADT table, void *clientData)$/;"	f
+MaxColors	.\graphics.c	47;"	d	file:
+MaxDigits	.\strlib.c	34;"	d	file:
+MaxExceptionsPerScope	.\exception.h	151;"	d
+MaxFontList	.\xdisplay.c	50;"	d	file:
+MaxFontName	.\xmanager.h	25;"	d
+MaxQueueSize	.\queue.c	18;"	d	file:
+MaxTextString	.\xmanager.h	26;"	d
+MaxUnhandledMessage	.\exception.c	24;"	d	file:
+MinColors	.\graphics.c	48;"	d	file:
+MoreTokensExist	.\scanadt.c	/^bool MoreTokensExist(scannerADT scanner)$/;"	f
+MouseButtonIsDown	.\graphics.c	/^bool MouseButtonIsDown(void)$/;"	f
+MovePen	.\graphics.c	/^void MovePen(double x, double y)$/;"	f
+Multiplier	.\symtab.c	179;"	d	file:
+NBuckets	.\symtab.c	17;"	d	file:
+NElements	.\set.c	/^int NElements(setADT set)$/;"	f
+NGrays	.\xdisplay.c	80;"	d	file:
+New	.\genlib.h	153;"	d
+NewArray	.\genlib.h	163;"	d
+NewBST	.\bst.c	/^bstADT NewBST(int size, cmpFnT cmpFn, nodeInitFnT nodeInitFn)$/;"	f
+NewBST	.\bst_save.c	/^bstADT NewBST(int size, cmpFnT cmpFn, nodeInitFnT nodeInitFn)$/;"	f
+NewIntSet	.\set.c	/^setADT NewIntSet(void)$/;"	f
+NewIterator	.\iterator1.c	/^iteratorADT NewIterator(symtabADT table)$/;"	f
+NewIterator	.\iterator2.c	/^iteratorADT NewIterator(void *collection)$/;"	f
+NewIteratorList	.\iterator2.c	/^iteratorADT NewIteratorList(int size, cmpFnT cmpFn)$/;"	f
+NewPtrSet	.\set.c	/^setADT NewPtrSet(cmpFnT cmpFn)$/;"	f
+NewQueue	.\queue.c	/^queueADT NewQueue(void){$/;"	f
+NewQueue	.\queuelist.c	/^queueADT NewQueue(void){$/;"	f
+NewRefBool	.\ref.c	/^void *NewRefBool(bool value)$/;"	f
+NewRefChar	.\ref.c	/^void *NewRefChar(char value)$/;"	f
+NewRefDouble	.\ref.c	/^void *NewRefDouble(double value)$/;"	f
+NewRefFloat	.\ref.c	/^void *NewRefFloat(float value)$/;"	f
+NewRefInt	.\ref.c	/^void *NewRefInt(int value)$/;"	f
+NewRefLong	.\ref.c	/^void *NewRefLong(long value)$/;"	f
+NewRefShort	.\ref.c	/^void *NewRefShort(short value)$/;"	f
+NewRefUnsignedChar	.\ref.c	/^void *NewRefUnsignedChar(unsigned char value)$/;"	f
+NewRefUnsignedLong	.\ref.c	/^void *NewRefUnsignedLong(unsigned long value)$/;"	f
+NewRefUnsignedShort	.\ref.c	/^void *NewRefUnsignedShort(unsigned short value)$/;"	f
+NewScanner	.\scanadt.c	/^scannerADT NewScanner(void)$/;"	f
+NewSet	.\set.c	/^static setADT NewSet(setClassT class, cmpFnT cmpFn)$/;"	f	file:
+NewSetIterator	.\set.c	/^static iteratorADT NewSetIterator(void *collection)$/;"	f	file:
+NewStack	.\stack.c	/^stackADT NewStack(void)$/;"	f
+NewStack	.\stacklist.c	/^stackADT NewStack(void)$/;"	f
+NewSymbolTable	.\symtab.c	/^symtabADT NewSymbolTable(void)$/;"	f
+NewSymtabIterator	.\symtab.c	/^static iteratorADT NewSymtabIterator(void *collection)$/;"	f	file:
+NoRegion	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon8	file:
+Normal	.\extgraph.h	148;"	d
+NotWaiting	.\xdisplay.c	/^    NotWaiting,$/;"	e	enum:__anon2	file:
+OrderT	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	t	typeref:enum:__anon1
+PStartSize	.\xdisplay.c	51;"	d	file:
+Pause	.\graphics.c	/^void Pause(double seconds)$/;"	f
+PenHasMoved	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon8	file:
+Pi	.\glibrary.c	16;"	d	file:
+PixelsX	.\xdisplay.c	/^static int PixelsX(double x)$/;"	f	file:
+PixelsY	.\xdisplay.c	/^static int PixelsY(double y)$/;"	f	file:
+Pop	.\stack.c	/^stackElementT Pop(stackADT stack)$/;"	f
+Pop	.\stacklist.c	/^stackElementT Pop(stackADT stack)$/;"	f
+PostOrder	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	e	enum:__anon1
+PreOrder	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	e	enum:__anon1
+PreserveSpaces	.\scanadt.h	/^typedef enum {PreserveSpaces, IgnoreSpaces} spaceOptionT;$/;"	e	enum:__anon3
+ProcessMessage	.\xmanager.c	/^static void ProcessMessage(void)$/;"	f	file:
+ProtectVariable	.\gcalloc.h	35;"	d
+PtrSet	.\set.h	/^typedef enum { IntSet, PtrSet } setClassT;$/;"	e	enum:__anon12
+Push	.\stack.c	/^void Push(stackADT stack, stackElementT element)$/;"	f
+Push	.\stacklist.c	/^void Push(stackADT stack, stackElementT element)$/;"	f
+QueueArraySize	.\queue.c	19;"	d	file:
+QueueIsEmpty	.\queue.c	/^bool QueueIsEmpty (queueADT queue)$/;"	f
+QueueIsEmpty	.\queuelist.c	/^bool QueueIsEmpty(queueADT queue){$/;"	f
+QueueIsFull	.\queue.c	/^bool QueueIsFull(queueADT queue){$/;"	f
+QueueIsFull	.\queuelist.c	/^bool QueueIsFull(queueADT queue){$/;"	f
+QueueLength	.\queue.c	/^int QueueLength (queueADT queue){$/;"	f
+QueueLength	.\queuelist.c	/^int QueueLength(queueADT queue)$/;"	f
+R	.\bst.c	/^    int R;$/;"	m	struct:deleteE	file:
+R	.\bst_save.c	/^  int R;$/;"	m	struct:deleteE	file:
+RAND_MAX	.\random.h	26;"	d
+RaiseException	.\exception.c	/^void RaiseException(exception *e, string name, void *value)$/;"	f
+RandomChance	.\random.c	/^bool RandomChance(double p)$/;"	f
+RandomInteger	.\random.c	/^int RandomInteger(int low, int high)$/;"	f
+RandomReal	.\random.c	/^double RandomReal(double low, double high)$/;"	f
+Randomize	.\random.c	/^void Randomize(void)$/;"	f
+ReadLine	.\simpio.c	/^string ReadLine(FILE *infile)$/;"	f
+ReadMessage	.\xmanager.c	/^static bool ReadMessage(void)$/;"	f	file:
+ReadToken	.\scanadt.c	/^string ReadToken(scannerADT scanner)$/;"	f
+RealToString	.\strlib.c	/^string RealToString(double d)$/;"	f
+RecDeleteNode	.\bst.c	/^static deleteT RecDeleteNode(bstADT bst, treeT *tptr, void *kp, deleteT delta)$/;"	f	file:
+RecDeleteNode	.\bst_save.c	/^static deleteT RecDeleteNode(bstADT bst, treeT *tptr, void *kp, deleteT delta)$/;"	f	file:
+RecFindNode	.\bst.c	/^static treeT RecFindNode(bstADT bst, treeT t, void *kp)$/;"	f	file:
+RecFindNode	.\bst_save.c	/^static treeT RecFindNode(bstADT bst, treeT t, void *kp)$/;"	f	file:
+RecInsertNode	.\bst.c	/^static int RecInsertNode(bstADT bst, treeT *tptr, void *kp, void *clientData)$/;"	f	file:
+RecInsertNode	.\bst_save.c	/^static int RecInsertNode(bstADT bst, treeT *tptr, void *kp, void *clientData)$/;"	f	file:
+RecMapBST	.\bst.c	/^static void RecMapBST(nodeFnT fn, bstADT bst, treeT t, OrderT order, void *clientData)$/;"	f	file:
+RecMapBST	.\bst_save.c	/^static void RecMapBST(nodeFnT fn, bstADT bst, treeT t,$/;"	f	file:
+RedrawWindow	.\xdisplay.c	/^static void RedrawWindow(void)$/;"	f	file:
+RefToBool	.\ref.c	/^bool RefToBool(void *ref) $/;"	f
+RefToChar	.\ref.c	/^char RefToChar(void *ref)$/;"	f
+RefToDouble	.\ref.c	/^double RefToDouble(void *ref)$/;"	f
+RefToFloat	.\ref.c	/^float RefToFloat(void *ref)$/;"	f
+RefToInt	.\ref.c	/^int RefToInt(void *ref)$/;"	f
+RefToLong	.\ref.c	/^long RefToLong(void *ref)$/;"	f
+RefToShort	.\ref.c	/^short RefToShort(void *ref)$/;"	f
+RefToUnsigned	.\ref.c	/^unsigned RefToUnsigned(void *ref)$/;"	f
+RefToUnsignedChar	.\ref.c	/^unsigned char RefToUnsignedChar(void *ref)$/;"	f
+RefToUnsignedLong	.\ref.c	/^unsigned long RefToUnsignedLong(void *ref)$/;"	f
+RefToUnsignedShort	.\ref.c	/^unsigned short RefToUnsignedShort(void *ref)$/;"	f
+RegionActive	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon8	file:
+RegionStarting	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon8	file:
+RenderArc	.\xdisplay.c	/^static void RenderArc(double x, double y, double rx, double ry,$/;"	f	file:
+RequiredMargin	.\xdisplay.c	48;"	d	file:
+RestoreGraphicsState	.\graphics.c	/^void RestoreGraphicsState(void)$/;"	f
+RotateLeft	.\bst.c	/^static void RotateLeft(bstADT bst, treeT *tptr)$/;"	f	file:
+RotateLeft	.\bst_save.c	/^static void RotateLeft(bstADT bst, treeT *tptr)$/;"	f	file:
+RotateRight	.\bst.c	/^static void RotateRight(bstADT bst, treeT *tptr)$/;"	f	file:
+RotateRight	.\bst_save.c	/^static void RotateRight(bstADT bst, treeT *tptr)$/;"	f	file:
+SaveGraphicsState	.\graphics.c	/^void SaveGraphicsState(void)$/;"	f
+SaveToken	.\scanadt.c	/^void SaveToken(scannerADT scanner, string token)$/;"	f
+ScaleX	.\xdisplay.c	/^static int ScaleX(double x)$/;"	f	file:
+ScaleY	.\xdisplay.c	/^static int ScaleY(double y)$/;"	f	file:
+ScanToEndOfIdentifier	.\scanadt.c	/^static int ScanToEndOfIdentifier(scannerADT scanner)$/;"	f	file:
+SetColorCmd	.\xmanager.h	/^   SetColorCmd,$/;"	e	enum:__anon14
+SetColorMessage	.\xmanager.c	/^static void SetColorMessage(string args)$/;"	f	file:
+SetDifference	.\set.c	/^setADT SetDifference(setADT s1, setADT s2)$/;"	f
+SetEqual	.\set.c	/^bool SetEqual(setADT s1, setADT s2)$/;"	f
+SetEraseCmd	.\xmanager.h	/^   SetEraseCmd,$/;"	e	enum:__anon14
+SetEraseMessage	.\xmanager.c	/^static void SetEraseMessage(string args)$/;"	f	file:
+SetEraseMode	.\graphics.c	/^void SetEraseMode(bool mode)$/;"	f
+SetFont	.\graphics.c	/^void SetFont(string font)$/;"	f
+SetFontCmd	.\xmanager.h	/^   SetFontCmd,$/;"	e	enum:__anon14
+SetFontMessage	.\xmanager.c	/^static void SetFontMessage(string args)$/;"	f	file:
+SetIsEmpty	.\set.c	/^bool SetIsEmpty(setADT set)$/;"	f
+SetPenColor	.\graphics.c	/^void SetPenColor(string color)$/;"	f
+SetPointSize	.\graphics.c	/^void SetPointSize(int size)$/;"	f
+SetScannerSpaceOption	.\scanadt.c	/^void SetScannerSpaceOption(scannerADT scanner, spaceOptionT option)$/;"	f
+SetScannerString	.\scanadt.c	/^void SetScannerString(scannerADT scanner, string str)$/;"	f
+SetStyle	.\graphics.c	/^void SetStyle(int style)$/;"	f
+SetTitleCmd	.\xmanager.h	/^   SetTitleCmd,$/;"	e	enum:__anon14
+SetTitleMessage	.\xmanager.c	/^static void SetTitleMessage(string args)$/;"	f	file:
+SetWindowSize	.\graphics.c	/^void SetWindowSize(double width, double height)$/;"	f
+SetWindowTitle	.\graphics.c	/^void SetWindowTitle(string title)$/;"	f
+ShortCmpFn	.\cmpfn.c	/^int ShortCmpFn(const void *p1, const void *p2)$/;"	f
+ShortExchFn	.\cmpfn.c	/^void ShortExchFn(void *p1, void *p2)$/;"	f
+ShouldBeWhite	.\graphics.c	/^static bool ShouldBeWhite(void)$/;"	f	file:
+SimulateSelect	.\xcompat.c	/^int SimulateSelect(int width,$/;"	f
+SizeFromFontName	.\xdisplay.c	/^static int SizeFromFontName(string fontName)$/;"	f	file:
+SkipSpaces	.\scanadt.c	/^static void SkipSpaces(scannerADT scanner)$/;"	f	file:
+StackDepth	.\stack.c	/^int  StackDepth(stackADT stack)$/;"	f
+StackDepth	.\stacklist.c	/^int  StackDepth(stackADT stack)$/;"	f
+StackIsEmpty	.\stack.c	/^bool StackIsEmpty(stackADT stack)$/;"	f
+StackIsEmpty	.\stacklist.c	/^bool StackIsEmpty(stackADT stack)$/;"	f
+StackIsFull	.\stack.c	/^bool StackIsFull(stackADT stack)$/;"	f
+StackIsFull	.\stacklist.c	/^bool StackIsFull(stackADT stack)$/;"	f
+StartFilledRegion	.\graphics.c	/^void StartFilledRegion(double density)$/;"	f
+StartPolygon	.\xdisplay.c	/^static void StartPolygon(void)$/;"	f	file:
+StartRegionCmd	.\xmanager.h	/^   StartRegionCmd,$/;"	e	enum:__anon14
+StartRegionMessage	.\xmanager.c	/^static void StartRegionMessage(string args)$/;"	f	file:
+StartToOpenDisplay	.\xdisplay.c	/^static void StartToOpenDisplay(void)$/;"	f	file:
+StepForEach	.\foreach.c	/^bool StepForEach(void *ep)$/;"	f
+StepIterator	.\iterator1.c	/^bool StepIterator(iteratorADT iterator, string *pKey)$/;"	f
+StepIterator	.\iterator2.c	/^bool StepIterator(iteratorADT iterator, void *ep)$/;"	f
+Str	.\cmpfn.h	/^struct Str{$/;"	s
+StringBox	.\cmpfn.h	/^typedef struct Str *StringBox;$/;"	t	typeref:struct:Str
+StringCmpFn	.\cmpfn.c	/^int StringCmpFn(const void *p1, const void *p2)$/;"	f
+StringCmpFn2	.\cmpfn.c	/^int StringCmpFn2(const void *p1, const void *p2)$/;"	f
+StringCompare	.\strlib.c	/^int StringCompare(string s1, string s2)$/;"	f
+StringEqual	.\strlib.c	/^bool StringEqual(string s1, string s2)$/;"	f
+StringExchFn	.\cmpfn.c	/^void StringExchFn(void *p1, void *p2)$/;"	f
+StringLength	.\strlib.c	/^int StringLength(string s)$/;"	f
+StringMatch	.\graphics.c	/^static bool StringMatch(string s1, string s2)$/;"	f	file:
+StringToInteger	.\strlib.c	/^int StringToInteger(string s)$/;"	f
+StringToReal	.\strlib.c	/^double StringToReal(string s)$/;"	f
+SubString	.\strlib.c	/^string SubString(string s, int p1, int p2)$/;"	f
+TRUE	.\genlib.h	/^       typedef enum {FALSE, TRUE} bool;$/;"	e	enum:__anon15
+TRUE	.\genlib.h	59;"	d
+TestERef	.\set.c	/^static bool TestERef(setADT set, void *ep)$/;"	f	file:
+TextCmd	.\xmanager.h	/^   TextCmd,$/;"	e	enum:__anon14
+TextMessage	.\xmanager.c	/^static void TextMessage(string args)$/;"	f	file:
+TextStringWidth	.\graphics.c	/^double TextStringWidth(string text)$/;"	f
+UNDEFINED	.\genlib.h	102;"	d
+USleep	.\graphics.c	/^static void USleep(unsigned useconds)$/;"	f	file:
+Union	.\set.c	/^setADT Union(setADT s1, setADT s2)$/;"	f
+UnsignedExchFn	.\cmpfn.c	/^void UnsignedExchFn(void *p1, void *p2)$/;"	f
+UnsignedIntCmpFn	.\cmpfn.c	/^int UnsignedIntCmpFn(const void *p1, const void *p2)$/;"	f
+UnsignedLongCmpFn	.\cmpfn.c	/^int UnsignedLongCmpFn(const void *p1, const void *p2)$/;"	f
+UnsignedLongExchFn	.\cmpfn.c	/^void UnsignedLongExchFn(void *p1, void *p2)$/;"	f
+UnsignedLonglongCmpFn	.\cmpfn.c	/^int UnsignedLonglongCmpFn(const void *p1, const void *p2)$/;"	f
+UnsignedShortCmpFn	.\cmpfn.c	/^int UnsignedShortCmpFn(const void *p1, const void *p2)$/;"	f
+UnsignedShortExchFn	.\cmpfn.c	/^void UnsignedShortExchFn(void *p1, void *p2)$/;"	f
+UnsortedFn	.\itertype.h	49;"	d
+UpdateCmd	.\xmanager.h	/^   UpdateCmd,$/;"	e	enum:__anon14
+UpdateDisplay	.\graphics.c	/^void UpdateDisplay(void)$/;"	f
+UpdateMessage	.\xmanager.c	/^static void UpdateMessage(string args)$/;"	f	file:
+WaitForMouseCmd	.\xmanager.h	/^   WaitForMouseCmd,$/;"	e	enum:__anon14
+WaitForMouseDown	.\graphics.c	/^void WaitForMouseDown(void)$/;"	f
+WaitForMouseMessage	.\xmanager.c	/^static void WaitForMouseMessage(string args)$/;"	f	file:
+WaitForMouseUp	.\graphics.c	/^void WaitForMouseUp(void)$/;"	f
+WaitingForMouseDown	.\xdisplay.c	/^    WaitingForMouseDown,$/;"	e	enum:__anon2	file:
+WaitingForMouseUp	.\xdisplay.c	/^    WaitingForMouseUp$/;"	e	enum:__anon2	file:
+WidthCmd	.\xmanager.h	/^   WidthCmd,$/;"	e	enum:__anon14
+WidthMessage	.\xmanager.c	/^static void WidthMessage(string args)$/;"	f	file:
+XDCheckForRedraw	.\xdisplay.c	/^void XDCheckForRedraw(void)$/;"	f
+XDClearDisplay	.\xdisplay.c	/^void XDClearDisplay(void)$/;"	f
+XDCloseDisplay	.\xdisplay.c	/^void XDCloseDisplay(void)$/;"	f
+XDDisplayFD	.\xdisplay.c	/^int XDDisplayFD(void)$/;"	f
+XDDrawArc	.\xdisplay.c	/^void XDDrawArc(double x, double y, double rx, double ry,$/;"	f
+XDDrawLine	.\xdisplay.c	/^void XDDrawLine(double x, double y, double dx, double dy)$/;"	f
+XDDrawText	.\xdisplay.c	/^void XDDrawText(double x, double y, string text)$/;"	f
+XDEndRegion	.\xdisplay.c	/^void XDEndRegion(void)$/;"	f
+XDGetMouse	.\xdisplay.c	/^void XDGetMouse(bool *buttonStateP, double *xp, double *yp)$/;"	f
+XDGetNColors	.\xdisplay.c	/^int XDGetNColors(void)$/;"	f
+XDGetResolution	.\xdisplay.c	/^void XDGetResolution(double *pXDPI, double *pYDPI)$/;"	f
+XDGetScreenSize	.\xdisplay.c	/^void XDGetScreenSize(double *pScreenWidth, double *pScreenHeight)$/;"	f
+XDOpenDisplay	.\xdisplay.c	/^void XDOpenDisplay(string title)$/;"	f
+XDProcessXEvent	.\xdisplay.c	/^bool XDProcessXEvent(void)$/;"	f
+XDSetColor	.\xdisplay.c	/^void XDSetColor(double red, double green, double blue)$/;"	f
+XDSetEraseMode	.\xdisplay.c	/^void XDSetEraseMode(bool flag)$/;"	f
+XDSetFont	.\xdisplay.c	/^string XDSetFont(string font, int size, int style)$/;"	f
+XDSetRedrawFlag	.\xdisplay.c	/^void XDSetRedrawFlag(void)$/;"	f
+XDSetTitle	.\xdisplay.c	/^void XDSetTitle(string title)$/;"	f
+XDSetWindowSize	.\xdisplay.c	/^void XDSetWindowSize(double width, double height)$/;"	f
+XDStartRegion	.\xdisplay.c	/^void XDStartRegion(double grayScale)$/;"	f
+XDTextWidth	.\xdisplay.c	/^double XDTextWidth(string text)$/;"	f
+XDWaitForMouse	.\xdisplay.c	/^void XDWaitForMouse(bool buttonState)$/;"	f
+XMGetResponse	.\xmanager.c	/^void XMGetResponse(char buffer[])$/;"	f
+XMInitialize	.\xmanager.c	/^void XMInitialize(string title)$/;"	f
+XMReleaseClient	.\xmanager.c	/^void XMReleaseClient(void)$/;"	f
+XMSendCommand	.\xmanager.c	/^void XMSendCommand(commandT cmd, string args)$/;"	f
+_GCControlBlock	.\gcalloc.h	/^} *_GCControlBlock;$/;"	t	typeref:struct:__anon11
+_bst_h	.\bst.h	10;"	d
+_cmpfn_h	.\cmpfn.h	9;"	d
+_exception_h	.\exception.h	12;"	d
+_extgraph_h	.\extgraph.h	13;"	d
+_foreach	.\foreach.h	29;"	d
+_foreach_h	.\foreach.h	9;"	d
+_gcalloc_h	.\gcalloc.h	22;"	d
+_genlib_h	.\genlib.h	28;"	d
+_glibrary_h	.\glibrary.h	13;"	d
+_graphics_h	.\graphics.h	14;"	d
+_iterator1_h	.\iterator1.h	11;"	d
+_iterator2_h	.\iterator2.h	11;"	d
+_itertype_h	.\itertype.h	10;"	d
+_queue_h	.\queue.h	11;"	d
+_queuelist_h	.\queuelist.h	11;"	d
+_random_h	.\random.h	11;"	d
+_ref_h	.\ref.h	8;"	d
+_scanadt_h	.\scanadt.h	13;"	d
+_set_h	.\set.h	21;"	d
+_simpio_h	.\simpio.h	11;"	d
+_stack_h	.\stack.h	8;"	d
+_stacklist_h	.\stacklist.h	9;"	d
+_strlib_h	.\strlib.h	32;"	d
+_symtab_h	.\symtab.h	8;"	d
+_xcompat_h	.\xcompat.h	26;"	d
+_xdisplay_h	.\xdisplay.h	18;"	d
+_xmanager_h	.\xmanager.h	12;"	d
+allocMethod	.\gcalloc.h	/^    void *(*allocMethod)(size_t nbytes);$/;"	m	struct:__anon11
+argC	.\xdisplay.c	/^static int argC = sizeof argV \/ sizeof argV[0];$/;"	v	file:
+argV	.\xdisplay.c	/^static string argV[] = { "xdisplay" };$/;"	v	file:
+array	.\exception.h	/^    exception *array[MaxExceptionsPerScope];$/;"	m	struct:ctx_block
+bf	.\bst.c	/^    int bf;$/;"	m	struct:__anon7	file:
+bf	.\bst_save.c	/^  int bf;$/;"	m	struct:__anon5	file:
+blue	.\graphics.c	/^    double red, green, blue;$/;"	m	struct:__anon9	file:
+bool	.\genlib.h	/^       typedef enum {FALSE, TRUE} bool;$/;"	t	typeref:enum:__anon15
+bool	.\genlib.h	/^   typedef int bool;$/;"	t
+bool	.\genlib.h	54;"	d
+bst	.\set.c	/^	bstADT bst;$/;"	m	struct:setCDT	file:
+bstADT	.\bst.h	/^typedef struct bstCDT *bstADT;$/;"	t	typeref:struct:bstCDT
+bstCDT	.\bst.c	/^struct bstCDT {$/;"	s	file:
+bstCDT	.\bst_save.c	/^struct bstCDT {$/;"	s	file:
+bstDataT	.\bst.c	/^} bstDataT;$/;"	t	typeref:struct:__anon7	file:
+bstDataT	.\bst_save.c	/^} bstDataT;$/;"	t	typeref:struct:__anon5	file:
+buckets	.\symtab.c	/^  cellT *buckets[NBuckets];$/;"	m	struct:symtabCDT	file:
+cellT	.\foreach.c	/^typedef struct cellT {$/;"	s	file:
+cellT	.\foreach.c	/^} cellT;$/;"	t	typeref:struct:cellT	file:
+cellT	.\iterator1.c	/^typedef struct cellT{$/;"	s	file:
+cellT	.\iterator1.c	/^} cellT;$/;"	t	typeref:struct:cellT	file:
+cellT	.\iterator2.c	/^typedef struct cellT{$/;"	s	file:
+cellT	.\iterator2.c	/^}cellT;$/;"	t	typeref:struct:cellT	file:
+cellT	.\queuelist.c	/^typedef struct cellT{$/;"	s	file:
+cellT	.\queuelist.c	/^} cellT;$/;"	t	typeref:struct:cellT	file:
+cellT	.\stacklist.c	/^typedef struct cellT{$/;"	s	file:
+cellT	.\stacklist.c	/^} cellT; $/;"	t	typeref:struct:cellT	file:
+cellT	.\symtab.c	/^typedef struct cellT{$/;"	s	file:
+cellT	.\symtab.c	/^}cellT;$/;"	t	typeref:struct:cellT	file:
+child	.\xmanager.c	/^static pid_t child;$/;"	v	file:
+class	.\set.c	/^	setClassT class;$/;"	m	struct:setCDT	file:
+cmdBuffer	.\graphics.c	/^static char cmdBuffer[CommandBufferSize];$/;"	v	file:
+cmdBuffer	.\xmanager.c	/^static char cmdBuffer[CommandBufferSize];$/;"	v	file:
+cmpFn	.\bst.c	/^    cmpFnT cmpFn;$/;"	m	struct:bstCDT	file:
+cmpFn	.\bst_save.c	/^  cmpFnT cmpFn;$/;"	m	struct:bstCDT	file:
+cmpFn	.\iterator2.c	/^	cmpFnT cmpFn;$/;"	m	struct:iteratorCDT	file:
+cmpFn	.\set.c	/^	cmpFnT cmpFn;$/;"	m	struct:setCDT	file:
+cmpFnT	.\cmpfn.h	/^typedef int (*cmpFnT) (const void *p1, const void *p2);$/;"	t
+color	.\graphics.c	/^    int color;$/;"	m	struct:graphicsStateT	file:
+colorEntryT	.\graphics.c	/^} colorEntryT;$/;"	t	typeref:struct:__anon9	file:
+colorOK	.\graphics.c	/^static bool colorOK;$/;"	v	file:
+colorTable	.\graphics.c	/^static colorEntryT colorTable[MaxColors];$/;"	v	file:
+colormap	.\xdisplay.c	/^static Colormap colormap;$/;"	v	file:
+commandT	.\xmanager.h	/^} commandT;$/;"	t	typeref:enum:__anon14
+context_block	.\exception.h	/^} context_block;$/;"	t	typeref:struct:ctx_block
+count	.\stack.c	/^	int count;$/;"	m	struct:stackCDT	file:
+cp	.\scanadt.c	/^	int cp;$/;"	m	struct:scannerCDT	file:
+ctx_block	.\exception.h	/^typedef struct ctx_block {$/;"	s
+currentFont	.\xdisplay.c	/^static string currentFont;$/;"	v	file:
+currentSize	.\xdisplay.c	/^static int currentSize;$/;"	v	file:
+currentStyle	.\xdisplay.c	/^static int currentStyle;$/;"	v	file:
+cx	.\graphics.c	/^    double cx, cy;$/;"	m	struct:graphicsStateT	file:
+cx	.\graphics.c	/^static double cx, cy;$/;"	v	file:
+cy	.\graphics.c	/^    double cx, cy;$/;"	m	struct:graphicsStateT	file:
+cy	.\graphics.c	/^static double cx, cy;$/;"	v	file:
+deleteE	.\bst.c	/^struct deleteE {$/;"	s	file:
+deleteE	.\bst_save.c	/^struct deleteE{$/;"	s	file:
+deleteT	.\bst.h	/^typedef struct deleteE *deleteT;$/;"	t	typeref:struct:deleteE
+disp	.\xdisplay.c	/^static Display *disp;$/;"	v	file:
+displayIsOpen	.\xdisplay.c	/^static bool displayIsOpen = FALSE;$/;"	v	file:
+drawColor	.\xdisplay.c	/^static unsigned long drawColor, eraseColor;$/;"	v	file:
+drawGC	.\xdisplay.c	/^static GC mainGC, drawGC, eraseGC;$/;"	v	file:
+element	.\stacklist.c	/^  stackElementT element;$/;"	m	struct:cellT	file:
+elementSize	.\iterator2.c	/^	int elementSize; $/;"	m	struct:iteratorCDT	file:
+elements	.\queue.c	/^	queueElementT elements[QueueArraySize];$/;"	m	struct:queueCDT	file:
+elements	.\stack.c	/^	stackElementT* elements;$/;"	m	struct:stackCDT	file:
+endtry	.\exception.h	249;"	d
+ep	.\foreach.c	/^    void *ep;$/;"	m	struct:cellT	file:
+erase	.\graphics.c	/^    bool erase;$/;"	m	struct:graphicsStateT	file:
+eraseColor	.\xdisplay.c	/^static unsigned long drawColor, eraseColor;$/;"	v	file:
+eraseGC	.\xdisplay.c	/^static GC mainGC, drawGC, eraseGC;$/;"	v	file:
+eraseMode	.\graphics.c	/^static bool eraseMode;$/;"	v	file:
+eraseMode	.\xdisplay.c	/^static bool eraseMode;$/;"	v	file:
+except	.\exception.h	238;"	d
+exception	.\exception.h	/^typedef struct { string name; } exception;$/;"	t	typeref:struct:__anon4
+exceptionStack	.\exception.c	/^context_block *exceptionStack = NULL;$/;"	v
+exchFnT	.\cmpfn.h	/^typedef void (*exchFnT) (void *p1, void *p2);$/;"	t
+exitGraphicsFlag	.\xmanager.c	/^static bool exitGraphicsFlag;$/;"	v	file:
+fdSetT	.\xcompat.h	/^} fdSetT;$/;"	t	typeref:struct:__anon10
+fd_set	.\xcompat.h	36;"	d
+fd_set	.\xcompat.h	42;"	d
+fds	.\xcompat.h	/^    char fds[FOPEN_MAX];$/;"	m	struct:__anon10
+font	.\graphics.c	/^    string font;$/;"	m	struct:graphicsStateT	file:
+fontChanged	.\graphics.c	/^static bool fontChanged;$/;"	v	file:
+fontInfo	.\xdisplay.c	/^static XFontStruct *fontInfo;$/;"	v	file:
+foreach	.\foreach.h	28;"	d
+freeMethod	.\gcalloc.h	/^    void (*freeMethod)(void *ptr);$/;"	m	struct:__anon11
+graphicsStateT	.\graphics.c	/^typedef struct graphicsStateT {$/;"	s	file:
+graphicsStateT	.\graphics.c	/^} *graphicsStateT;$/;"	t	typeref:struct:graphicsStateT	file:
+grayGC	.\xdisplay.c	/^static GC grayGC[NGrays];$/;"	v	file:
+grayList	.\xdisplay.c	/^static char grayList[][8] = {$/;"	v	file:
+grayStipple	.\xdisplay.c	/^static Pixmap grayStipple[NGrays];$/;"	v	file:
+green	.\graphics.c	/^    double red, green, blue;$/;"	m	struct:__anon9	file:
+head	.\iterator2.c	/^	cellT *head, *tail;$/;"	m	struct:iteratorCDT	file:
+head	.\queue.c	/^	int head;$/;"	m	struct:queueCDT	file:
+head	.\queuelist.c	/^	cellT *head;$/;"	m	struct:queueCDT	file:
+header	.\set.c	/^	iteratorHeaderT header;$/;"	m	struct:setCDT	file:
+header	.\symtab.c	/^  iteratorHeaderT header;$/;"	m	struct:symtabCDT	file:
+id	.\exception.h	/^    exception *id;$/;"	m	struct:ctx_block
+in	.\foreach.h	27;"	d
+inPipe	.\xmanager.c	/^static FILE *inPipe, *outPipe;$/;"	v	file:
+infd	.\xmanager.c	/^static int infd;$/;"	v	file:
+initialized	.\graphics.c	/^static bool initialized = FALSE;$/;"	v	file:
+intRep	.\set.c	/^	int intRep;$/;"	m	union:__anon6	file:
+iterator	.\foreach.c	/^    iteratorADT iterator;$/;"	m	struct:cellT	file:
+iteratorADT	.\iterator1.h	/^typedef struct iteratorCDT *iteratorADT;$/;"	t	typeref:struct:iteratorCDT
+iteratorADT	.\iterator2.h	/^typedef struct iteratorCDT *iteratorADT;$/;"	t	typeref:struct:iteratorCDT
+iteratorCDT	.\iterator1.c	/^struct iteratorCDT{$/;"	s	file:
+iteratorCDT	.\iterator2.c	/^struct iteratorCDT{$/;"	s	file:
+iteratorHeaderT	.\itertype.h	/^}iteratorHeaderT;$/;"	t	typeref:struct:__anon13
+iteratorList	.\foreach.c	/^static cellT *iteratorList = NULL;$/;"	v	file:
+jmp	.\exception.h	/^    jmp_buf jmp;$/;"	m	struct:ctx_block
+key	.\iterator1.c	/^	string key;$/;"	m	struct:cellT	file:
+key	.\symtab.c	/^	string key;$/;"	m	struct:cellT	file:
+lastColor	.\graphics.c	/^static int lastColor;$/;"	v	file:
+left	.\bst.c	/^    treeT left, right;$/;"	m	struct:__anon7	file:
+left	.\bst_save.c	/^  treeT left, right;$/;"	m	struct:__anon5	file:
+len	.\scanadt.c	/^	int len;$/;"	m	struct:scannerCDT	file:
+link	.\exception.h	/^    struct ctx_block *link;$/;"	m	struct:ctx_block	typeref:struct:ctx_block::ctx_block
+link	.\foreach.c	/^    struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
+link	.\graphics.c	/^    struct graphicsStateT *link;$/;"	m	struct:graphicsStateT	typeref:struct:graphicsStateT::graphicsStateT	file:
+link	.\iterator1.c	/^	struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
+link	.\iterator2.c	/^  struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
+link	.\queuelist.c	/^	struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
+link	.\stacklist.c	/^  struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
+link	.\symtab.c	/^	struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
+mainGC	.\xdisplay.c	/^static GC mainGC, drawGC, eraseGC;$/;"	v	file:
+mainWindow	.\xdisplay.c	/^static Window mainWindow;$/;"	v	file:
+nColors	.\graphics.c	/^static int nColors;$/;"	v	file:
+nElements	.\set.c	/^	int nElements;$/;"	m	struct:setCDT	file:
+nPolygonPoints	.\xdisplay.c	/^static int nPolygonPoints;$/;"	v	file:
+name	.\exception.h	/^    string name;$/;"	m	struct:ctx_block
+name	.\exception.h	/^typedef struct { string name; } exception;$/;"	m	struct:__anon4
+name	.\graphics.c	/^    string name;$/;"	m	struct:__anon9	file:
+newFn	.\itertype.h	/^	newIteratorFnT newFn;$/;"	m	struct:__anon13
+newIteratorFnT	.\itertype.h	/^typedef iteratorADT (*newIteratorFnT) (void *collection);$/;"	t
+nodeFnT	.\bst.h	/^typedef void (*nodeFnT) (void *np, void *clientData);$/;"	t
+nodeInitFn	.\bst.c	/^    nodeInitFnT nodeInitFn;$/;"	m	struct:bstCDT	file:
+nodeInitFn	.\bst_save.c	/^  nodeInitFnT nodeInitFn;$/;"	m	struct:bstCDT	file:
+nodeInitFnT	.\bst.h	/^typedef void (*nodeInitFnT) (void *np, void *kp, void *clientData);$/;"	t
+nx	.\exception.h	/^    int nx;$/;"	m	struct:ctx_block
+osWindow	.\xdisplay.c	/^static Pixmap osWindow;$/;"	v	file:
+outPipe	.\xmanager.c	/^static FILE *inPipe, *outPipe;$/;"	v	file:
+password	.\itertype.h	/^	unsigned long password;$/;"	m	struct:__anon13
+penColor	.\graphics.c	/^static int penColor;$/;"	v	file:
+pixelDepth	.\xdisplay.c	/^static int pixelDepth;$/;"	v	file:
+pointSize	.\graphics.c	/^static int pointSize;$/;"	v	file:
+polygonPoints	.\xdisplay.c	/^static XPoint *polygonPoints;$/;"	v	file:
+polygonSize	.\xdisplay.c	/^static int polygonSize;$/;"	v	file:
+protectMethod	.\gcalloc.h	/^    void (*protectMethod)(void *ptr, size_t nbytes);$/;"	m	struct:__anon11
+ptrRep	.\set.c	/^	void *ptrRep;$/;"	m	union:__anon6	file:
+queueADT	.\queue.h	/^typedef struct queueCDT *queueADT;$/;"	t	typeref:struct:queueCDT
+queueADT	.\queuelist.h	/^typedef struct queueCDT *queueADT;$/;"	t	typeref:struct:queueCDT
+queueCDT	.\queue.c	/^struct queueCDT{$/;"	s	file:
+queueCDT	.\queuelist.c	/^struct queueCDT{$/;"	s	file:
+queueElementT	.\queue.h	/^typedef void *queueElementT;$/;"	t
+queueElementT	.\queuelist.h	/^typedef char queueElementT;$/;"	t
+raise	.\exception.h	222;"	d
+red	.\graphics.c	/^    double red, green, blue;$/;"	m	struct:__anon9	file:
+redraw	.\xdisplay.c	/^static bool redraw = FALSE;$/;"	v	file:
+regionGrayScale	.\xdisplay.c	/^static double regionGrayScale;$/;"	v	file:
+regionStarted	.\xdisplay.c	/^static bool regionStarted;$/;"	v	file:
+regionState	.\graphics.c	/^static regionStateT regionState;$/;"	v	file:
+regionStateT	.\graphics.c	/^} regionStateT;$/;"	t	typeref:enum:__anon8	file:
+repeat	.\genlib.h	204;"	d
+right	.\bst.c	/^    treeT left, right;$/;"	m	struct:__anon7	file:
+right	.\bst_save.c	/^  treeT left, right;$/;"	m	struct:__anon5	file:
+root	.\bst.c	/^    treeT root;$/;"	m	struct:bstCDT	file:
+root	.\bst_save.c	/^  treeT root;$/;"	m	struct:bstCDT	file:
+s	.\cmpfn.h	/^  string s;$/;"	m	struct:Str
+savedToken	.\scanadt.c	/^	string savedToken;$/;"	m	struct:scannerCDT	file:
+scannerADT	.\scanadt.h	/^typedef struct scannerCDT *scannerADT;$/;"	t	typeref:struct:scannerCDT
+scannerCDT	.\scanadt.c	/^struct scannerCDT{$/;"	s	file:
+screenHeight	.\xdisplay.c	/^static double screenWidth, screenHeight;$/;"	v	file:
+screenWidth	.\xdisplay.c	/^static double screenWidth, screenHeight;$/;"	v	file:
+select	.\xcompat.h	52;"	d
+setADT	.\set.h	/^typedef struct setCDT *setADT;$/;"	t	typeref:struct:setCDT
+setCDT	.\set.c	/^struct setCDT{$/;"	s	file:
+setClassT	.\set.h	/^typedef enum { IntSet, PtrSet } setClassT;$/;"	t	typeref:enum:__anon12
+setElementT	.\set.c	/^}setElementT;$/;"	t	typeref:union:__anon6	file:
+size	.\graphics.c	/^    int size;$/;"	m	struct:graphicsStateT	file:
+size	.\stack.c	/^	int size;$/;"	m	struct:stackCDT	file:
+spaceOption	.\scanadt.c	/^	spaceOptionT spaceOption;$/;"	m	struct:scannerCDT	file:
+spaceOptionT	.\scanadt.h	/^typedef enum {PreserveSpaces, IgnoreSpaces} spaceOptionT;$/;"	t	typeref:enum:__anon3
+stackADT	.\stack.h	/^typedef struct stackCDT *stackADT;$/;"	t	typeref:struct:stackCDT
+stackADT	.\stacklist.h	/^typedef struct stackCDT *stackADT;$/;"	t	typeref:struct:stackCDT
+stackCDT	.\stack.c	/^struct stackCDT{$/;"	s	file:
+stackCDT	.\stacklist.c	/^struct stackCDT$/;"	s	file:
+stackElementT	.\stack.h	/^typedef void* stackElementT;$/;"	t
+stackElementT	.\stacklist.h	/^typedef void* stackElementT;$/;"	t
+start	.\iterator1.c	/^	cellT *start;$/;"	m	struct:iteratorCDT	file:
+start	.\stacklist.c	/^  cellT *start;$/;"	m	struct:stackCDT	file:
+stateStack	.\graphics.c	/^static graphicsStateT stateStack;$/;"	v	file:
+str	.\scanadt.c	/^	string str;$/;"	m	struct:scannerCDT	file:
+stream	.\genlib.h	/^typedef FILE *stream;$/;"	t
+string	.\genlib.h	/^typedef char *string;$/;"	t
+style	.\graphics.c	/^    int style;$/;"	m	struct:graphicsStateT	file:
+symtabADT	.\symtab.h	/^typedef struct symtabCDT *symtabADT;$/;"	t	typeref:struct:symtabCDT
+symtabCDT	.\symtab.c	/^struct symtabCDT{$/;"	s	file:
+symtabFnT	.\symtab.h	/^typedef void (*symtabFnT) (string key, void *value, void *clientData);$/;"	t
+tail	.\iterator2.c	/^	cellT *head, *tail;$/;"	m	struct:iteratorCDT	file:
+tail	.\queue.c	/^	int tail;$/;"	m	struct:queueCDT	file:
+tail	.\queuelist.c	/^	cellT *tail;$/;"	m	struct:queueCDT	file:
+target	.\bst.c	/^    void *target;$/;"	m	struct:deleteE	file:
+target	.\bst_save.c	/^  void *target;$/;"	m	struct:deleteE	file:
+textFont	.\graphics.c	/^static string textFont;$/;"	v	file:
+textStyle	.\graphics.c	/^static int textStyle;$/;"	v	file:
+totalSize	.\bst.c	/^    int userSize, totalSize;$/;"	m	struct:bstCDT	file:
+totalSize	.\bst_save.c	/^  int userSize, totalSize;$/;"	m	struct:bstCDT	file:
+treeT	.\bst.c	/^typedef void *treeT;$/;"	t	file:
+treeT	.\bst_save.c	/^typedef void *treeT;$/;"	t	file:
+tree_height	.\bst.c	/^static int tree_height(bstADT bst, treeT root, int height)$/;"	f	file:
+tree_height	.\bst_save.c	/^static int tree_height(bstADT bst, treeT root, int height)$/;"	f	file:
+try	.\exception.h	224;"	d
+undefined_object	.\genlib.c	/^char undefined_object[] = "UNDEFINED";$/;"	v
+userSize	.\bst.c	/^    int userSize, totalSize;$/;"	m	struct:bstCDT	file:
+userSize	.\bst_save.c	/^  int userSize, totalSize;$/;"	m	struct:bstCDT	file:
+value	.\exception.h	/^    void *value;$/;"	m	struct:ctx_block
+value	.\queuelist.c	/^	queueElementT value;$/;"	m	struct:cellT	file:
+value	.\symtab.c	/^	void *value;$/;"	m	struct:cellT	file:
+waitState	.\xdisplay.c	/^static waitStateT waitState;$/;"	v	file:
+waitStateT	.\xdisplay.c	/^} waitStateT;$/;"	t	typeref:enum:__anon2	file:
+windowHeight	.\graphics.c	/^static double windowHeight = DesiredHeight;$/;"	v	file:
+windowHeight	.\xdisplay.c	/^static double windowWidth, windowHeight;$/;"	v	file:
+windowTitle	.\graphics.c	/^static string windowTitle = "Graphics Window";$/;"	v	file:
+windowWidth	.\graphics.c	/^static double windowWidth = DesiredWidth;$/;"	v	file:
+windowWidth	.\xdisplay.c	/^static double windowWidth, windowHeight;$/;"	v	file:
+xdpi	.\xdisplay.c	/^static double xdpi, ydpi;$/;"	v	file:
+ydpi	.\xdisplay.c	/^static double xdpi, ydpi;$/;"	v	file:

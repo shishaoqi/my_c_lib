@@ -1,0 +1,11 @@
+#! /bin/csh -f
+set INCLUDE = /www/my_c_lib
+set CSLIB = $INCLUDE/libcs.a
+set LIBRARIES = ($CSLIB -lX11 -lm)
+foreach x ($*)
+  if ("x$x" == "x-c") then
+    set LIBRARIES = ""
+    break
+  endif
+end
+gcc -g -I$INCLUDE $* $LIBRARIES

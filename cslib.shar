@@ -1,0 +1,5537 @@
+#! /bin/sh
+# This is a shell archive.  Remove anything before this line, then unpack
+# it by saving it into a file and typing "sh file".  To overwrite existing
+# files, type "sh file -c".  You can also feed this as standard input via
+# unshar, or by typing "sh <file", e.g..  If this archive is complete, you
+# will see the following message at the end:
+#		"End of shell archive."
+# Contents:  cslib cslib/Makefile cslib/config.csh cslib/exception.c
+#   cslib/exception.h cslib/extgraph.h cslib/gcalloc.h cslib/genlib.c
+#   cslib/genlib.h cslib/glibrary.c cslib/glibrary.h cslib/graphics.c
+#   cslib/graphics.h cslib/random.c cslib/random.h cslib/simpio.c
+#   cslib/simpio.h cslib/strlib.c cslib/strlib.h cslib/xcompat.c
+#   cslib/xcompat.h cslib/xdisplay.c cslib/xdisplay.h cslib/xmanager.c
+#   cslib/xmanager.h
+# Wrapped by eroberts@Eeyore.Stanford.EDU on Fri Feb 24 19:45:03 1995
+PATH=/bin:/usr/bin:/usr/ucb ; export PATH
+if test ! -d 'cslib' ; then
+    echo shar: Creating directory \"'cslib'\"
+    mkdir 'cslib'
+fi
+if test -f 'cslib/Makefile' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/Makefile'\"
+else
+echo shar: Extracting \"'cslib/Makefile'\" \(2837 characters\)
+sed "s/^X//" >'cslib/Makefile' <<'END_OF_FILE'
+X# Makefile for cslib/xwindows directory
+X# Last modified on Sat Oct  1 12:56:29 1994 by eroberts
+X#****************************************************************
+X
+XOBJECTS = \
+X    genlib.o \
+X    exception.o \
+X    strlib.o \
+X    simpio.o \
+X    random.o \
+X    graphics.o \
+X    xmanager.o \
+X    xdisplay.o \
+X    xcompat.o \
+X    glibrary.o
+X
+XCSLIB = cslib.a
+X
+XCC = gcc
+XCFLAGS = -g -I. $(CCFLAGS)
+XCONFIG = `csh config.csh -DHasPoll $(CC) -E -DHasPoll xcompat.c`
+X
+X# ***************************************************************
+X# Entry to bring the package up to date
+X#    The "make all" entry should be the first real entry
+X
+Xall: $(CSLIB) gccx
+X
+X# ***************************************************************
+X# Standard entries to remove files from the directories
+X#    tidy    -- eliminate unwanted files
+X#    clean   -- delete derived files in preparation for rebuild
+X#    scratch -- synonym for clean
+X
+Xtidy:
+X	rm -f ,* .,* *~ core a.out *.err
+X
+Xclean scratch: tidy
+X	rm -f *.o *.a gccx
+X
+X# ***************************************************************
+X# C compilations
+X
+Xgenlib.o: genlib.c genlib.h exception.h gcalloc.h
+X	$(CC) $(CFLAGS) -c genlib.c
+X
+Xexception.o: exception.c exception.h genlib.h
+X	$(CC) $(CFLAGS) -c exception.c
+X
+Xstrlib.o: strlib.c strlib.h genlib.h
+X	$(CC) $(CFLAGS) -c strlib.c
+X
+Xsimpio.o: simpio.c simpio.h strlib.h genlib.h
+X	$(CC) $(CFLAGS) -c simpio.c
+X
+Xrandom.o: random.c random.h genlib.h
+X	$(CC) $(CFLAGS) -c random.c
+X
+Xgraphics.o: graphics.c graphics.h extgraph.h xmanager.h xcompat.h \
+X            glibrary.h genlib.h gcalloc.h simpio.h strlib.h Makefile
+X	$(CC) $(CONFIG) $(CFLAGS) -c graphics.c
+X
+Xxmanager.o: xmanager.c xmanager.h xdisplay.h xcompat.h glibrary.h \
+X	    genlib.h exception.h simpio.h Makefile
+X	$(CC) $(CONFIG) $(CFLAGS) -c xmanager.c
+X
+Xxdisplay.o: xdisplay.c xdisplay.h xmanager.h glibrary.h genlib.h strlib.h \
+X            Makefile
+X	$(CC) $(CONFIG) $(CFLAGS) -c xdisplay.c
+X
+Xxcompat.o: xcompat.c xcompat.h Makefile
+X	$(CC) $(CONFIG) $(CFLAGS) -c xcompat.c
+X
+Xglibrary.o: glibrary.c glibrary.h genlib.h
+X	$(CC) $(CFLAGS) -c glibrary.c
+X
+X# ***************************************************************
+X# Entry to reconstruct the library archive
+X
+X$(CSLIB): $(OBJECTS)
+X	-rm -f $(CSLIB)
+X	ar cr $(CSLIB) $(OBJECTS)
+X	ranlib $(CSLIB)
+X
+X# ***************************************************************
+X# Entry to reconstruct the gccx script
+X
+Xgccx: Makefile
+X	@echo '#! /bin/csh -f' > gccx
+X	@echo 'set INCLUDE =' `pwd` >> gccx
+X	@echo 'set CSLIB = $$INCLUDE/cslib.a' >> gccx
+X	@echo 'set LIBRARIES = ($$CSLIB -lX11 -lm)' >> gccx
+X	@echo 'foreach x ($$*)' >> gccx
+X	@echo '  if ("x$$x" == "x-c") then' >> gccx
+X	@echo '    set LIBRARIES = ""' >> gccx
+X	@echo '    break' >> gccx
+X	@echo '  endif' >> gccx
+X	@echo 'end' >> gccx
+X	@echo 'gcc -g -I$$INCLUDE $$* $$LIBRARIES' >> gccx
+X	@chmod a+x gccx
+X	@echo '[gccx script created]'
+END_OF_FILE
+if test 2837 -ne `wc -c <'cslib/Makefile'`; then
+    echo shar: \"'cslib/Makefile'\" unpacked with wrong size!
+fi
+# end of 'cslib/Makefile'
+fi
+if test -f 'cslib/config.csh' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/config.csh'\"
+else
+echo shar: Extracting \"'cslib/config.csh'\" \(1035 characters\)
+sed "s/^X//" >'cslib/config.csh' <<'END_OF_FILE'
+X#! /bin/csh -f
+X#! File: config.csh
+X#! Usage: csh config.csh flag command . . .
+X#! Last modified on Sat Oct  1 12:54:21 1994 by eroberts
+X#! -----------------------------------------------------
+X#! This shell script is used inside Makefiles to parameterize
+X#! compilations for different Unix systems.  The effect of the
+X#! script is to execute the command and its arguments silently,
+X#! throwing away any output to stdout or stderr.  If the command
+X#! succeeds, the config.csh program echoes the flag parameter; if not,
+X#! it generates no output.  The typical use of the program is
+X#! within backquotes, as follows:
+X#! 
+X#!     gcc `csh config.csh -DCFLAG gcc -E -DCFLAG testfile.c` -c file.c
+X#! 
+X#! If the internal command
+X#! 
+X#!     gcc -E -DCFLAG testfile.c
+X#! 
+X#! succeeds, the outer compilation will define the CFLAG macro;
+X#! if not, the macro will be undefined.  Thus, if the option
+X#! flag works correctly in the test case, it is used in the
+X#! other compilations as well.
+X#!
+Xeval $argv[2-] >& /dev/null
+Xif ($status == 0) echo $1
+END_OF_FILE
+if test 1035 -ne `wc -c <'cslib/config.csh'`; then
+    echo shar: \"'cslib/config.csh'\" unpacked with wrong size!
+fi
+chmod +x 'cslib/config.csh'
+# end of 'cslib/config.csh'
+fi
+if test -f 'cslib/exception.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/exception.c'\"
+else
+echo shar: Extracting \"'cslib/exception.c'\" \(3276 characters\)
+sed "s/^X//" >'cslib/exception.c' <<'END_OF_FILE'
+X/*
+X * File: exception.c
+X * Version: 1.0
+X * Last modified on Sun Jul 24 10:28:11 1994 by eroberts
+X * -----------------------------------------------------
+X * This file implements the C exception handler.  Much of the
+X * real work is done in the exception.h header file.
+X */
+X
+X#include <stdio.h>
+X#include <stdarg.h>
+X
+X#include "genlib.h"
+X#include "gcalloc.h"
+X#include "exception.h"
+X
+X/*
+X * Constant: MaxUnhandledMessage
+X * -----------------------------
+X * This constant should be large enough to accommodate the
+X * unhandled exception message, including the exception name.
+X */
+X
+X#define MaxUnhandledMessage 100
+X
+X/* Publically accessible exceptions */
+X
+Xexception ANY = { "ANY" };
+Xexception ErrorException = { "ErrorException" };
+X
+X/*
+X * Global variable: exceptionStack
+X * -------------------------------
+X * This variable is the head pointer to a linked list of
+X * context blocks that act as the exception stack.  The chain
+X * pointer is referenced by the macros in exception.h and must
+X * therefore be exported, but clients should not reference it
+X * directly.
+X */
+X
+Xcontext_block *exceptionStack = NULL;
+X
+X/* Private function prototypes */
+X
+Xstatic context_block *FindHandler(exception *e);
+X
+X/* Public entries */
+X
+X/*
+X * Function: RaiseException
+X * ------------------------
+X * This function operates by finding an appropriate handler
+X * and then using longjmp to return to the context stored
+X * there after resetting the exception stack.  If no handler
+X * exists, the function notes an unhandled exception.  Much
+X * of the complexity comes from the fact that allocation
+X * within the exception handler may fail.
+X */
+X
+Xvoid RaiseException(exception *e, string name, void *value)
+X{
+X    context_block *cb;
+X    char errbuf[MaxUnhandledMessage + 1];
+X    string errmsg;
+X    int errlen;
+X
+X    cb = FindHandler(e);
+X    if (cb == NULL) {
+X        sprintf(errbuf, "Unhandled exception (%.30s)", name);
+X        errlen = strlen(errbuf);
+X        if (_acb == NULL) {
+X            errmsg = malloc(errlen + 1);
+X        } else {
+X            errmsg = _acb->allocMethod(errlen + 1);
+X        }
+X        if (errmsg == NULL) {
+X            errmsg = "Unhandled exception: unknown";
+X        } else {
+X            strcpy(errmsg, errbuf);
+X        }
+X        Error(errmsg);
+X    }
+X    exceptionStack = cb;
+X    cb->id = e;
+X    cb->value = value;
+X    cb->name = name;
+X    longjmp(cb->jmp, ES_Exception);
+X}
+X
+X/*
+X * Function: HandlerExists
+X * -----------------------
+X * This public entry is used primarily by the Error function
+X * to determine if ErrorException has been trapped, although
+X * it is available to other clients as well.
+X */
+X
+Xbool HandlerExists(exception *e)
+X{
+X    return (FindHandler(e) != NULL);
+X}
+X
+X/* Private functions */
+X
+X/*
+X * Function: FindHandler
+X * ---------------------
+X * This function searches the exception stack to find the
+X * first active handler for the indicated exception.  If a
+X * match is found, the context block pointer is returned.
+X * If not, FindHandler returns NULL.
+X */
+X
+Xstatic context_block *FindHandler(exception *e)
+X{
+X    context_block *cb;
+X    exception *t;
+X    int i;
+X
+X    for (cb = exceptionStack; cb != NULL; cb = cb->link) {
+X        for (i = 0; i < cb->nx; i++) {
+X            t = cb->array[i];
+X            if (t == e || t == &ANY) return (cb);
+X        }
+X    }
+X    return (NULL);
+X}
+END_OF_FILE
+if test 3276 -ne `wc -c <'cslib/exception.c'`; then
+    echo shar: \"'cslib/exception.c'\" unpacked with wrong size!
+fi
+# end of 'cslib/exception.c'
+fi
+if test -f 'cslib/exception.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/exception.h'\"
+else
+echo shar: Extracting \"'cslib/exception.h'\" \(7990 characters\)
+sed "s/^X//" >'cslib/exception.h' <<'END_OF_FILE'
+X/*
+X * File: exception.h
+X * Version: 1.0
+X * Last modified on Thu Feb 23 12:45:01 1995 by eroberts
+X * -----------------------------------------------------
+X * The exception package provides a general exception
+X * handling mechanism for use with C that is portable
+X * across a variety of compilers and operating systems.
+X */
+X
+X#ifndef _exception_h
+X#define _exception_h
+X
+X/*
+X * Overview:
+X * --------
+X * The exception package makes it possible for clients to
+X * specify a handler for an exceptional conditions in a
+X * syntactically readable way.  As a client, your first step
+X * is to declare an exception condition name by declaring
+X * a variable of type exception, as in
+X *
+X *       exception MyException;
+X *
+X * Normal visibility rules apply, so that you should declare
+X * the exception variable at the appropriate level.  For
+X * example, if an exception is local to an implementation,
+X * it should be declared statically within that module.  If
+X * an exception condition is shared by many modules, the
+X * exception variable should be declared in an interface
+X * and exported to all clients that need it.  This package
+X * defines and exports the exception ErrorException, which
+X * is likely to be sufficient for many clients.
+X *
+X * The basic functionality of exceptions is that one piece
+X * of code can "raise" an exception so that it can then be
+X * "handled" by special code in a dynamically enclosing
+X * section of the program.  Exceptions are raised by calling
+X * the pseudo-function raise with the exception name, as in
+X *
+X *     raise(MyException);
+X *
+X * Exceptions are handled using the "try" statement
+X * (actually implemented using macros), which has the form:
+X *
+X *     try {
+X *        . . . statements in the body of the block . . .
+X *     except(exception1)
+X *        . . . statements to handle exception 1 . . .
+X *     except(exception2)
+X *        . . . statements to handle exception 2 . . .
+X *     except(ANY)
+X *        . . . statements to handle any exception . . .
+X *     } endtry
+X *
+X * Any number of except clauses may appear (up to a
+X * maximum defined by the constant MaxExceptionsPerScope),
+X * and the ANY clause is optional.
+X *
+X * When the program encounters the "try" statement, the
+X * statements in the body are executed.  If no exception
+X * conditions are raised during that execution, either
+X * in this block or by a function call nested inside
+X * this block, control passes to the end of the "try"
+X * statement when the last statement in the block is
+X * executed.  If an exception is raised during the
+X * dynamic execution of the block, control immediately
+X * passes to the statements in the appropriate except
+X * clause.  Only the statements in that clause are
+X * executed; no break statement is required to exit
+X * the block.  If no handler for the raised exception
+X * appears anywhere in the control history, the program
+X * exits with an error.
+X *
+X * Examples of use:
+X *
+X * 1.  Catching errors.
+X *
+X * The following code fragment traps calls to Error, so
+X * that the program does not quit but instead returns
+X * to the top-level read-and-execute loop.
+X *
+X *     while (TRUE) {
+X *         try {
+X *             printf("> ");
+X *             cmd = ReadCommand();
+X *             ExecuteCommand(cmd);
+X *         except(ErrorException)
+X *             printf("Error: %s\n", (string) GetExceptionValue());
+X *             -- additional handling code, if any --
+X *         } endtry
+X *     }
+X *
+X * If either ReadCommand or ExecuteCommand calls Error,
+X * control will be passed back to the main loop, after
+X * executing any additional handler code.  The error
+X * message is passed as the exception value and can be
+X * printed as shown in the example.
+X *
+X * 2.  Handling control-C
+X *
+X * The following code extends the example above so that
+X * typing ^C also returns to top-level.
+X *
+X *     #include <signal.h>
+X *
+X *     static exception ControlCException;
+X *     static int errorCount = 0;
+X *     static int ControlCHandler();
+X *
+X *     main()
+X *     {
+X *         string cmd;
+X *
+X *         signal(SIGINT, ControlCHandler);
+X *         while (TRUE) {
+X *             try {
+X *                 printf("> ");
+X *                 cmd = ReadCommand();
+X *                 ExecuteCommand(cmd);
+X *             except(ControlCException);
+X *                 printf("^C\n");
+X *                 signal(SIGINT, ControlCHandler);
+X *             except(ErrorException)
+X *                 errorCount++;
+X *             } endtry
+X *         }
+X *     }
+X *
+X *     static int ControlCHandler()
+X *     {
+X *         raise(ControlCException);
+X *     }
+X */
+X
+X/*
+X * Actual interface specification
+X * ------------------------------
+X * Most of the implementation of the exception mechanism is
+X * actually done in the macros defined by this file.
+X * Clients should ordinarily be able to read the description
+X * above and ignore the detailed code below.
+X */
+X
+X#include <setjmp.h>
+X#include <string.h>
+X#include "genlib.h"
+X
+X/* Define parameters and error status indicators */
+X
+X#define MaxExceptionsPerScope 10
+X#define ETooManyExceptClauses 101
+X#define EUnhandledException 102
+X
+X/* Codes to keep track of the state of the try handler */
+X
+X#define ES_Initialize 0
+X#define ES_EvalBody 1
+X#define ES_Exception 2
+X
+X/*
+X * Type: exception
+X * ---------------
+X * Exceptions are specified by their address, so that the
+X * actual structure does not matter.  Strings are used here
+X * so that exporters of exceptions can store the exception
+X * name for the use of debuggers and other tools.
+X */
+X
+Xtypedef struct { string name; } exception;
+X
+X/*
+X * Type: context_block
+X * -------------------
+X * This structure is used internally to maintain a chain of
+X * exception scopes on the control stack.
+X */
+X
+Xtypedef struct ctx_block {
+X    jmp_buf jmp;
+X    int nx;
+X    exception *array[MaxExceptionsPerScope];
+X    exception *id;
+X    void *value;
+X    string name;
+X    struct ctx_block *link;
+X} context_block;
+X
+X/* Declare the built-in exceptions */
+X
+Xextern exception ErrorException;
+Xextern exception ANY;
+X
+X/* Declare a global pointer to the context stack */
+X
+Xextern context_block *exceptionStack;
+X
+X/*
+X * Function: RaiseException
+X * Usage: RaiseException(&e, name, value);
+X * ---------------------------------------
+X * This function is called by the raise macro and does the
+X * work necessary to raise the exception.  See the exception.c file
+X * for details.  Clients do not ordinarily call this directly.
+X */
+X
+Xvoid RaiseException(exception *e, string name, void *value);
+X
+X/*
+X * Function: HandlerExists
+X * Usage: if (HandlerExists(&e)) ...
+X * ---------------------------------
+X * Determines whether a handler exists for an exception in
+X * the dynamically enclosing scope.  Intended only for use
+X * by special clients, such as the Error package.
+X */
+X
+Xbool HandlerExists(exception *e);
+X
+X/* Define the pseudo-functions for raise and try */
+X
+X#define raise(e) RaiseException(&e, #e, NULL)
+X
+X#define try \
+X      { \
+X          jmp_buf _jmp_; \
+X          context_block _ctx_; \
+X          volatile int _es_; \
+X          _es_ = ES_Initialize; \
+X          _ctx_.nx = 0; \
+X          _ctx_.link = exceptionStack; \
+X          exceptionStack = (context_block *) &_ctx_; \
+X          if (setjmp(_jmp_) != 0) _es_ = ES_Exception; \
+X          memcpy((void *) _ctx_.jmp, (void *) _jmp_, sizeof(jmp_buf)); \
+X          while (1) { \
+X              if (_es_ == ES_EvalBody)
+X
+X#define except(e) \
+X                  if (_es_ == ES_EvalBody) exceptionStack = _ctx_.link; \
+X                  break; \
+X              } \
+X              if (_es_ == ES_Initialize) { \
+X                  if (_ctx_.nx >= MaxExceptionsPerScope) \
+X                      exit(ETooManyExceptClauses); \
+X                  _ctx_.array[_ctx_.nx++] = &e; \
+X              } else if (_ctx_.id == &e || &e == &ANY) { \
+X                  exceptionStack = _ctx_.link;
+X
+X#define endtry \
+X              if (_es_ != ES_Initialize) break; \
+X              _es_ = ES_EvalBody; \
+X          } \
+X      }
+X
+X#define GetExceptionName() _ctx_.name
+X#define GetExceptionValue() _ctx_.value
+X#define GetCurrentException() _ctx_.id
+X
+X#endif
+END_OF_FILE
+if test 7990 -ne `wc -c <'cslib/exception.h'`; then
+    echo shar: \"'cslib/exception.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/exception.h'
+fi
+if test -f 'cslib/extgraph.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/extgraph.h'\"
+else
+echo shar: Extracting \"'cslib/extgraph.h'\" \(14869 characters\)
+sed "s/^X//" >'cslib/extgraph.h' <<'END_OF_FILE'
+X/*
+X * File: extgraph.h
+X * Version: 3.0
+X * Last modified on Tue Oct  4 11:24:41 1994 by eroberts
+X * -----------------------------------------------------
+X * This interface is the extended graphics interface.
+X * It includes all of the facilities in graphics.h, plus
+X * several additional functions that are designed to
+X * support more sophisticated, interactive graphics.
+X */
+X
+X#ifndef _extgraph_h
+X#define _extgraph_h
+X
+X#include "genlib.h"
+X
+X/* Exported functions */
+X
+X/* Section 1 -- Basic functions from graphics.h */
+X
+X#include "graphics.h"
+X
+X/* Section 2 -- Elliptical arcs */
+X
+X/*
+X * Function: DrawEllipticalArc
+X * Usage: DrawEllipticalArc(rx, ry, start, sweep);
+X * -----------------------------------------------
+X * This procedure draws an elliptical arc.  It is exactly
+X * the same in its operation as DrawArc in the graphics.h
+X * interface, except that the radius is different along the
+X * two axes.
+X */
+X
+Xvoid DrawEllipticalArc(double rx, double ry,
+X                       double start, double sweep);
+X
+X/* Section 3 -- Graphical regions*/
+X
+X/*
+X * Functions: StartFilledRegion, EndFilledRegion
+X * Usage: StartFilledRegion(density);
+X *        . . . other calls . . .
+X *        EndFilledRegion();
+X * ------------------------------
+X * These calls make it possible to draw filled shapes on the
+X * display.  After calling StartFilledRegion, any calls to
+X * DrawLine and DrawArc are used to create a shape definition
+X * and do not appear on the screen until EndFilledRegion is
+X * called.  The lines and arcs must be consecutive, in the
+X * sense that each new element must start where the last
+X * one ended.  MovePen calls may occur at the beginning
+X * or the end of the region, but not in the interior. When
+X * EndFilledRegion is called, the entire region appears on the
+X * screen, with its interior filled in.  The density parameter
+X * is a number between 0 and 1 and indicates how the dot density
+X * to be used for the fill pattern.  If density is 1, the shape
+X * will be filled in a solid color; if it is 0, the fill will be
+X * invisible.  In between, the implementation will use a dot
+X * pattern that colors some of the screen dots but not others.
+X */
+X
+Xvoid StartFilledRegion(double density);
+Xvoid EndFilledRegion(void);
+X
+X/* Section 4 -- String functions */
+X
+X/*
+X * Function: DrawTextString
+X * Usage: DrawTextString(text);
+X * ----------------------------
+X * This function displays the string text at the current point
+X * in the current font and size.  The current point is updated
+X * so that the next DrawTextString command would continue from
+X * the next character position.  The string may not include the
+X * newline character.
+X */
+X
+Xvoid DrawTextString(string text);
+X
+X/*
+X * Function: TextStringWidth
+X * Usage: w = TextStringWidth(text);
+X * ---------------------------------
+X * This function returns the width of the text string if displayed
+X * at the current font and size.
+X */
+X
+Xdouble TextStringWidth(string text);
+X
+X/*
+X * Function: SetFont
+X * Usage: SetFont(font);
+X * ---------------------
+X * This function sets a new font according to the font string,
+X * which is case-independent.  Different systems support different
+X * fonts, although common ones like "Times" and "Courier" are often
+X * supported.  Initially, the font is set to "Default" which is
+X * always supported, although the underlying font is system
+X * dependent.  If the font name is unrecognized, no error is
+X * generated, and the font remains unchanged.  If you need to
+X * detect this condition, you can call GetFont to see if the
+X * change took effect.  By not generating an error in this case,
+X * programs become more portable.
+X */
+X
+Xvoid SetFont(string font);
+X
+X/*
+X * Function: GetFont
+X * Usage: font = GetFont();
+X * ------------------------
+X * This function returns the current font name as a string.
+X */
+X
+Xstring GetFont(void);
+X
+X/*
+X * Function: SetPointSize
+X * Usage: SetPointSize(size);
+X * --------------------------
+X * This function sets a new point size.  If the point size is
+X * not supported for a particular font, the closest existing
+X * size is selected.
+X */
+X
+Xvoid SetPointSize(int size);
+X
+X/*
+X * Function: GetPointSize
+X * Usage: size = GetPointSize();
+X * -----------------------------
+X * This function returns the current point size.
+X */
+X
+Xint GetPointSize(void);
+X
+X/*
+X * Text style constants
+X * --------------------
+X * The constants Bold and Italic are used in the SetStyle
+X * command to specify the desired text style.  They may also
+X * be used in combination by adding these constants together,
+X * as in Bold + Italic.  The constant Normal indicates the
+X * default style.
+X */
+X
+X#define Normal  0
+X#define Bold    1
+X#define Italic  2
+X
+X/*
+X * Function: SetStyle
+X * Usage: SetStyle(style);
+X * -----------------------
+X * This function establishes the current style properties
+X * for text based on the parameter style, which is an integer
+X * representing the sum of any of the text style constants.
+X */
+X
+Xvoid SetStyle(int style);
+X
+X/*
+X * Function: GetStyle
+X * Usage: style = GetStyle();
+X * --------------------------
+X * This function returns the current style.
+X */
+X
+Xint GetStyle(void);
+X
+X/*
+X * Functions: GetFontAscent, GetFontDescent, GetFontHeight
+X * Usage: ascent = GetFontAscent();
+X *        descent = GetFontDescent();
+X *        height = GetFontHeight();
+X * -------------------------------------------------------
+X * These functions return properties of the current font that are
+X * used to calculate how to position text vertically on the page.
+X * The ascent of a font is the distance from the baseline to the
+X * top of the largest character; the descent is the maximum
+X * distance any character extends below the baseline.  The height
+X * is the total distance between two lines of text, including the
+X * interline space (which is called leading).
+X *
+X * Examples:
+X *   To change the value of y so that it indicates the next text
+X *   line, you need to execute
+X *
+X *        y -= GetFontHeight();
+X *
+X *   To center text vertically around the coordinate y, you need
+X *   to start the pen at
+X *
+X *       y - GetFontAscent() / 2
+X */
+X
+Xdouble GetFontAscent(void);
+Xdouble GetFontDescent(void);
+Xdouble GetFontHeight(void);
+X
+X/* Section 5 -- Mouse support */
+X
+X/*
+X * Functions: GetMouseX, GetMouseY
+X * Usage: x = GetMouseX();
+X *        y = GetMouseY();
+X * -------------------------------
+X * These functions return the x and y coordinates of the mouse,
+X * respectively.  The coordinate values are real numbers measured
+X * in inches from the origin and therefore match the drawing
+X * coordinates.
+X */
+X
+Xdouble GetMouseX(void);
+Xdouble GetMouseY(void);
+X
+X/*
+X * Functions: MouseButtonIsDown
+X * Usage: if (MouseButtonIsDown()) . . .
+X * -------------------------------------
+X * This function returns TRUE if the mouse button is currently
+X * down.  For maximum compatibility among implementations, the
+X * mouse is assumed to have one button.  If the mouse has more
+X * than one button, this function returns TRUE if any button
+X * is down.
+X */
+X
+Xbool MouseButtonIsDown(void);
+X
+X/*
+X * Functions: WaitForMouseDown, WaitForMouseUp
+X * Usage: WaitForMouseDown();
+X *        WaitForMouseUp();
+X * -------------------------------------------
+X * The WaitForMouseDown function waits until the mouse button
+X * is pressed and then returns.  WaitForMouseUp waits for the
+X * button to be released.
+X */
+X
+Xvoid WaitForMouseDown(void);
+Xvoid WaitForMouseUp(void);
+X
+X/* Section 6 -- Color support */
+X
+X/*
+X * Function: HasColor
+X * Usage: if (HasColor()) . . .
+X * ----------------------------
+X * This function returns TRUE if the graphics window can display a
+X * color image.  Note that this condition is stronger than simply
+X * checking whether a color display is available.  Because color
+X * windows require more memory than black and white ones, this
+X * function will return FALSE with a color screen if there is
+X * not enough memory to store a colored image.  On the Macintosh,
+X * for example, it is usually necessary to increase the partition
+X * size to at least 1MB before color windows can be created.
+X */
+X
+Xbool HasColor(void);
+X
+X/*
+X * Function: SetPenColor
+X * Usage: SetPenColor(color);
+X * --------------------------
+X * This function sets the color of the pen used for any drawing,
+X * including lines, text, and filled regions.  The color is a
+X * string, which will ordinarily be one of the following
+X * predefined color names:
+X *
+X *    Black, Dark Gray, Gray, Light Gray, White,
+X *    Red, Yellow, Green, Cyan, Blue, Magenta
+X *
+X * The first line corresponds to standard gray scales and the
+X * second to the primary and secondary colors of light.  The
+X * built-in set is limited to these colors because they are
+X * likely to be the same on all hardware devices.  For finer
+X * color control, you can use the DefineColor function to
+X * create new color names as well.
+X */
+X
+Xvoid SetPenColor(string color);
+X
+X/*
+X * Function: GetPenColor
+X * Usage: color = GetPenColor();
+X * -----------------------------
+X * This function returns the current pen color as a string.
+X */
+X
+Xstring GetPenColor(void);
+X
+X/*
+X * Function: DefineColor
+X * Usage: DefineColor(name, red, green, blue);
+X * -------------------------------------------
+X * This function allows the client to define a new color name
+X * by supplying intensity levels for the colors red, green,
+X * and blue, which are the primary colors of light.  The
+X * color values are provided as real numbers between 0 and 1,
+X * indicating the intensity of that color.  For example,
+X * the predefined color Magenta has full intensity red and
+X * blue but no green and is therefore defined as:
+X *
+X *      DefineColor("Magenta", 1, 0, 1);
+X *
+X * DefineColor allows you to create intermediate colors on
+X * many displays, although the results vary significantly
+X * depending on the hardware.  For example, the following
+X * usually gives a reasonable approximation of brown:
+X *
+X *      DefineColor("Brown", .35, .20, .05);
+X */
+X
+Xvoid DefineColor(string name,
+X                 double red, double green, double blue);
+X
+X/* Section 7 -- Miscellaneous functions */
+X
+X/*
+X * Function: SetEraseMode
+X * Usage: SetEraseMode(TRUE);
+X *        SetEraseMode(FALSE);
+X * ---------------------------
+X * The SetEraseMode function sets the value of the internal
+X * erasing flag.  Setting this flag is similar to setting the
+X * color to "White" in its effect but does not affect the
+X * current color setting.  When erase mode is set to FALSE,
+X * normal drawing is restored, using the current color.
+X */
+X
+Xvoid SetEraseMode(bool mode);
+X
+X/*
+X * Function: GetEraseMode
+X * Usage: mode = GetEraseMode();
+X * -----------------------------
+X * This function returns the current state of the erase mode flag.
+X */
+X
+Xbool GetEraseMode(void);
+X
+X/*
+X * Function: SetWindowTitle
+X * Usage: SetWindowTitle(title);
+X * -----------------------------
+X * This function sets the title of the graphics window, if such
+X * an operation is possible on the display.  If it is not possible
+X * for a particular implementation, the call is simply ignored.
+X * This function may be called prior to the InitGraphics call to
+X * set the initial name of the window.
+X */
+X
+Xvoid SetWindowTitle(string title);
+X
+X/*
+X * Function: GetWindowTitle
+X * Usage: title = GetWindowTitle();
+X * --------------------------------
+X * This function returns the title of the graphics window.  If the
+X * implementation does not support titles, this call returns the
+X * empty string.
+X */
+X
+Xstring GetWindowTitle(void);
+X
+X/*
+X * Function: UpdateDisplay
+X * Usage: UpdateDisplay();
+X * -----------------------
+X * This function initiates an immediate update of the graphics
+X * window and is necessary for animation.  Ordinarily, the
+X * graphics window is updated only when the program waits for
+X * user input.
+X */
+X
+Xvoid UpdateDisplay(void);
+X
+X/*
+X * Function: Pause
+X * Usage: Pause(seconds);
+X * ----------------------
+X * The Pause function updates the graphics window and then
+X * pauses for the indicated number of seconds.  This function
+X * is useful for animation where the motion would otherwise
+X * be too fast.
+X */
+X
+Xvoid Pause(double seconds);
+X
+X/*
+X * Function: ExitGraphics
+X * Usage: ExitGraphics();
+X * ----------------------
+X * The ExitGraphics function closes the graphics window and
+X * exits from the application without waiting for any additional
+X * user interaction.
+X */
+X
+Xvoid ExitGraphics(void);
+X
+X/*
+X * Functions: SaveGraphicsState, RestoreGraphicsState
+X * Usage: SaveGraphicsState();
+X *        . . . graphical operations . . .
+X *        RestoreGraphicsState();
+X * ---------------------------------------------------
+X * The SaveGraphicsState function saves the current graphics
+X * state (the current pen position, the font, the point size,
+X * and the erase mode flag) internally, so that they can be
+X * restored by the next RestoreGraphicsState call.  These two
+X * functions must be used in pairs but may be nested to any depth.
+X */
+X
+Xvoid SaveGraphicsState(void);
+Xvoid RestoreGraphicsState(void);
+X
+X/*
+X * Functions: GetFullScreenWidth, GetFullScreenHeight
+X * Usage: width = GetFullScreenWidth();
+X *        height = GetFullScreenHeight();
+X * --------------------------------------
+X * These functions return the height and width of the entire
+X * display screen, not the graphics window.  Their only
+X * significant use is for applications that need to adjust
+X * the size of the graphics window based on available screen
+X * space.  These functions may be called before InitGraphics
+X * has been called.
+X */
+X
+Xdouble GetFullScreenWidth(void);
+Xdouble GetFullScreenHeight(void);
+X
+X/*
+X * Functions: SetWindowSize
+X * Usage: SetWindowSize(width, height);
+X * ------------------------------------
+X * This function sets the window size to the indicated dimensions,
+X * if possible.  This function should be called before the graphics
+X * window is created by InitGraphics.  Attempts to change the size
+X * of an existing window are ignored by most implementations.  This
+X * function should be used sparingly because it reduces the
+X * portability of applications, particularly if the client
+X * requests more space than is available on the screen.
+X */
+X
+Xvoid SetWindowSize(double width, double height);
+X
+X/*
+X * Functions: GetXResolution, GetYResolution
+X * Usage: xres = GetXResolution();
+X *        yres = GetYResolution();
+X * -----------------------------------------
+X * These functions return the number of pixels per inch along
+X * each of the coordinate directions and are useful for applications
+X * in which it is important for short distances to be represented
+X * uniformly in terms of dot spacing.  Even though the x and y
+X * resolutions are the same for most displays, clients should
+X * not rely on this property.
+X *
+X * Note: Lines in the graphics library are one pixel unit wide and
+X * have a length that is always one pixel longer than you might
+X * expect.  For example, the function call
+X *
+X *     DrawLine(2 / GetXResolution(), 0);
+X *
+X * draws a line from the current point to the point two pixels
+X * further right, which results in a line of three pixels.
+X */
+X
+Xdouble GetXResolution(void);
+Xdouble GetYResolution(void);
+X
+X#endif
+END_OF_FILE
+if test 14869 -ne `wc -c <'cslib/extgraph.h'`; then
+    echo shar: \"'cslib/extgraph.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/extgraph.h'
+fi
+if test -f 'cslib/gcalloc.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/gcalloc.h'\"
+else
+echo shar: Extracting \"'cslib/gcalloc.h'\" \(2269 characters\)
+sed "s/^X//" >'cslib/gcalloc.h' <<'END_OF_FILE'
+X/*
+X * File: gcalloc.h
+X * Version: 1.0
+X * Last modified on Wed Sep 21 16:21:37 1994 by eroberts
+X * -----------------------------------------------------
+X * This file is a stub version of the interface for a
+X * garbage-collecting allocator that will be part of
+X * a future library release.  When the garbage-collecting
+X * allocator is in use, the memory returned by the GetBlock
+X * and FreeBlock functions in genlib.h can be traced and
+X * collected automatically when it is no longer accessible.
+X *
+X * The garbage-collecting allocator is not part of the
+X * current cslib distribution.  Even so, functions in the
+X * other libraries call the ProtectVariable and ProtectBlock
+X * functions, so that they will continue to work when the
+X * full library is released.  Those functions are implemented
+X * in genlib.c.
+X */
+X
+X#ifndef _gcalloc_h
+X#define _gcalloc_h
+X
+X/*
+X * Macro: ProtectVariable
+X * Usage: ProtectVariable(v);
+X * --------------------------
+X * This macro registers a global variable with the allocation
+X * system, so that the variable is traced when the garbage
+X * collector is used.  This operation needs is implemented
+X * in genlib.c so that code can be written to function correctly
+X * whether or not the garbage-collecting allocator is loaded.
+X */
+X
+X#define ProtectVariable(v) ProtectBlock(&v, sizeof v)
+X
+X/*
+X * Function: ProtectBlock
+X * Usage: ProtectBlock(ptr, nbytes);
+X * ---------------------------------
+X * This function is not usually called by clients (who will
+X * ordinarily use ProtectVariable instead), but has the
+X * effect of protecting the block of memory beginning at
+X * ptr and extending for nbytes from the garbage collector.
+X */
+X
+Xvoid ProtectBlock(void *ptr, size_t nbytes);
+X
+X/*
+X * Global linkage variable: _acb
+X * -----------------------------
+X * This variable is used to hold the allocation control block
+X * that provides the linkage between this package and the
+X * dynamic allocator.  The reason for using the structure
+X * as a linkage is so that the garbage-collecting allocator
+X * need not even be loaded if it is not explicitly called.
+X */
+X
+Xtypedef struct {
+X    void *(*allocMethod)(size_t nbytes);
+X    void (*freeMethod)(void *ptr);
+X    void (*protectMethod)(void *ptr, size_t nbytes);
+X} *_GCControlBlock;
+X
+Xextern _GCControlBlock _acb;
+X
+X#endif
+END_OF_FILE
+if test 2269 -ne `wc -c <'cslib/gcalloc.h'`; then
+    echo shar: \"'cslib/gcalloc.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/gcalloc.h'
+fi
+if test -f 'cslib/genlib.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/genlib.c'\"
+else
+echo shar: Extracting \"'cslib/genlib.c'\" \(3748 characters\)
+sed "s/^X//" >'cslib/genlib.c' <<'END_OF_FILE'
+X/*
+X * File: genlib.c
+X * Version: 1.0
+X * Last modified on Sun Jul 24 10:29:46 1994 by eroberts
+X * -----------------------------------------------------
+X * This file implements the general C library package.  See the
+X * interface description in genlib.h for details.
+X */
+X
+X#include <stdio.h>
+X#include <stddef.h>
+X#include <string.h>
+X#include <stdarg.h>
+X
+X#include "genlib.h"
+X#include "gcalloc.h"
+X#include "exception.h"
+X
+X/*
+X * Constants:
+X * ----------
+X * ErrorExitStatus -- Status value used in exit call
+X * MaxErrorMessage -- Longest error message allowed
+X */
+X
+X#define ErrorExitStatus 1
+X#define MaxErrorMessage 500
+X
+X/* Section 1 -- Define new "primitive" types */
+X
+X/*
+X * Constant: UNDEFINED
+X * -------------------
+X * This entry defines the target of the UNDEFINED constant.
+X */
+X
+Xchar undefined_object[] = "UNDEFINED";
+X
+X/* Section 2 -- Memory allocation */
+X
+X/*
+X * Implementation notes:
+X * ---------------------
+X * The code for the memory allocator is divided between
+X * genlib.c and gcalloc.c, and the division strategy may at
+X * first seem unnatural, since the function ProtectBlock is
+X * declared in gcalloc.h but defined here in genlib.c.  The
+X * intention is to minimize the size of object files
+X * produced by linkers that search a library for modules
+X * that are actually referenced.  The libraries themselves
+X * need to call ProtectBlock (usually through the macro
+X * ProtectVariable), but will not require the actual code
+X * for the allocator unless InitGCAllocator is explicitly
+X * called.
+X */
+X
+X/*
+X * Global variable: _acb
+X * ---------------------
+X * This variable is used to hold a method suite that makes it
+X * easy to substitute a garbage-collecting allocator for the
+X * ANSI allocator.
+X */
+X
+X_GCControlBlock _acb = NULL;
+X
+X/* Memory allocation implementation */
+X
+Xvoid *GetBlock(size_t nbytes)
+X{
+X    void *result;
+X
+X    if (_acb == NULL) {
+X        result = malloc(nbytes);
+X    } else {
+X        result = _acb->allocMethod(nbytes);
+X    }
+X    if (result == NULL) Error("No memory available");
+X    return (result);
+X}
+X
+Xvoid FreeBlock(void *ptr)
+X{
+X    if (_acb == NULL) {
+X        free(ptr);
+X    } else {
+X        _acb->freeMethod(ptr);
+X    }
+X}
+X
+Xvoid ProtectBlock(void *ptr, size_t nbytes)
+X{
+X    if (_acb != NULL) _acb->protectMethod(ptr, nbytes);
+X}
+X
+X/* Section 3 -- Basic error handling */
+X
+X/*
+X * Implementation notes: Error
+X * ---------------------------
+X * Writing the Error function requires some care, since it is
+X * called in circumstances in which parts of the system may be
+X * broken.  In particular, it is not acceptable for Error to
+X * call GetBlock, since the error condition may be that the
+X * system is out of memory, in which case calling GetBlock would
+X * fail.  The error string should be allocated dynamically,
+X * so that this function can be used in reentrant code.
+X * Note that it is critical to exit if the length bound for
+X * an error message is exceeded, since this error almost
+X * certainly corrupts the stack.
+X */
+X
+Xvoid Error(string msg, ...)
+X{
+X    va_list args;
+X    char errbuf[MaxErrorMessage + 1];
+X    string errmsg;
+X    int errlen;
+X
+X    va_start(args, msg);
+X    vsprintf(errbuf, msg, args);
+X    va_end(args);
+X    errlen = strlen(errbuf);
+X    if (errlen > MaxErrorMessage) {
+X        fprintf(stderr, "Error: Error Message too long\n");
+X        exit(ErrorExitStatus);
+X    }
+X    if (_acb == NULL) {
+X        errmsg = malloc(errlen + 1);
+X    } else {
+X        errmsg = _acb->allocMethod(errlen + 1);
+X    }
+X    if (errmsg == NULL) {
+X        errmsg = "No memory available";
+X    } else {
+X        strcpy(errmsg, errbuf);
+X    }
+X    if (HandlerExists(&ErrorException)) {
+X        RaiseException(&ErrorException, "ErrorException", errmsg);
+X    } else {
+X        fprintf(stderr, "Error: %s\n", errmsg);
+X        exit(ErrorExitStatus);
+X    }
+X}
+END_OF_FILE
+if test 3748 -ne `wc -c <'cslib/genlib.c'`; then
+    echo shar: \"'cslib/genlib.c'\" unpacked with wrong size!
+fi
+# end of 'cslib/genlib.c'
+fi
+if test -f 'cslib/genlib.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/genlib.h'\"
+else
+echo shar: Extracting \"'cslib/genlib.h'\" \(6232 characters\)
+sed "s/^X//" >'cslib/genlib.h' <<'END_OF_FILE'
+X/*
+X * File: genlib.h
+X * Version: 1.0
+X * Last modified on Sun Jul 24 10:32:49 1994 by eroberts
+X * -----------------------------------------------------
+X * This file contains several definitions that form the
+X * core of a general-purpose ANSI C library developed by Eric
+X * Roberts.  The goal of this library is to provide a basic
+X * set of tools and conventions that increase the readability
+X * of C programs, particularly as they are used in a teaching
+X * environment.
+X *
+X * The basic definitions provided by genlib.h are:
+X *
+X *    1.  Declarations for several new "primitive" types
+X *        (most importantly bool and string) that are
+X *        used throughout the other libraries and
+X *        applications as fundamental types.
+X *
+X *    2.  A new set of functions for memory allocation.
+X *
+X *    3.  A function for error handling.
+X *
+X *    4.  A repeat statement for loops with interior exits.
+X */
+X
+X#ifndef _genlib_h
+X#define _genlib_h
+X
+X#include <stdio.h>
+X#include <stdlib.h>
+X#include <stddef.h>
+X
+X/* Section 1 -- Define new "primitive" types */
+X
+X/*
+X * Type: bool
+X * ----------
+X * This type has two values, FALSE and TRUE, which are equal to 0
+X * and 1, respectively.  Most of the advantage of defining this type
+X * comes from readability because it allows the programmer to
+X * provide documentation that a variable will take on only one of
+X * these two values.  Designing a portable representation, however,
+X * is surprisingly hard, because many libraries and some compilers
+X * define these names.  The definitions are usually compatible but
+X * may still be flagged as errors.
+X */
+X
+X#ifdef THINK_C
+X   typedef int bool;
+X#else
+X#  ifdef TRUE
+X#    ifndef bool
+X#      define bool int
+X#    endif
+X#  else
+X#    ifdef bool
+X#      define FALSE 0
+X#      define TRUE 1
+X#    else
+X       typedef enum {FALSE, TRUE} bool;
+X#    endif
+X#  endif
+X#endif
+X
+X/*
+X * Type: string
+X * ------------
+X * The type string is identical to the type char *, which is
+X * traditionally used in C programs.  The main point of defining a
+X * new type is to improve program readability.   At the abstraction
+X * levels at which the type string is used, it is usually not
+X * important to take the string apart into its component characters.
+X * Declaring it as a string emphasizes this atomicity.
+X */
+X
+Xtypedef char *string;
+X
+X/*
+X * Type: stream
+X * ------------
+X * Like string, the stream type is used to provide additional
+X * readability and is defined to be equivalent to FILE *
+X * (which is particularly confusing because it violates
+X * standard case conventions).  This type is not used in
+X * the text but is preserved in genlib.h, so it is possible
+X * to teach all of CS1 without exposing any pointers.
+X */
+X
+Xtypedef FILE *stream;
+X
+X/*
+X * Constant: UNDEFINED
+X * -------------------
+X * Besides NULL, the only other constant of pointer type is
+X * UNDEFINED, which is used in certain packages as a special
+X * sentinel to indicate an undefined pointer value.  In many
+X * such contexts, NULL is a legitimate data value and is
+X * therefore inappropriate as a sentinel.
+X */
+X
+X#define UNDEFINED ((void *) undefined_object)
+X
+Xextern char undefined_object[];
+X
+X/* Section 2 -- Memory allocation */
+X
+X/*
+X * General notes:
+X * --------------
+X * These functions provide a common interface for memory
+X * allocation.  All functions in the library that allocate
+X * memory do so using GetBlock and FreeBlock.  Even though
+X * the ANSI standard defines malloc and free for the same
+X * purpose, using GetBlock and FreeBlock provides greater
+X * compatibility with non-ANSI implementations, automatic
+X * out-of-memory error detection, and the possibility of
+X * substituting a garbage-collecting allocator.
+X */
+X
+X/*
+X * Function: GetBlock
+X * Usage: ptr = (type) GetBlock(nbytes);
+X * -------------------------------------
+X * GetBlock allocates a block of memory of the given size.  If
+X * no memory is available, GetBlock generates an error.
+X */
+X
+Xvoid *GetBlock(size_t nbytes);
+X
+X/*
+X * Function: FreeBlock
+X * Usage: FreeBlock(ptr);
+X * ----------------------
+X * FreeBlock frees the memory associated with ptr, which must
+X * have been allocated using GetBlock, New, or NewArray.
+X */
+X
+Xvoid FreeBlock(void *ptr);
+X
+X/*
+X * Macro: New
+X * Usage: p = New(pointer-type);
+X * -----------------------------
+X * The New pseudofunction allocates enough space to hold an
+X * object of the type to which pointer-type points and returns
+X * a pointer to the newly allocated pointer.  Note that
+X * "New" is different from the "new" operator used in C++;
+X * the former takes a pointer type and the latter takes the
+X * target type.
+X */
+X
+X#define New(type) ((type) GetBlock(sizeof *((type) NULL)))
+X
+X/*
+X * Macro: NewArray
+X * Usage: p = NewArray(n, element-type);
+X * -------------------------------------
+X * NewArray allocates enough space to hold an array of n
+X * values of the specified element type.
+X */
+X
+X#define NewArray(n, type) ((type *) GetBlock((n) * sizeof (type)))
+X
+X/* Section 3 -- Basic error handling */
+X
+X/*
+X * Function: Error
+X * Usage: Error(msg, ...)
+X * ----------------------
+X * Error generates an error string, expanding % constructions
+X * appearing in the error message string just as printf does.
+X * If an error handler exception has been introduced (see the
+X * "exception.h" facility), the ErrorException exception is
+X * raised with the expanded error string as argument.  If
+X * there is no ErrorException defined, the program exits
+X * with a status code indicating failure (as given by the
+X * constant ErrorExitStatus).  The length of the error
+X * message string following expansion must not exceed
+X * MaxErrorMessage, and it is the client's responsibility
+X * to ensure this.
+X */
+X
+Xvoid Error(string msg, ...);
+X
+X/* Section 4 -- The repeat pseudo-statement */
+X
+X/*
+X * Statement form: repeat { ... }
+X * ------------------------------
+X * Some instructors who have taught CS1 using this library
+X * have found that using
+X *
+X *     while (TRUE)
+X *
+X * to initiate a loop with an interior exit is confusing to
+X * students, particularly when it comes at the beginning of
+X * the course.  This macro defines "repeat" as an infinite
+X * loop construct for instructors who find it easier to
+X * explain, although it is not used in the text.   Similar
+X * macro definitions are common in industry.
+X */
+X
+X#define repeat for (;;)
+X
+X#endif
+END_OF_FILE
+if test 6232 -ne `wc -c <'cslib/genlib.h'`; then
+    echo shar: \"'cslib/genlib.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/genlib.h'
+fi
+if test -f 'cslib/glibrary.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/glibrary.c'\"
+else
+echo shar: Extracting \"'cslib/glibrary.c'\" \(818 characters\)
+sed "s/^X//" >'cslib/glibrary.c' <<'END_OF_FILE'
+X/*
+X * File: glibrary.c
+X * Version: 3.0
+X * Last modified on Sat Oct  1 12:28:01 1994 by eroberts
+X * -----------------------------------------------------
+X * This file implements the simple functions in the glibrary.h
+X * interface.
+X */
+X
+X#include <stdio.h>
+X#include <math.h>
+X#include "genlib.h"
+X
+X/* Constants */
+X
+X#define Pi 3.1415926535
+X
+X/* Exported entries */
+X
+Xdouble GLRadians(double degrees)
+X{
+X    return (degrees * Pi / 180);
+X}
+X
+Xdouble GLDegrees(double radians)
+X{
+X    return (radians * 180 / Pi);
+X}
+X
+Xint GLRound(double x)
+X{
+X    return ((int) floor(x + 0.5));
+X}
+X
+Xint GLMin(int x, int y)
+X{
+X    return ((x < y) ? x : y);
+X}
+X
+Xint GLMax(int x, int y)
+X{
+X    return ((x > y) ? x : y);
+X}
+X
+Xdouble GLMinF(double x, double y)
+X{
+X    return ((x < y) ? x : y);
+X}
+X
+Xdouble GLMaxF(double x, double y)
+X{
+X    return ((x > y) ? x : y);
+X}
+END_OF_FILE
+if test 818 -ne `wc -c <'cslib/glibrary.c'`; then
+    echo shar: \"'cslib/glibrary.c'\" unpacked with wrong size!
+fi
+# end of 'cslib/glibrary.c'
+fi
+if test -f 'cslib/glibrary.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/glibrary.h'\"
+else
+echo shar: Extracting \"'cslib/glibrary.h'\" \(1439 characters\)
+sed "s/^X//" >'cslib/glibrary.h' <<'END_OF_FILE'
+X/*
+X * File: glibrary.h
+X * Version: 3.0
+X * Last modified on Sat Oct  1 12:28:02 1994 by eroberts
+X * -----------------------------------------------------
+X * This interface exports several simple, low-level functions that are
+X * used in various other parts of the graphics package implementation.
+X * Because these functions are otherwise likely to collide with student
+X * functions, all external names include a GL prefix.
+X */
+X
+X#ifndef _glibrary_h
+X#define _glibrary_h
+X
+X/*
+X * Functions: GLRadians, GLDegrees
+X * Usage: radians = GLRadians(degrees);
+X *        degrees = GLDegrees(radians);
+X * ------------------------------------
+X * These functions convert back and forth between degrees and radians.
+X */
+X
+Xdouble GLRadians(double degrees);
+Xdouble GLDegrees(double radians);
+X
+X/*
+X * Function: GLRound
+X * Usage: n = GLRound(x);
+X * ----------------------
+X * This function rounds a double to the nearest integer.
+X */
+X
+Xint GLRound(double x);
+X
+X/*
+X * Functions: GLMin, GLMax
+X * Usage: min = GLMin(x, y);
+X *        max = GLMax(x, y);
+X * -------------------------
+X * These functions find the minimum and maximum of two integers.
+X */
+X
+Xint GLMin(int x, int y);
+Xint GLMax(int x, int y);
+X
+X/*
+X * Functions: GLMinF, GLMaxF
+X * Usage: min = GLMinF(x, y);
+X *        max = GLMaxF(x, y);
+X * --------------------------
+X * These functions find the minimum and maximum of two doubles.
+X */
+X
+Xdouble GLMinF(double x, double y);
+Xdouble GLMaxF(double x, double y);
+X
+X#endif
+END_OF_FILE
+if test 1439 -ne `wc -c <'cslib/glibrary.h'`; then
+    echo shar: \"'cslib/glibrary.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/glibrary.h'
+fi
+if test -f 'cslib/graphics.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/graphics.c'\"
+else
+echo shar: Extracting \"'cslib/graphics.c'\" \(17740 characters\)
+sed "s/^X//" >'cslib/graphics.c' <<'END_OF_FILE'
+X/*
+X * File: graphics.c
+X * Version: 3.0
+X * Last modified on Sat Oct  1 12:28:01 1994 by eroberts
+X * -----------------------------------------------------
+X * This file is the top-level file in the implementation of the
+X * graphics.h interface for X windows.  The complete implementation
+X * also includes the following subsidiary modules:
+X *
+X *   glibrary.h  Various low-level mathematical functions
+X *   xmanager.h  Mediates communication with the X operations
+X *   xdisplay.h  Performs the actual drawing operations
+X *   xcompat.h   Maintains BSD compatibility on System V.
+X */
+X
+X#include <stdio.h>
+X#include <stdlib.h>
+X#include <string.h>
+X#include <math.h>
+X#include <signal.h>
+X#include <sys/time.h>
+X#include <sys/types.h>
+X
+X#include "genlib.h"
+X#include "gcalloc.h"
+X#include "simpio.h"
+X#include "strlib.h"
+X#include "extgraph.h"
+X#include "glibrary.h"
+X#include "xmanager.h"
+X#include "xdisplay.h"
+X#include "xcompat.h"
+X
+X/*
+X * Parameters
+X * ----------
+X * DesiredWidth  -- Desired width of the graphics window in inches
+X * DesiredHeight -- Desired height of the graphics window in inches
+X * DefaultSize   -- Default point size
+X * MaxColors     -- Maximum number of color names allowed
+X * MinColors     -- Minimum number of colors the device must support
+X */
+X
+X#define DesiredWidth    7.0
+X#define DesiredHeight   4.0
+X#define DefaultSize    12
+X#define MaxColors     256
+X#define MinColors      16
+X
+X/*
+X * Type: graphicsStateT
+X * --------------------
+X * This structure holds the variables that make up the graphics state.
+X */
+X
+Xtypedef struct graphicsStateT {
+X    double cx, cy;
+X    string font;
+X    int size;
+X    int style;
+X    bool erase;
+X    int color;
+X    struct graphicsStateT *link;
+X} *graphicsStateT;
+X
+X/*
+X * Type: regionStateT
+X * ------------------
+X * The region assembly process has the character of a finite state
+X * machine with the following four states:
+X *
+X *   NoRegion       Region has not yet been started
+X *   RegionStarting Region is started but no line segments yet
+X *   RegionActive   First line segment appears
+X *   PenHasMoved    Pen has moved during definition
+X *
+X * The current state determines whether other operations are legal
+X * at that point.
+X */
+X
+Xtypedef enum {
+X    NoRegion, RegionStarting, RegionActive, PenHasMoved
+X} regionStateT;
+X
+X/*
+X * Type: colorEntryT
+X * -----------------
+X * This type is used for the entries in the color table.
+X */
+X
+Xtypedef struct {
+X    string name;
+X    double red, green, blue;
+X} colorEntryT;
+X
+X/*
+X * Global variables
+X * ----------------
+X * initialized   -- TRUE if initialization has been done
+X * windowTitle   -- Current window title (initialized statically)
+X * cmdBuffer     -- Static buffer for sending commands
+X * regionState   -- Current state of the region
+X * colorTable    -- Table of defined colors
+X * nColors       -- Number of defined colors
+X * colorOK       -- TRUE if the display supports color
+X * lastColor     -- Previous color to avoid multiple changes
+X * fontChanged   -- TRUE if font information has changed
+X * windowWidth   -- Width of the window in inches
+X * windowHeight  -- Height of the window in inches
+X * stateStack    -- Stack of graphicStateT blocks
+X * cx, cy        -- Current coordinates     | These
+X * eraseMode     -- Setting of erase flag   | variables
+X * textFont      -- Current font            | consititute
+X * textStyle     -- Current style           | the current
+X * pointSize     -- Current point size      | graphics
+X * penColor      -- Color of pen            | state
+X */
+X
+Xstatic bool initialized = FALSE;
+Xstatic string windowTitle = "Graphics Window";
+X
+Xstatic char cmdBuffer[CommandBufferSize];
+X
+Xstatic regionStateT regionState;
+X
+Xstatic colorEntryT colorTable[MaxColors];
+Xstatic int nColors;
+Xstatic bool colorOK;
+Xstatic int lastColor;
+Xstatic bool fontChanged;
+X
+Xstatic double windowWidth = DesiredWidth;
+Xstatic double windowHeight = DesiredHeight;
+X
+Xstatic graphicsStateT stateStack;
+X
+Xstatic double cx, cy;
+Xstatic bool eraseMode;
+Xstatic string textFont;
+Xstatic int textStyle;
+Xstatic int pointSize;
+Xstatic int penColor;
+X
+X/* Private function prototypes */
+X
+Xstatic void InitCheck(void);
+Xstatic void InitGraphicsState(void);
+Xstatic void InstallFont(void);
+Xstatic void InitColors(void);
+Xstatic int FindColorName(string name);
+Xstatic bool ShouldBeWhite(void);
+Xstatic bool StringMatch(string s1, string s2);
+Xstatic void USleep(unsigned useconds);
+X
+X/* Exported entries */
+X
+X/* Section 1 -- Basic functions from graphics.h */
+X
+X/*
+X * Function: InitGraphics
+X * ----------------------
+X * The implementation below hides considerable complexity underneath
+X * the InitXHandler call.  If you are trying to modify or maintain
+X * this implementation, it is important to understand how that
+X * function is implemented.  For details, see the xhandler.c
+X * implementation.
+X */
+X
+Xvoid InitGraphics(void)
+X{
+X    if (initialized) {
+X        XMSendCommand(ClearCmd, "");
+X    } else {
+X        initialized = TRUE;
+X        ProtectVariable(stateStack);
+X        ProtectVariable(windowTitle);
+X        ProtectVariable(textFont);
+X        XDSetWindowSize(windowWidth, windowHeight);
+X        XMInitialize(windowTitle);
+X        InitColors();
+X    }
+X    InitGraphicsState();
+X}
+X
+Xvoid MovePen(double x, double y)
+X{
+X    InitCheck();
+X    if (regionState == RegionActive) regionState = PenHasMoved;
+X    cx = x;
+X    cy = y;
+X}
+X
+Xvoid DrawLine(double dx, double dy)
+X{
+X    InitCheck();
+X    switch (regionState) {
+X      case NoRegion: case RegionActive:
+X        break;
+X      case RegionStarting:
+X        regionState = RegionActive;
+X        break;
+X      case PenHasMoved:
+X        Error("Region segments must be contiguous");
+X    }
+X    sprintf(cmdBuffer, "%.12g %.12g %.12g %.12g", cx, cy, dx, dy);
+X    XMSendCommand(LineCmd, cmdBuffer);
+X    cx += dx;
+X    cy += dy;
+X}
+X
+Xvoid DrawArc(double r, double start, double sweep)
+X{
+X    DrawEllipticalArc(r, r, start, sweep);
+X}
+X
+Xdouble GetWindowWidth(void)
+X{
+X    return (windowWidth);
+X}
+X
+Xdouble GetWindowHeight(void)
+X{
+X    return (windowHeight);
+X}
+X
+Xdouble GetCurrentX(void)
+X{
+X    InitCheck();
+X    return (cx);
+X}
+X
+Xdouble GetCurrentY(void)
+X{
+X    InitCheck();
+X    return (cy);
+X}
+X
+X/* Section 2 -- Elliptical arcs */
+X
+Xvoid DrawEllipticalArc(double rx, double ry,
+X                       double start, double sweep)
+X{
+X    double x, y;
+X
+X    InitCheck();
+X    switch (regionState) {
+X      case NoRegion: case RegionActive:
+X        break;
+X      case RegionStarting:
+X        regionState = RegionActive;
+X        break;
+X      case PenHasMoved:
+X        Error("Region segments must be contiguous");
+X    }
+X    x = cx + rx * cos(GLRadians(start + 180));
+X    y = cy + ry * sin(GLRadians(start + 180));
+X    sprintf(cmdBuffer, "%.12g %.12g %.12g %.12g %.12g %.12g",
+X                       x, y, rx, ry, start, sweep);
+X    XMSendCommand(ArcCmd, cmdBuffer);
+X    cx = x + rx * cos(GLRadians(start + sweep));
+X    cy = y + ry * sin(GLRadians(start + sweep));
+X}
+X
+X/* Section 3 -- Graphical structures */
+X
+Xvoid StartFilledRegion(double density)
+X{
+X    InitCheck();
+X    if (regionState != NoRegion) {
+X        Error("Region is already in progress");
+X    }
+X    if (density < 0 || density > 1) {
+X        Error("Density for regions must be between 0 and 1");
+X    }
+X    regionState = RegionStarting;
+X    sprintf(cmdBuffer, "%.12g", density);
+X    XMSendCommand(StartRegionCmd, cmdBuffer);
+X}
+X
+Xvoid EndFilledRegion(void)
+X{
+X    InitCheck();
+X    if (regionState == NoRegion) {
+X        Error("EndFilledRegion without StartFilledRegion");
+X    }
+X    regionState = NoRegion;
+X    XMSendCommand(EndRegionCmd, "");
+X}
+X
+X/* Section 4 -- String functions */
+X
+Xvoid DrawTextString(string text)
+X{
+X    InitCheck();
+X    if (regionState != NoRegion) {
+X        Error("Text strings are illegal inside a region");
+X    }
+X    if (strlen(text) > MaxTextString) {
+X        Error("Text string too long");
+X    }
+X    InstallFont();
+X    sprintf(cmdBuffer, "%.12g %.12g %s", cx, cy, text);
+X    XMSendCommand(TextCmd, cmdBuffer);
+X    cx += TextStringWidth(text);
+X}
+X
+Xdouble TextStringWidth(string text)
+X{
+X    double result;
+X
+X    InitCheck();
+X    if (strlen(text) > MaxTextString) {
+X        Error("Text string too long");
+X    }
+X    InstallFont();
+X    sprintf(cmdBuffer, "%s", text);
+X    XMSendCommand(WidthCmd, cmdBuffer);
+X    XMGetResponse(cmdBuffer);
+X    (void) sscanf(cmdBuffer, "%lg", &result);
+X    return (result);
+X}
+X
+Xvoid SetFont(string font)
+X{
+X    InitCheck();
+X    if (strlen(font) > MaxFontName) Error("Font name too long");
+X    textFont = CopyString(font);
+X    fontChanged = TRUE;
+X}
+X
+Xstring GetFont(void)
+X{
+X    InitCheck();
+X    InstallFont();
+X    return (CopyString(textFont));
+X}
+X
+Xvoid SetPointSize(int size)
+X{
+X    InitCheck();
+X    pointSize = size;
+X    fontChanged = TRUE;
+X}
+X
+Xint GetPointSize(void)
+X{
+X    InitCheck();
+X    InstallFont();
+X    return (pointSize);
+X}
+X
+Xvoid SetStyle(int style)
+X{
+X    InitCheck();
+X    textStyle = style;
+X    fontChanged = TRUE;
+X}
+X
+Xint GetStyle(void)
+X{
+X    InitCheck();
+X    InstallFont();
+X    return (textStyle);
+X}
+X
+Xdouble GetFontAscent(void)
+X{
+X    double ascent;
+X
+X    InitCheck();
+X    InstallFont();
+X    XMSendCommand(FontMetricsCmd, "");
+X    XMGetResponse(cmdBuffer);
+X    (void) sscanf(cmdBuffer, "%lg", &ascent);
+X    return (ascent);
+X}
+X
+Xdouble GetFontDescent(void)
+X{
+X    double descent;
+X
+X    InitCheck();
+X    InstallFont();
+X    XMSendCommand(FontMetricsCmd, "");
+X    XMGetResponse(cmdBuffer);
+X    (void) sscanf(cmdBuffer, "%*lg %lg", &descent);
+X    return (descent);
+X}
+X
+Xdouble GetFontHeight(void)
+X{
+X    double height;
+X
+X    InitCheck();
+X    InstallFont();
+X    XMSendCommand(FontMetricsCmd, "");
+X    XMGetResponse(cmdBuffer);
+X    (void) sscanf(cmdBuffer, "%*lg %*lg %lg", &height);
+X    return (height);
+X}
+X
+X/* Section 5 -- Mouse support */
+X
+Xdouble GetMouseX(void)
+X{
+X    double x, y;
+X    int state;
+X
+X    InitCheck();
+X    XMSendCommand(GetMouseCmd, "");
+X    XMGetResponse(cmdBuffer);
+X    (void) sscanf(cmdBuffer, "%d, %lg, %lg", &state, &x, &y);
+X    return (x);
+X}
+X
+Xdouble GetMouseY(void)
+X{
+X    string line;
+X    double x, y;
+X    int state;
+X
+X    InitCheck();
+X    XMSendCommand(GetMouseCmd, "");
+X    XMGetResponse(cmdBuffer);
+X    (void) sscanf(cmdBuffer, "%d, %lg, %lg", &state, &x, &y);
+X    return (y);
+X}
+X
+Xbool MouseButtonIsDown(void)
+X{
+X    string line;
+X    double x, y;
+X    int state;
+X
+X    InitCheck();
+X    XMSendCommand(GetMouseCmd, "");
+X    XMGetResponse(cmdBuffer);
+X    (void) sscanf(cmdBuffer, "%d, %lg, %lg", &state, &x, &y);
+X    return (state != 0);
+X}
+X
+Xvoid WaitForMouseDown(void)
+X{
+X    InitCheck();
+X    XMSendCommand(WaitForMouseCmd, "D");
+X    XMGetResponse(cmdBuffer);
+X}
+X
+Xvoid WaitForMouseUp(void)
+X{
+X    InitCheck();
+X    XMSendCommand(WaitForMouseCmd, "U");
+X    XMGetResponse(cmdBuffer);
+X}
+X
+X/* Section 6 -- Color support */
+X
+Xbool HasColor(void)
+X{
+X    InitCheck();
+X    return (colorOK);
+X}
+X
+Xvoid SetPenColor(string color)
+X{
+X    int cindex;
+X
+X    InitCheck();
+X    cindex = FindColorName(color);
+X    if (cindex == -1) Error("Undefined color: %s", color);
+X    penColor = cindex;
+X    if (penColor == lastColor) return;
+X    lastColor = penColor;
+X    if (HasColor()) {
+X        sprintf(cmdBuffer, "%g %g %g\n",
+X                colorTable[cindex].red,
+X                colorTable[cindex].green,
+X                colorTable[cindex].blue);
+X        XMSendCommand(SetColorCmd, cmdBuffer);
+X    } else {
+X        SetEraseMode(eraseMode);
+X    }
+X}
+X
+Xstring GetPenColor(void)
+X{
+X    InitCheck();
+X    return (colorTable[penColor].name);
+X}
+X
+Xvoid DefineColor(string name,
+X                 double red, double green, double blue)
+X{
+X    int cindex;
+X
+X    InitCheck();
+X    if (red < 0 || red > 1 || green < 0 || green > 1 || blue < 0 || blue > 1) {
+X        Error("DefineColor: All color intensities must be between 0 and 1");
+X    }
+X    cindex = FindColorName(name);
+X    if (cindex == -1) {
+X        if (nColors == MaxColors) Error("DefineColor: Too many colors");
+X        cindex = nColors++;
+X    }
+X    colorTable[cindex].name = CopyString(name);
+X    colorTable[cindex].red = red;
+X    colorTable[cindex].green = green;
+X    colorTable[cindex].blue = blue;
+X}
+X
+X/* Section 7 -- Miscellaneous functions */
+X
+Xvoid SetEraseMode(bool mode)
+X{
+X    InitCheck();
+X    eraseMode = mode;
+X    sprintf(cmdBuffer, "%d", (int) (mode || ShouldBeWhite()));
+X    XMSendCommand(SetEraseCmd, cmdBuffer);
+X}
+X
+Xbool GetEraseMode(void)
+X{
+X    InitCheck();
+X    return (eraseMode);
+X}
+X
+Xvoid SetWindowTitle(string title)
+X{
+X    windowTitle = CopyString(title);
+X    if (initialized) {
+X        sprintf(cmdBuffer, "%s", windowTitle);
+X        XMSendCommand(SetTitleCmd, cmdBuffer);
+X    }
+X}
+X
+Xstring GetWindowTitle(void)
+X{
+X    return (CopyString(windowTitle));
+X}
+X
+Xvoid UpdateDisplay(void)
+X{
+X    int cnt;
+X
+X    InitCheck();
+X    XMSendCommand(UpdateCmd, "");
+X}
+X
+Xvoid Pause(double seconds)
+X{
+X    if (initialized) UpdateDisplay();
+X    USleep((unsigned) (seconds * 1000000));
+X}
+X
+Xvoid ExitGraphics(void)
+X{
+X    XMSendCommand(ExitGraphicsCmd, "");
+X    exit(0);
+X}
+X
+Xvoid SaveGraphicsState(void)
+X{
+X    graphicsStateT sb;
+X
+X    InitCheck();
+X    sb = New(graphicsStateT);
+X    sb->cx = cx;
+X    sb->cy = cy;
+X    sb->font = textFont;
+X    sb->size = pointSize;
+X    sb->style = textStyle;
+X    sb->erase = eraseMode;
+X    sb->color = penColor;
+X    sb->link = stateStack;
+X    stateStack = sb;
+X}
+X
+Xvoid RestoreGraphicsState(void)
+X{
+X    graphicsStateT sb;
+X
+X    InitCheck();
+X    if (stateStack == NULL) {
+X        Error("RestoreGraphicsState called before SaveGraphicsState");
+X    }
+X    sb = stateStack;
+X    cx = sb->cx;
+X    cy = sb->cy;
+X    textFont = sb->font;
+X    pointSize = sb->size;
+X    textStyle = sb->style;
+X    eraseMode = sb->erase;
+X    penColor = sb->color;
+X    stateStack = sb->link;
+X    FreeBlock(sb);
+X    fontChanged = TRUE;
+X    SetEraseMode(eraseMode);
+X    SetPenColor(colorTable[penColor].name);
+X}
+X
+Xdouble GetFullScreenWidth(void)
+X{
+X    double screenWidth, screenHeight;
+X
+X    XDGetScreenSize(&screenWidth, &screenHeight);
+X    return (screenWidth);
+X}
+X
+Xdouble GetFullScreenHeight(void)
+X{
+X    double screenWidth, screenHeight;
+X
+X    XDGetScreenSize(&screenWidth, &screenHeight);
+X    return (screenHeight);
+X}
+X
+Xvoid SetWindowSize(double width, double height)
+X{
+X    if (initialized) {
+X        Error("The window size cannot be set after calling InitGraphics");
+X    }
+X    windowWidth = width;
+X    windowHeight = height;
+X}
+X
+Xdouble GetXResolution(void)
+X{
+X    double xdpi, ydpi;
+X
+X    XDGetResolution(&xdpi, &ydpi);
+X    return (ydpi);
+X}
+X
+Xdouble GetYResolution(void)
+X{
+X    double xdpi, ydpi;
+X
+X    XDGetResolution(&xdpi, &ydpi);
+X    return (ydpi);
+X}
+X
+X/* Private functions */
+X
+X/*
+X * Function: InitCheck
+X * Usage: InitCheck();
+X * -------------------
+X * This function merely ensures that the package has been
+X * initialized before the client functions are called.
+X */
+X
+Xstatic void InitCheck(void)
+X{
+X    if (!initialized) Error("InitGraphics has not been called");
+X}
+X
+X/*
+X * Function: InitGraphicsState
+X * Usage: InitGraphicsState();
+X * ---------------------------
+X * This function initializes the graphics state elements to
+X * their default values.
+X */
+X
+Xstatic void InitGraphicsState(void)
+X{
+X    cx = cy = 0;
+X    eraseMode = FALSE;
+X    textFont = "Default";
+X    pointSize = DefaultSize;
+X    textStyle = Normal;
+X    stateStack = NULL;
+X    regionState = NoRegion;
+X    fontChanged = TRUE;
+X    SetPenColor("Black");
+X}
+X
+Xstatic void InstallFont(void)
+X{
+X    char fontbuf[MaxFontName];
+X    string line;
+X
+X    if (!fontChanged) return;
+X    sprintf(cmdBuffer, "%d %d %s", pointSize, textStyle, textFont);
+X    XMSendCommand(SetFontCmd, cmdBuffer);
+X    XMGetResponse(cmdBuffer);
+X    (void) sscanf(cmdBuffer, "%d %d %s", &pointSize, &textStyle, fontbuf);
+X    textFont = CopyString(fontbuf);
+X    fontChanged = FALSE;
+X}
+X
+X/*
+X * Function: InitColors
+X * Usage: InitColors();
+X * --------------------
+X * This function defines the built-in colors.
+X */
+X
+Xstatic void InitColors(void)
+X{
+X    colorOK = (XDGetNColors() >= MinColors);
+X    lastColor = -1;
+X    nColors = 0;
+X    DefineColor("Black", 0, 0, 0);
+X    DefineColor("Dark Gray", .35, .35, .35);
+X    DefineColor("Gray", .6, .6, .6);
+X    DefineColor("Light Gray", .75, .75, .75);
+X    DefineColor("White", 1, 1, 1);
+X    DefineColor("Red", 1, 0, 0);
+X    DefineColor("Yellow", 1, 1, 0);
+X    DefineColor("Green", 0, 1, 0);
+X    DefineColor("Cyan", 0, 1, 1);
+X    DefineColor("Blue", 0, 0, 1);
+X    DefineColor("Magenta", 1, 0, 1);
+X}
+X
+X/*
+X * Function: FindColorName
+X * Usage: index = FindColorName(name);
+X * -----------------------------------
+X * This function returns the index of the named color in the
+X * color table, or -1 if the color does not exist.
+X */
+X
+Xstatic int FindColorName(string name)
+X{
+X    int i;
+X
+X    for (i = 0; i < nColors; i++) {
+X        if (StringMatch(name, colorTable[i].name)) return (i);
+X    }
+X    return (-1);
+X}
+X
+Xstatic bool ShouldBeWhite(void)
+X{
+X    if (colorTable[penColor].red < .9) return (FALSE);
+X    if (colorTable[penColor].blue < .9) return (FALSE);
+X    if (colorTable[penColor].green < .9) return (FALSE);
+X    return (TRUE);
+X}
+X
+X/*
+X * Function: StringMatch
+X * Usage: if (StringMatch(s1, s2)) . . .
+X * -------------------------------------
+X * This function returns TRUE if two strings are equal, ignoring
+X * case distinctions.
+X */
+X
+Xstatic bool StringMatch(string s1, string s2)
+X{
+X    register char *cp1, *cp2;
+X
+X    cp1 = s1;
+X    cp2 = s2;
+X    while (tolower(*cp1) == tolower(*cp2)) {
+X        if (*cp1 == '\0') return (TRUE);
+X        cp1++;
+X        cp2++;
+X    }
+X    return (FALSE);
+X}
+X
+X/*
+X * Function: USleep
+X * Usage: USleep(useconds);
+X * ------------------------
+X * This function sleeps for the indicated number of microseconds.
+X * Some versions of Unix implement a usleep call, but it does not
+X * appear to be standard.  The easiest way to implement it is by
+X * calling select with no descriptors, since the compatibility
+X * library has already made sure that select is available.
+X */
+X
+Xstatic void USleep(unsigned useconds)
+X{
+X    struct timeval tv;
+X
+X    tv.tv_sec = useconds / 1000000;
+X    tv.tv_usec = useconds % 1000000;
+X    (void) select(1, NULL, NULL, NULL, &tv);
+X}
+END_OF_FILE
+if test 17740 -ne `wc -c <'cslib/graphics.c'`; then
+    echo shar: \"'cslib/graphics.c'\" unpacked with wrong size!
+fi
+# end of 'cslib/graphics.c'
+fi
+if test -f 'cslib/graphics.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/graphics.h'\"
+else
+echo shar: Extracting \"'cslib/graphics.h'\" \(4805 characters\)
+sed "s/^X//" >'cslib/graphics.h' <<'END_OF_FILE'
+X/*
+X * File: graphics.h
+X * Version: 1.0
+X * Last modified on Mon Jun  6 11:03:27 1994 by eroberts
+X * -----------------------------------------------------
+X * This interface provides access to a simple library of
+X * functions that make it possible to draw lines and arcs
+X * on the screen.  This interface presents a portable
+X * abstraction that can be used with a variety of window
+X * systems implemented on different hardware platforms.
+X */
+X
+X#ifndef _graphics_h
+X#define _graphics_h
+X
+X/*
+X * Overview
+X * --------
+X * This library provides several functions for drawing lines
+X * and circular arcs in a region of the screen that is
+X * defined as the "graphics window."  Once drawn, these
+X * lines and arcs stay in their position, which means that
+X * the package can only be used for static pictures and not
+X * for animation.
+X *
+X * Individual points within the window are specified by
+X * giving their x and y coordinates.  These coordinates are
+X * real numbers measured in inches, with the origin in the
+X * lower left corner, as it is in traditional mathematics.
+X *
+X * The calls available in the package are listed below.  More
+X * complete descriptions are included with each function
+X * description.
+X *
+X *   InitGraphics();
+X *   MovePen(x, y);
+X *   DrawLine(dx, dy);
+X *   DrawArc(r, start, sweep);
+X *   width = GetWindowWidth();
+X *   height = GetWindowHeight();
+X *   x = GetCurrentX();
+X *   y = GetCurrentY();
+X */
+X
+X/*
+X * Function: InitGraphics
+X * Usage: InitGraphics();
+X * ----------------------
+X * This procedure creates the graphics window on the screen.
+X * The call to InitGraphics must precede any calls to other
+X * functions in this package and must also precede any printf
+X * output.  In most cases, the InitGraphics call is the first
+X * statement in the function main.
+X */
+X
+Xvoid InitGraphics(void);
+X
+X/*
+X * Function: MovePen
+X * Usage: MovePen(x, y);
+X * ---------------------
+X * This procedure moves the current point to the position
+X * (x, y), without drawing a line.  The model is that of
+X * the pen being lifted off the graphics window surface and
+X * then moved to its new position.
+X */
+X
+Xvoid MovePen(double x, double y);
+X
+X/*
+X * Function: DrawLine
+X * Usage: DrawLine(dx, dy);
+X * ------------------------
+X * This procedure draws a line extending from the current
+X * point by moving the pen dx inches in the x direction
+X * and dy inches in the y direction.  The final position
+X * becomes the new current point.
+X */
+X
+Xvoid DrawLine(double dx, double dy);
+X
+X/*
+X * Function: DrawArc
+X * Usage: DrawArc(r, start, sweep);
+X * --------------------------------
+X * This procedure draws a circular arc, which always begins
+X * at the current point.  The arc itself has radius r, and
+X * starts at the angle specified by the parameter start,
+X * relative to the center of the circle.  This angle is
+X * measured in degrees counterclockwise from the 3 o'clock
+X * position along the x-axis, as in traditional mathematics.
+X * For example, if start is 0, the arc begins at the 3 o'clock
+X * position; if start is 90, the arc begins at the 12 o'clock
+X * position; and so on.  The fraction of the circle drawn is
+X * specified by the parameter sweep, which is also measured in
+X * degrees.  If sweep is 360, DrawArc draws a complete circle;
+X * if sweep is 90, it draws a quarter of a circle.  If the value
+X * of sweep is positive, the arc is drawn counterclockwise from
+X * the current point.  If sweep is negative, the arc is drawn
+X * clockwise from the current point.  The current point at the
+X * end of the DrawArc operation is the final position of the pen
+X * along the arc.
+X *
+X * Examples:
+X *   DrawArc(r, 0, 360)    Draws a circle to the left of the
+X *                         current point.
+X *   DrawArc(r, 90, 180)   Draws the left half of a semicircle
+X *                         starting from the 12 o'clock position.
+X *   DrawArc(r, 0, 90)     Draws a quarter circle from the 3
+X *                         o'clock to the 12 o'clock position.
+X *   DrawArc(r, 0, -90)    Draws a quarter circle from the 3
+X *                         o'clock to the 6 o'clock position.
+X *   DrawArc(r, -90, -90)  Draws a quarter circle from the 6
+X *                         o'clock to the 9 o'clock position.
+X */
+X
+Xvoid DrawArc(double r, double start, double sweep);
+X
+X/*
+X * Functions: GetWindowWidth, GetWindowHeight
+X * Usage: width = GetWindowWidth();
+X *        height = GetWindowHeight();
+X * ------------------------------------------
+X * These functions return the width and height of the graphics
+X * window, in inches.
+X */
+X
+Xdouble GetWindowWidth(void);
+Xdouble GetWindowHeight(void);
+X
+X/*
+X * Functions: GetCurrentX, GetCurrentY
+X * Usage: x = GetCurrentX();
+X *        y = GetCurrentY();
+X * -----------------------------------
+X * These functions return the current x and y positions.
+X */
+X
+Xdouble GetCurrentX(void);
+Xdouble GetCurrentY(void);
+X
+X#endif
+END_OF_FILE
+if test 4805 -ne `wc -c <'cslib/graphics.h'`; then
+    echo shar: \"'cslib/graphics.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/graphics.h'
+fi
+if test -f 'cslib/random.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/random.c'\"
+else
+echo shar: Extracting \"'cslib/random.c'\" \(1718 characters\)
+sed "s/^X//" >'cslib/random.c' <<'END_OF_FILE'
+X/*
+X * File: random.c
+X * Version: 1.0
+X * Last modified on Mon Sep 13 10:42:45 1993 by eroberts
+X * -----------------------------------------------------
+X * This file implements the random.h interface.
+X */
+X
+X#include <stdio.h>
+X#include <stdlib.h>
+X#include <time.h>
+X
+X#include "genlib.h"
+X#include "random.h"
+X
+X/*
+X * Function: Randomize
+X * -------------------
+X * This function operates by setting the random number
+X * seed to the current time.  The srand function is
+X * provided by the <stdlib.h> library and requires an
+X * integer argument.  The time function is provided
+X * by <time.h>.
+X */
+X
+Xvoid Randomize(void)
+X{
+X    srand((int) time(NULL));
+X}
+X
+X/*
+X * Function: RandomInteger
+X * -----------------------
+X * This function first obtains a random integer in
+X * the range [0..RAND_MAX] by applying four steps:
+X * (1) Generate a real number between 0 and 1.
+X * (2) Scale it to the appropriate range size.
+X * (3) Truncate the value to an integer.
+X * (4) Translate it to the appropriate starting point.
+X */
+X
+Xint RandomInteger(int low, int high)
+X{
+X    int k;
+X    double d;
+X
+X    d = (double) rand() / ((double) RAND_MAX + 1);
+X    k = (int) (d * (high - low + 1));
+X    return (low + k);
+X}
+X
+X/*
+X * Function: RandomReal
+X * --------------------
+X * The implementation of RandomReal is similar to that
+X * of RandomInteger, without the truncation step.
+X */
+X
+Xdouble RandomReal(double low, double high)
+X{
+X    double d;
+X
+X    d = (double) rand() / ((double) RAND_MAX + 1);
+X    return (low + d * (high - low));
+X}
+X
+X/*
+X * Function: RandomChance
+X * ----------------------
+X * This function uses RandomReal to generate a number
+X * between 0 and 100, which it then compares to p.
+X */
+X
+Xbool RandomChance(double p)
+X{
+X    return (RandomReal(0, 1) < p);
+X}
+END_OF_FILE
+if test 1718 -ne `wc -c <'cslib/random.c'`; then
+    echo shar: \"'cslib/random.c'\" unpacked with wrong size!
+fi
+# end of 'cslib/random.c'
+fi
+if test -f 'cslib/random.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/random.h'\"
+else
+echo shar: Extracting \"'cslib/random.h'\" \(1962 characters\)
+sed "s/^X//" >'cslib/random.h' <<'END_OF_FILE'
+X/*
+X * File: random.h
+X * Version: 1.0
+X * Last modified on Fri Jul 22 16:44:36 1994 by eroberts
+X * -----------------------------------------------------
+X * This interface provides several functions for generating
+X * pseudo-random numbers.
+X */
+X
+X#ifndef _random_h
+X#define _random_h
+X
+X#include "genlib.h"
+X#include <stdlib.h>
+X
+X/*
+X * Constant: RAND_MAX
+X * ------------------
+X * Unfortunately, several libraries that supposedly conform to
+X * the ANSI standard do not define RAND_MAX in <stdlib.h>.  To
+X * reduce portability problems, this interface defines RAND_MAX
+X * to be the largest positive integer if it is undefined.
+X */
+X
+X#ifndef RAND_MAX
+X#  define RAND_MAX ((int) ((unsigned) ~0 >> 1))
+X#endif
+X
+X/*
+X * Function: Randomize
+X * Usage: Randomize();
+X * -------------------
+X * This function sets the random seed so that the random sequence
+X * is unpredictable.  During the debugging phase, it is best not
+X * to call this function, so that program behavior is repeatable.
+X */
+X
+Xvoid Randomize(void);
+X
+X/*
+X * Function: RandomInteger
+X * Usage: n = RandomInteger(low, high);
+X * ------------------------------------
+X * This function returns a random integer in the range low to high,
+X * inclusive.
+X */
+X
+Xint RandomInteger(int low, int high);
+X
+X/*
+X * Function: RandomReal
+X * Usage: d = RandomReal(low, high);
+X * ---------------------------------
+X * This function returns a random real number in the half-open
+X * interval [low .. high), meaning that the result is always
+X * greater than or equal to low but strictly less than high.
+X */
+X
+Xdouble RandomReal(double low, double high);
+X
+X/*
+X * Function: RandomChance
+X * Usage: if (RandomChance(p)) . . .
+X * ---------------------------------
+X * The RandomChance function returns TRUE with the probability
+X * indicated by p, which should be a floating-point number between
+X * 0 (meaning never) and 1 (meaning always).  For example, calling
+X * RandomChance(.30) returns TRUE 30 percent of the time.
+X */
+X
+Xbool RandomChance(double p);
+X
+X#endif
+END_OF_FILE
+if test 1962 -ne `wc -c <'cslib/random.h'`; then
+    echo shar: \"'cslib/random.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/random.h'
+fi
+if test -f 'cslib/simpio.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/simpio.c'\"
+else
+echo shar: Extracting \"'cslib/simpio.c'\" \(3788 characters\)
+sed "s/^X//" >'cslib/simpio.c' <<'END_OF_FILE'
+X/*
+X * File: simpio.c
+X * Version: 3.0
+X * Last modified on Tue Oct  4 11:24:40 1994 by eroberts
+X * -----------------------------------------------------
+X * This file implements the simpio.h interface.
+X */
+X
+X#include <stdio.h>
+X#include <string.h>
+X
+X#include "genlib.h"
+X#include "strlib.h"
+X#include "simpio.h"
+X
+X/*
+X * Constants:
+X * ----------
+X * InitialBufferSize -- Initial buffer size for ReadLine
+X */
+X
+X#define InitialBufferSize 120
+X
+X/* Exported entries */
+X
+X/*
+X * Functions: GetInteger, GetLong, GetReal
+X * ---------------------------------------
+X * These functions first read a line and then call sscanf to
+X * translate the number.  Reading an entire line is essential to
+X * good error recovery, because the characters after the point of
+X * error would otherwise remain in the input buffer and confuse
+X * subsequent input operations.  The sscanf line allows white space
+X * before and after the number but no other extraneous characters.
+X */
+X
+Xint GetInteger(void)
+X{
+X    string line;
+X    int value;
+X    char termch;
+X
+X    while (TRUE) {
+X        line = GetLine();
+X        if (line == NULL) Error("GetInteger: unexpected end of file");
+X        switch (sscanf(line, " %d %c", &value, &termch)) {
+X          case 1:
+X            FreeBlock(line);
+X            return (value);
+X          case 2:
+X            printf("Unexpected character: '%c'\n", termch);
+X            break;
+X          default:
+X            printf("Please enter an integer\n");
+X            break;
+X        }
+X        FreeBlock(line);
+X        printf("Retry: ");
+X    }
+X}
+X
+Xlong GetLong(void)
+X{
+X    string line;
+X    long value;
+X    char termch;
+X
+X    while (TRUE) {
+X        line = GetLine();
+X        if (line == NULL) Error("GetLong: unexpected end of file");
+X        switch (sscanf(line, " %ld %c", &value, &termch)) {
+X          case 1:
+X            FreeBlock(line);
+X            return (value);
+X          case 2:
+X            printf("Unexpected character: '%c'\n", termch);
+X            break;
+X          default:
+X            printf("Please enter an integer\n");
+X            break;
+X        }
+X        FreeBlock(line);
+X        printf("Retry: ");
+X    }
+X}
+X
+Xdouble GetReal(void)
+X{
+X    string line;
+X    double value;
+X    char termch;
+X
+X    while (TRUE) {
+X        line = GetLine();
+X        if (line == NULL) Error("GetReal: unexpected end of file");
+X        switch (sscanf(line, " %lf %c", &value, &termch)) {
+X          case 1:
+X            FreeBlock(line);
+X            return (value);
+X          case 2:
+X            printf("Unexpected character: '%c'\n", termch);
+X            break;
+X          default:
+X            printf("Please enter a real number\n");
+X            break;
+X        }
+X        FreeBlock(line);
+X        printf("Retry: ");
+X    }
+X}
+X
+X/*
+X * Function: GetLine
+X * -----------------
+X * This function is a simple wrapper; all the work is done by
+X * ReadLine.
+X */
+X
+Xstring GetLine(void)
+X{
+X    return (ReadLine(stdin));
+X}
+X
+X/*
+X * Function: ReadLine
+X * ------------------
+X * This function operates by reading characters from the file
+X * into a dynamically allocated buffer.  If the buffer becomes
+X * full before the end of the line is reached, a new buffer
+X * twice the size of the previous one is allocated.
+X */
+X
+Xstring ReadLine(FILE *infile)
+X{
+X    string line, nline;
+X    int n, ch, size;
+X
+X    n = 0;
+X    size = InitialBufferSize;
+X    line = GetBlock(size + 1);
+X    while ((ch = getc(infile)) != '\n' && ch != EOF) {
+X        if (n == size) {
+X            size *= 2;
+X            nline = (string) GetBlock(size + 1);
+X            strncpy(nline, line, n);
+X            FreeBlock(line);
+X            line = nline;
+X        }
+X        line[n++] = ch;
+X    }
+X    if (n == 0 && ch == EOF) {
+X        FreeBlock(line);
+X        return (NULL);
+X    }
+X    line[n] = '\0';
+X    nline = (string) GetBlock(n + 1);
+X    strcpy(nline, line);
+X    FreeBlock(line);
+X    return (nline);
+X}
+END_OF_FILE
+if test 3788 -ne `wc -c <'cslib/simpio.c'`; then
+    echo shar: \"'cslib/simpio.c'\" unpacked with wrong size!
+fi
+# end of 'cslib/simpio.c'
+fi
+if test -f 'cslib/simpio.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/simpio.h'\"
+else
+echo shar: Extracting \"'cslib/simpio.h'\" \(2008 characters\)
+sed "s/^X//" >'cslib/simpio.h' <<'END_OF_FILE'
+X/*
+X * File: simpio.h
+X * Version: 1.0
+X * Last modified on Wed Apr 27 07:29:13 1994 by eroberts
+X * -----------------------------------------------------
+X * This interface provides access to a simple package of
+X * functions that simplify the reading of input data.
+X */
+X
+X#ifndef _simpio_h
+X#define _simpio_h
+X
+X#include "genlib.h"
+X
+X/*
+X * Function: GetInteger
+X * Usage: i = GetInteger();
+X * ------------------------
+X * GetInteger reads a line of text from standard input and scans
+X * it as an integer.  The integer value is returned.  If an
+X * integer cannot be scanned or if more characters follow the
+X * number, the user is given a chance to retry.
+X */
+X
+Xint GetInteger(void);
+X
+X/*
+X * Function: GetLong
+X * Usage: l = GetLong();
+X * ---------------------
+X * GetLong reads a line of text from standard input and scans
+X * it as a long integer.  The value is returned as a long.
+X * If an integer cannot be scanned or if more characters follow
+X * the number, the user is given a chance to retry.
+X */
+X
+Xlong GetLong(void);
+X
+X/*
+X * Function: GetReal
+X * Usage: x = GetReal();
+X * ---------------------
+X * GetReal reads a line of text from standard input and scans
+X * it as a double.  If the number cannot be scanned or if extra
+X * characters follow after the number ends, the user is given
+X * a chance to reenter the value.
+X */
+X
+Xdouble GetReal(void);
+X
+X/*
+X * Function: GetLine
+X * Usage: s = GetLine();
+X * ---------------------
+X * GetLine reads a line of text from standard input and returns
+X * the line as a string.  The newline character that terminates
+X * the input is not stored as part of the string.
+X */
+X
+Xstring GetLine(void);
+X
+X/*
+X * Function: ReadLine
+X * Usage: s = ReadLine(infile);
+X * ----------------------------
+X * ReadLine reads a line of text from the input file and
+X * returns the line as a string.  The newline character
+X * that terminates the input is not stored as part of the
+X * string.  The ReadLine function returns NULL if infile
+X * is at the end-of-file position.
+X */
+X
+Xstring ReadLine(FILE *infile);
+X
+X#endif
+END_OF_FILE
+if test 2008 -ne `wc -c <'cslib/simpio.h'`; then
+    echo shar: \"'cslib/simpio.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/simpio.h'
+fi
+if test -f 'cslib/strlib.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/strlib.c'\"
+else
+echo shar: Extracting \"'cslib/strlib.c'\" \(5382 characters\)
+sed "s/^X//" >'cslib/strlib.c' <<'END_OF_FILE'
+X/*
+X * File: strlib.c
+X * Version: 1.0
+X * Last modified on Fri Jul 15 14:10:41 1994 by eroberts
+X * -----------------------------------------------------
+X * This file implements the strlib.h interface.
+X */
+X
+X/*
+X * General implementation notes:
+X * -----------------------------
+X * This module implements the strlib library by mapping all
+X * functions into the appropriate calls to the ANSI <string.h>
+X * interface.  The implementations of the individual functions
+X * are all quite simple and do not require individual comments.
+X * For descriptions of the behavior of each function, see the
+X * interface.
+X */
+X
+X#include <stdio.h>
+X#include <string.h>
+X#include <ctype.h>
+X
+X#include "genlib.h"
+X#include "strlib.h"
+X
+X/*
+X * Constant: MaxDigits
+X * -------------------
+X * This constant must be larger than the maximum
+X * number of digits that can appear in a number.
+X */
+X
+X#define MaxDigits 30
+X
+X/* Private function prototypes */
+X
+Xstatic string CreateString(int len);
+X
+X/* Section 1 -- Basic string operations */
+X
+Xstring Concat(string s1, string s2)
+X{
+X    string s;
+X    int len1, len2;
+X
+X    if (s1 == NULL || s2 == NULL) {
+X        Error("NULL string passed to Concat");
+X    }
+X    len1 = strlen(s1);
+X    len2 = strlen(s2);
+X    s = CreateString(len1 + len2);
+X    strcpy(s, s1);
+X    strcpy(s + len1, s2);
+X    return (s);
+X}
+X
+Xchar IthChar(string s, int i)
+X{
+X    int len;
+X
+X    if (s == NULL) Error("NULL string passed to IthChar");
+X    len = strlen(s);
+X    if (i < 0 || i > len) {
+X        Error("Index outside of string range in IthChar");
+X    }
+X    return (s[i]);
+X}
+X
+Xstring SubString(string s, int p1, int p2)
+X{
+X    int len;
+X    string result;
+X
+X    if (s == NULL) Error("NULL string passed to SubString");
+X    len = strlen(s);
+X    if (p1 < 0) p1 = 0;
+X    if (p2 >= len) p2 = len - 1;
+X    len = p2 - p1 + 1;
+X    if (len < 0) len = 0;
+X    result = CreateString(len);
+X    strncpy(result, s + p1, len);
+X    result[len] = '\0';
+X    return (result);
+X}
+X
+Xstring CharToString(char ch)
+X{
+X    string result;
+X
+X    result = CreateString(1);
+X    result[0] = ch;
+X    result[1] = '\0';
+X    return (result);
+X}
+X
+Xint StringLength(string s)
+X{
+X    if (s == NULL) Error("NULL string passed to StringLength");
+X    return (strlen(s));
+X}
+X
+Xstring CopyString(string s)
+X{
+X    string newstr;
+X
+X    if (s == NULL) Error("NULL string passed to CopyString");
+X    newstr = CreateString(strlen(s));
+X    strcpy(newstr, s);
+X    return (newstr);
+X}
+X
+X/* Section 2 -- String comparison functions */
+X
+Xbool StringEqual(string s1, string s2)
+X{
+X    if (s1 == NULL || s2 == NULL) {
+X        Error("NULL string passed to StringEqual");
+X    }
+X    return (strcmp(s1, s2) == 0);
+X}
+X
+Xint StringCompare(string s1, string s2)
+X{
+X    if (s1 == NULL || s2 == NULL) {
+X        Error("NULL string passed to StringCompare");
+X    }
+X    return (strcmp(s1, s2));
+X}
+X
+X/* Section 3 -- Search functions */
+X
+Xint FindChar(char ch, string text, int start)
+X{
+X    char *cptr;
+X
+X    if (text == NULL) Error("NULL string passed to FindChar");
+X    if (start < 0) start = 0;
+X    if (start > strlen(text)) return (-1);
+X    cptr = strchr(text + start, ch);
+X    if (cptr == NULL) return (-1);
+X    return ((int) (cptr - text));
+X}
+X
+Xint FindString(string str, string text, int start)
+X{
+X    char *cptr;
+X
+X    if (str == NULL) Error("NULL pattern string in FindString");
+X    if (text == NULL) Error("NULL text string in FindString");
+X    if (start < 0) start = 0;
+X    if (start > strlen(text)) return (-1);
+X    cptr = strstr(text + start, str);
+X    if (cptr == NULL) return (-1);
+X    return ((int) (cptr - text));
+X}
+X
+X/* Section 4 -- Case-conversion functions */
+X
+Xstring ConvertToLowerCase(string s)
+X{
+X    string result;
+X    int i;
+X
+X    if (s == NULL) {
+X        Error("NULL string passed to ConvertToLowerCase");
+X    }
+X    result = CreateString(strlen(s));
+X    for (i = 0; s[i] != '\0'; i++) result[i] = tolower(s[i]);
+X    result[i] = '\0';
+X    return (result);
+X}
+X
+Xstring ConvertToUpperCase(string s)
+X{
+X    string result;
+X    int i;
+X
+X    if (s == NULL) {
+X        Error("NULL string passed to ConvertToUpperCase");
+X    }
+X    result = CreateString(strlen(s));
+X    for (i = 0; s[i] != '\0'; i++) result[i] = toupper(s[i]);
+X    result[i] = '\0';
+X    return (result);
+X}
+X
+X/* Section 5 -- Functions for converting numbers to strings */
+X
+Xstring IntegerToString(int n)
+X{
+X    char buffer[MaxDigits];
+X
+X    sprintf(buffer, "%d", n);
+X    return (CopyString(buffer));
+X}
+X
+Xint StringToInteger(string s)
+X{
+X    int result;
+X    char dummy;
+X
+X    if (s == NULL) {
+X        Error("NULL string passed to StringToInteger");
+X    }
+X    if (sscanf(s, " %d %c", &result, &dummy) != 1) {
+X        Error("StringToInteger called on illegal number %s", s);
+X    }
+X    return (result);
+X}
+X
+Xstring RealToString(double d)
+X{
+X    char buffer[MaxDigits];
+X
+X    sprintf(buffer, "%G", d);
+X    return (CopyString(buffer));
+X}
+X
+Xdouble StringToReal(string s)
+X{
+X    double result;
+X    char dummy;
+X
+X    if (s == NULL) Error("NULL string passed to StringToReal");
+X    if (sscanf(s, " %lg %c", &result, &dummy) != 1) {
+X        Error("StringToReal called on illegal number %s", s);
+X    }
+X    return (result);
+X}
+X
+X/* Private functions */
+X
+X/*
+X * Function: CreateString
+X * Usage: s = CreateString(len);
+X * -----------------------------
+X * This function dynamically allocates space for a string of
+X * len characters, leaving room for the null character at the
+X * end.
+X */
+X
+Xstatic string CreateString(int len)
+X{
+X    return ((string) GetBlock(len + 1));
+X}
+END_OF_FILE
+if test 5382 -ne `wc -c <'cslib/strlib.c'`; then
+    echo shar: \"'cslib/strlib.c'\" unpacked with wrong size!
+fi
+# end of 'cslib/strlib.c'
+fi
+if test -f 'cslib/strlib.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/strlib.h'\"
+else
+echo shar: Extracting \"'cslib/strlib.h'\" \(7407 characters\)
+sed "s/^X//" >'cslib/strlib.h' <<'END_OF_FILE'
+X/*
+X * File: strlib.h
+X * Version: 1.0
+X * Last modified on Fri Jul 15 14:10:40 1994 by eroberts
+X * -----------------------------------------------------
+X * The strlib.h file defines the interface for a simple
+X * string library.  In the context of this package, strings
+X * are considered to be an abstract data type, which means
+X * that the client relies only on the operations defined for
+X * the type and not on the underlying representation.
+X */
+X
+X/*
+X * Cautionary note:
+X * ----------------
+X * Although this interface provides an extremely convenient
+X * abstraction for working with strings, it is not appropriate
+X * for all applications.  In this interface, the functions that
+X * return string values (such as Concat and SubString) do so
+X * by allocating new memory.  Over time, a program that uses
+X * this package will consume increasing amounts of memory
+X * and eventually exhaust the available supply.  If you are
+X * writing a program that runs for a short time and stops,
+X * the fact that the package consumes memory is not a problem.
+X * If, however, you are writing an application that must run
+X * for an extended period of time, using this package requires
+X * that you make some provision for freeing any allocated
+X * storage.
+X */
+X
+X#ifndef _strlib_h
+X#define _strlib_h
+X
+X#include "genlib.h"
+X
+X/* Section 1 -- Basic string operations */
+X
+X/*
+X * Function: Concat
+X * Usage: s = Concat(s1, s2);
+X * --------------------------
+X * This function concatenates two strings by joining them end
+X * to end.  For example, Concat("ABC", "DE") returns the string
+X * "ABCDE".
+X */
+X
+Xstring Concat(string s1, string s2);
+X
+X/*
+X * Function: IthChar
+X * Usage: ch = IthChar(s, i);
+X * --------------------------
+X * This function returns the character at position i in the
+X * string s.  It is included in the library to make the type
+X * string a true abstract type in the sense that all of the
+X * necessary operations can be invoked using functions. Calling
+X * IthChar(s, i) is like selecting s[i], except that IthChar
+X * checks to see if i is within the range of legal index
+X * positions, which extend from 0 to StringLength(s).
+X * IthChar(s, StringLength(s)) returns the null character
+X * at the end of the string.
+X */
+X
+Xchar IthChar(string s, int i);
+X
+X/*
+X * Function: SubString
+X * Usage: t = SubString(s, p1, p2);
+X * --------------------------------
+X * SubString returns a copy of the substring of s consisting
+X * of the characters between index positions p1 and p2,
+X * inclusive.  The following special cases apply:
+X *
+X * 1. If p1 is less than 0, it is assumed to be 0.
+X * 2. If p2 is greater than the index of the last string
+X *    position, which is StringLength(s) - 1, then p2 is
+X *    set equal to StringLength(s) - 1.
+X * 3. If p2 < p1, SubString returns the empty string.
+X */
+X
+Xstring SubString(string s, int p1, int p2);
+X
+X/*
+X * Function: CharToString
+X * Usage: s = CharToString(ch);
+X * ----------------------------
+X * This function takes a single character and returns a
+X * one-character string consisting of that character.  The
+X * CharToString function is useful, for example, if you
+X * need to concatenate a string and a character.  Since
+X * Concat requires two strings, you must first convert
+X * the character into a string.
+X */
+X
+Xstring CharToString(char ch);
+X
+X/*
+X * Function: StringLength
+X * Usage: len = StringLength(s);
+X * -----------------------------
+X * This function returns the length of s.
+X */
+X
+Xint StringLength(string s);
+X
+X/*
+X * Function: CopyString
+X * Usage: newstr = CopyString(s);
+X * ------------------------------
+X * CopyString copies the string s into dynamically allocated
+X * storage and returns the new string.  This function is not
+X * ordinarily required if this package is used on its own,
+X * but is often necessary when you are working with more than
+X * one string package.
+X */
+X
+Xstring CopyString(string s);
+X
+X/* Section 2 -- String comparison functions */
+X
+X/*
+X * Function: StringEqual
+X * Usage: if (StringEqual(s1, s2)) ...
+X * -----------------------------------
+X * This function returns TRUE if the strings s1 and s2 are
+X * equal.  For the strings to be considered equal, every
+X * character in one string must precisely match the
+X * corresponding character in the other.  Uppercase and
+X * lowercase characters are considered to be different.
+X */
+X
+Xbool StringEqual(string s1, string s2);
+X
+X/*
+X * Function: StringCompare
+X * Usage: if (StringCompare(s1, s2) < 0) ...
+X * -----------------------------------------
+X * This function returns a number less than 0 if string s1
+X * comes before s2 in alphabetical order, 0 if they are equal,
+X * and a number greater than 0 if s1 comes after s2.  The
+X * ordering is determined by the internal representation used
+X * for characters, which is usually ASCII.
+X */
+X
+Xint StringCompare(string s1, string s2);
+X
+X/* Section 3 -- Search functions */
+X
+X/*
+X * Function: FindChar
+X * Usage: p = FindChar(ch, text, start);
+X * -------------------------------------
+X * Beginning at position start in the string text, this
+X * function searches for the character ch and returns the
+X * first index at which it appears or -1 if no match is
+X * found.
+X */
+X
+Xint FindChar(char ch, string text, int start);
+X
+X/*
+X * Function: FindString
+X * Usage: p = FindString(str, text, start);
+X * ----------------------------------------
+X * Beginning at position start in the string text, this
+X * function searches for the string str and returns the
+X * first index at which it appears or -1 if no match is
+X * found.
+X */
+X
+Xint FindString(string str, string text, int start);
+X
+X/* Section 4 -- Case-conversion functions */
+X
+X/*
+X * Function: ConvertToLowerCase
+X * Usage: s = ConvertToLowerCase(s);
+X * ---------------------------------
+X * This function returns a new string with all
+X * alphabetic characters converted to lower case.
+X */
+X
+Xstring ConvertToLowerCase(string s);
+X
+X/*
+X * Function: ConvertToUpperCase
+X * Usage: s = ConvertToUpperCase(s);
+X * ---------------------------------
+X * This function returns a new string with all
+X * alphabetic characters converted to upper case.
+X */
+X
+Xstring ConvertToUpperCase(string s);
+X
+X/* Section 5 -- Functions for converting numbers to strings */
+X
+X/*
+X * Function: IntegerToString
+X * Usage: s = IntegerToString(n);
+X * ------------------------------
+X * This function converts an integer into the corresponding
+X * string of digits.  For example, IntegerToString(123)
+X * returns "123" as a string.
+X */
+X
+Xstring IntegerToString(int n);
+X
+X/*
+X * Function: StringToInteger
+X * Usage: n = StringToInteger(s);
+X * ------------------------------
+X * This function converts a string of digits into an integer.
+X * If the string is not a legal integer or contains extraneous
+X * characters, StringToInteger signals an error condition.
+X */
+X
+Xint StringToInteger(string s);
+X
+X/*
+X * Function: RealToString
+X * Usage: s = RealToString(d);
+X * ---------------------------
+X * This function converts a floating-point number into the
+X * corresponding string form.  For example, calling
+X * RealToString(23.45) returns "23.45".  The conversion is
+X * the same as that used for "%G" format in printf.
+X */
+X
+Xstring RealToString(double d);
+X
+X/*
+X * Function: StringToReal
+X * Usage: d = StringToReal(s);
+X * ---------------------------
+X * This function converts a string representing a real number
+X * into its corresponding value.  If the string is not a
+X * legal floating-point number or if it contains extraneous
+X * characters, StringToReal signals an error condition.
+X */
+X
+Xdouble StringToReal(string s);
+X
+X#endif
+END_OF_FILE
+if test 7407 -ne `wc -c <'cslib/strlib.h'`; then
+    echo shar: \"'cslib/strlib.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/strlib.h'
+fi
+if test -f 'cslib/xcompat.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/xcompat.c'\"
+else
+echo shar: Extracting \"'cslib/xcompat.c'\" \(2341 characters\)
+sed "s/^X//" >'cslib/xcompat.c' <<'END_OF_FILE'
+X/*
+X * File: xcompat.c
+X * Version: 3.0
+X * Last modified on Sat Oct  1 11:28:05 1994 by eroberts
+X * -----------------------------------------------------
+X * This implementation and the corresponding interface simulate the
+X * operation of any BSD4.2 calls that are required by the graphics
+X * package but that are not defined in the local system.  See the
+X * interface for details.  Note that this file generates no code
+X * unless one of the conditions is set.
+X */
+X
+X#ifdef HasPoll
+X
+X#include <stdio.h>
+X#include <stdlib.h>
+X#include <poll.h>
+X#include <sys/time.h>
+X#include <sys/types.h>
+X#include "xcompat.h"
+X
+X/* Private function prototypes */
+X
+Xstatic void SigAlarmHandler();
+X
+X/*
+X * Function: SimulateSelect
+X * ------------------------
+X * This function simulates the BSD select call by mapping it onto
+X * the poll system call implemented under System V.
+X */
+X
+Xint SimulateSelect(int width,
+X                   fd_set *readfds,
+X                   fd_set *writefds,
+X                   fd_set *exceptfds,
+X                   struct timeval *tvp)
+X{
+X    struct pollfd fds[FOPEN_MAX];
+X    int i, fd, nfds;
+X    short events;
+X    int timeout, nready;
+X
+X    nfds = 0;
+X    if (tvp == NULL) {
+X        timeout = 0;
+X    } else {
+X        timeout = tvp->tv_sec * 1000 + (tvp->tv_usec + 500) / 1000;
+X    }
+X    for (fd = 0; fd < width; fd++) {
+X        events = 0;
+X        if (readfds && FD_ISSET(fd, readfds)) {
+X            events |= POLLIN;
+X            FD_CLR(fd, readfds);
+X        }
+X        if (writefds && FD_ISSET(fd, writefds)) {
+X            events |= POLLOUT;
+X            FD_CLR(fd, writefds);
+X        }
+X        if (exceptfds && FD_ISSET(fd, exceptfds)) {
+X            events |= POLLIN | POLLOUT;
+X            FD_CLR(fd, exceptfds);
+X        }
+X        if (events != 0) {
+X            fds[nfds].fd = fd;
+X            fds[nfds].events = events;
+X            fds[nfds].revents = 0;
+X            nfds++;
+X        }
+X    }
+X    nready = poll(fds, nfds, timeout);
+X    if (nready <= 0) return (nready);
+X    for (i = 0; i < nfds; i++) {
+X        if (fds[i].revents & (POLLIN | POLLPRI | POLLHUP)) {
+X            FD_SET(fds[i].fd, readfds);
+X        }
+X        if (fds[i].revents & POLLOUT) {
+X            FD_SET(fds[i].fd, writefds);
+X        }
+X        if (fds[i].revents & (POLLERR | POLLNVAL)) {
+X            FD_SET(fds[i].fd, exceptfds);
+X        }
+X    }
+X    return (nready);
+X}
+X
+X#endif
+END_OF_FILE
+if test 2341 -ne `wc -c <'cslib/xcompat.c'`; then
+    echo shar: \"'cslib/xcompat.c'\" unpacked with wrong size!
+fi
+# end of 'cslib/xcompat.c'
+fi
+if test -f 'cslib/xcompat.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/xcompat.h'\"
+else
+echo shar: Extracting \"'cslib/xcompat.h'\" \(1669 characters\)
+sed "s/^X//" >'cslib/xcompat.h' <<'END_OF_FILE'
+X/*
+X * File: xcompat.h
+X * Version: 3.0
+X * Last modified on Thu Sep 22 15:52:24 1994 by eroberts
+X * -----------------------------------------------------
+X * This interface exists entirely for portability with Unix systems
+X * other than BSD 4.4, which is the assumed model for the rest of
+X * the code.  To get the graphics library to run on other systems
+X * (such as System V, POSIX, and so forth), the graphics library
+X * approaches the portability problem by reimplementing the BSD
+X * system calls and functions in terms of the corresponding
+X * facilities on the target machine.  The advantage of this
+X * approach is that the clients can work with only one model
+X * that is relatively well understood.
+X *
+X * This interface has no effect unless one of the following macros
+X * is defined:
+X *
+X *     HasPoll   -- Used if the System V poll call is available
+X *
+X * Additional conditionals may be added as new environments are
+X * supported.
+X */
+X
+X#ifndef _xcompat_h
+X#define _xcompat_h
+X
+X#ifdef HasPoll
+X
+X#include <string.h>
+X
+X#ifndef FOPEN_MAX
+X#  define FOPEN_MAX 128
+X#endif
+X
+X#undef fd_set
+X#undef FD_ZERO
+X#undef FD_SET
+X#undef FD_CLR
+X#undef FD_ISSET
+X
+X#define fd_set fdSetT
+X#define FD_ZERO(fdptr) (memset((fdptr)->fds, sizeof (fd_set), 0))
+X#define FD_SET(fd, fdptr) ((fdptr)->fds[fd] = 1)
+X#define FD_CLR(fd, fdptr) ((fdptr)->fds[fd] = 0)
+X#define FD_ISSET(fd, fdptr) ((fdptr)->fds[fd])
+X
+Xtypedef struct {
+X    char fds[FOPEN_MAX];
+X} fdSetT;
+X
+X#define select SimulateSelect
+X
+Xint SimulateSelect(int width,
+X                   fd_set *readfds,
+X                   fd_set *writefds,
+X                   fd_set *exceptfds,
+X                   struct timeval *tvp);
+X
+X#endif /* HasPoll */
+X
+X#endif
+END_OF_FILE
+if test 1669 -ne `wc -c <'cslib/xcompat.h'`; then
+    echo shar: \"'cslib/xcompat.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/xcompat.h'
+fi
+if test -f 'cslib/xdisplay.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/xdisplay.c'\"
+else
+echo shar: Extracting \"'cslib/xdisplay.c'\" \(28069 characters\)
+sed "s/^X//" >'cslib/xdisplay.c' <<'END_OF_FILE'
+X/*
+X * File: xdisplay.c
+X * Version: 3.0
+X * Last modified on Sat Oct  1 12:25:07 1994 by eroberts
+X * -----------------------------------------------------
+X * This file implements the xdisplay.h interface, which is
+X * responsible for all of the X windows interaction.  Before
+X * you attempt to understand this implementation, you need to
+X * understand the basics of X11 library.
+X */
+X
+X/*
+X * General implementation notes
+X * ----------------------------
+X * This implementation creates two X drawables: the graphics
+X * window itself (mainWindow) and an offscreen window (osWindow).
+X * All rendering is done into the offscreen window.  When update
+X * events occur, the graphics window is updated by copying bits
+X * from the offscreen window.
+X */
+X
+X#include <stdio.h>
+X#include <stdlib.h>
+X#include <string.h>
+X#include <math.h>
+X#include <sys/time.h>
+X#include <sys/types.h>
+X#include <X11/Xlib.h>
+X#include <X11/Xutil.h>
+X
+X#include "genlib.h"
+X#include "strlib.h"
+X#include "glibrary.h"
+X#include "extgraph.h"
+X#include "xmanager.h"
+X#include "xdisplay.h"
+X
+X/*
+X * Parameters
+X * ----------
+X * RequiredMargin -- Minimum margin on each side of screen (inches)
+X * BorderPixels   -- Width of the window border in pixels
+X * MaxFontList    -- Size of the font list we will accept
+X * PStartSize     -- Starting size for polygon (must be greater than 1)
+X * DefaultFont    -- Font that serves as the "Default" font
+X */
+X
+X#define RequiredMargin   0.5
+X#define BorderPixels     1
+X#define MaxFontList    500
+X#define PStartSize      50
+X#define DefaultFont     "courier"
+X
+X/*
+X * Other constants
+X * ---------------
+X * Epsilon -- Small offset used to avoid banding/aliasing
+X * GCFgBg  -- GC mask for both foreground and background
+X */
+X
+X#define Epsilon 0.000000001
+X#define GCFgBg (GCForeground | GCBackground)
+X
+X/*
+X * Static table: grayList
+X * ----------------------
+X * This table contains the bitmaps for the various gray-scale
+X * values.  Adding more bitmaps to this list increases
+X * the precision at which the client can specify gray scales.
+X */
+X
+Xstatic char grayList[][8] = {
+X    { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+X    { 0x88, 0x22, 0x88, 0x22, 0x88, 0x22, 0x88, 0x22 },
+X    { 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA },
+X    { 0x77, 0xDD, 0x77, 0xDD, 0x77, 0xDD, 0x77, 0xDD },
+X    { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF },
+X};
+X
+X#define NGrays (sizeof grayList / sizeof grayList[0])
+X
+X/*
+X * Type: waitStateT
+X * ----------------
+X * This type indicates the various conditions for which the
+X * client might be waiting.
+X */
+X
+Xtypedef enum {
+X    NotWaiting,
+X    WaitingForMouseDown,
+X    WaitingForMouseUp
+X} waitStateT;
+X
+X/*
+X * Private variables
+X * -----------------
+X * displayIsOpen   -- TRUE if the display has been opened
+X * redraw          -- TRUE if mainWindow needs redrawing
+X * eraseMode       -- TRUE if erase mode has been set
+X * xdpi, ydpi      -- Dots per inch in each coordinate
+X * disp            -- X display containing windows
+X * mainWindow      -- Handle of graphics window
+X * osWindow        -- Handle of offscreen window bitmap
+X * pixelDepth      -- Depth of pixels on the screen
+X * colormap        -- Color map of screen
+X * drawColor       -- Color used for drawing (black)
+X * eraseColor      -- Color used for erasing (white)
+X * mainGC          -- The graphics context (GC) for mainWindow
+X * drawGC          -- The GC used for drawing on osWindow
+X * eraseGC         -- The GC used for erasing on osWindow
+X * grayGC          -- Array of GCs representing gray scales
+X * grayStipple     -- Array of stipples used for gray scales
+X * currentFont     -- Name of current font
+X * currentSize     -- Current point size
+X * currentStyle    -- Current style
+X * fontInfo        -- Font structure pointer for current font
+X * windowWidth     -- Width of the window in inches
+X * windowHeight    -- Height of the window in inches
+X * screenWidth     -- Width of the full screen in inches
+X * screenHeight    -- Height of the full screen in inches
+X * argV, argC      -- Used to set corresponding X window fields
+X * waitState       -- Indicates what mouse event is awaited
+X * regionStarted   -- TRUE is a region is in progress
+X * regionGrayScale -- Gray scale density [0,1]
+X * polygonPoints   -- Array of points used in current region
+X * nPolygonPoints  -- Number of active points
+X * polygonSize     -- Number of allocated points
+X */
+X
+Xstatic bool displayIsOpen = FALSE;
+Xstatic bool redraw = FALSE;
+Xstatic bool eraseMode;
+Xstatic double xdpi, ydpi;
+X
+Xstatic Display *disp;
+Xstatic Window mainWindow;
+Xstatic Pixmap osWindow;
+Xstatic Colormap colormap;
+Xstatic int pixelDepth;
+Xstatic unsigned long drawColor, eraseColor;
+Xstatic GC mainGC, drawGC, eraseGC;
+Xstatic GC grayGC[NGrays];
+Xstatic Pixmap grayStipple[NGrays];
+Xstatic string currentFont;
+Xstatic int currentSize;
+Xstatic int currentStyle;
+Xstatic XFontStruct *fontInfo;
+Xstatic double windowWidth, windowHeight;
+Xstatic double screenWidth, screenHeight;
+X
+Xstatic string argV[] = { "xdisplay" };
+Xstatic int argC = sizeof argV / sizeof argV[0];
+X
+Xstatic waitStateT waitState;
+X
+Xstatic bool regionStarted;
+Xstatic double regionGrayScale;
+Xstatic XPoint *polygonPoints;
+Xstatic int nPolygonPoints;
+Xstatic int polygonSize;
+X
+X/* Private function prototypes */
+X
+Xstatic void StartToOpenDisplay(void);
+Xstatic void InitGC(void);
+Xstatic void ForceRedraw(void);
+Xstatic void RedrawWindow(void);
+Xstatic void StartPolygon(void);
+Xstatic void AddSegment(int x0, int y0, int x1, int y1);
+Xstatic void DisplayPolygon(void);
+Xstatic void RenderArc(double x, double y, double rx, double ry,
+X                      double start, double sweep);
+Xstatic int SizeFromFontName(string fontName);
+Xstatic double InchesX(int x);
+Xstatic double InchesY(int y);
+Xstatic int PixelsX(double x);
+Xstatic int PixelsY(double y);
+Xstatic int ScaleX(double x);
+Xstatic int ScaleY(double y);
+X
+X/* Exported entries */
+X
+X/*
+X * Function: XDOpenDisplay
+X * -----------------------
+X * The XDOpenDisplay function is relatively long but consists of
+X * little more than a series of X calls to establish the
+X * parameters of the display.
+X */
+X
+Xvoid XDOpenDisplay(string title)
+X{
+X    XWMHints xwmh;
+X    XSizeHints xsh;
+X    XFontStruct *font;
+X    Screen *screen;
+X    XSetWindowAttributes xswa;
+X    long width, height;
+X    int bitmask, scnum;
+X    double xScale, yScale, scaleFactor;
+X    char geometry[100];
+X
+X    StartToOpenDisplay();
+X    if ((font = XLoadQueryFont(disp, "fixed")) == NULL) {
+X        Error("Can't create font");
+X    }
+X    scnum = DefaultScreen(disp);
+X    screen = ScreenOfDisplay(disp, scnum);
+X    colormap = DefaultColormap(disp, scnum);
+X    drawColor = BlackPixel(disp, scnum);
+X    eraseColor = WhitePixel(disp, scnum);
+X    xScale = yScale = 1.0;
+X    if (windowWidth > screenWidth - 2 * RequiredMargin) {
+X        xScale = (screenWidth - 2 * RequiredMargin) / windowWidth;
+X    }
+X    if (windowHeight > screenHeight - 2 * RequiredMargin) {
+X        yScale = (screenHeight - 2 * RequiredMargin) / windowHeight;
+X    }
+X    scaleFactor = GLMinF(xScale, yScale);
+X    xdpi *= scaleFactor;
+X    ydpi *= scaleFactor;
+X    width = PixelsX(windowWidth);
+X    height = PixelsY(windowHeight);
+X    sprintf(geometry, "%dx%d+%d+%d", width, height,
+X            (DisplayWidth(disp, scnum) - width) / 2,
+X            (DisplayHeight(disp, scnum) - height) / 2);
+X    bitmask = XGeometry(disp, scnum, geometry, geometry,
+X                        BorderPixels,
+X                        font->max_bounds.width,
+X                        font->max_bounds.ascent + font->max_bounds.descent,
+X                        1, 1, &xsh.x, &xsh.y, &xsh.width, &xsh.height);
+X    if (bitmask & (XValue | YValue)) xsh.flags |= USPosition;
+X    if (bitmask & (WidthValue | HeightValue)) xsh.flags |= USSize;
+X    mainWindow = XCreateSimpleWindow(disp, DefaultRootWindow(disp),
+X                                     xsh.x, xsh.y, xsh.width, xsh.height,
+X                                     BorderPixels, drawColor, eraseColor);
+X    XSetStandardProperties(disp, mainWindow, title, title,
+X                           None, argV, argC, &xsh);
+X    xwmh.flags = (InputHint | StateHint);
+X    xwmh.input = False;
+X    xwmh.initial_state = NormalState;
+X    XSetWMHints(disp, mainWindow, &xwmh);
+X    xswa.colormap = colormap;
+X    xswa.bit_gravity = CenterGravity;
+X    XChangeWindowAttributes(disp, mainWindow,
+X                            CWColormap | CWBitGravity, &xswa);
+X    XSelectInput(disp, mainWindow,
+X                 ExposureMask | ButtonPressMask | ButtonReleaseMask);
+X    XMapWindow(disp, mainWindow);
+X    osWindow = XCreatePixmap(disp, DefaultRootWindow(disp),
+X                             xsh.width, xsh.height, pixelDepth);
+X    fontInfo = NULL;
+X    InitGC();
+X    regionStarted = FALSE;
+X    waitState = NotWaiting;
+X    XDClearDisplay();
+X    XFlush(disp);
+X}
+X
+X/*
+X * Function: XDCloseDisplay
+X * ------------------------
+X * This function frees the X structures allocated by the package.
+X */
+X
+Xvoid XDCloseDisplay(void)
+X{
+X    int i;
+X
+X    XDestroyWindow(disp, mainWindow);
+X    XFreePixmap(disp, osWindow);
+X    XFreeGC(disp, mainGC);
+X    XFreeGC(disp, drawGC);
+X    XFreeGC(disp, eraseGC);
+X    for (i = 0; i < NGrays; i++) {
+X        XFreeGC(disp, grayGC[i]);
+X        XFreePixmap(disp, grayStipple[i]);
+X    }
+X    XCloseDisplay(disp);
+X}
+X
+X/*
+X * Function: XDDisplayFD
+X * ---------------------
+X * This function simply returns the file descriptor for the X
+X * connection.  The client cannot obtain this directly because the
+X * display identified disp is private to this module.
+X */
+X
+Xint XDDisplayFD(void)
+X{
+X    return (XConnectionNumber(disp));
+X}
+X
+X/*
+X * Function: XDProcessXEvent
+X * -------------------------
+X * This function is used to read and respond to a pending X event.
+X * It returns TRUE if an event was processed.
+X */
+X
+Xbool XDProcessXEvent(void)
+X{
+X    XEvent event;
+X
+X    if (!XPending(disp)) return (FALSE);
+X    XNextEvent(disp, &event);
+X    if (event.xany.window == mainWindow) {
+X        switch (event.type) {
+X          case Expose:
+X            if (event.xexpose.count == 0) RedrawWindow();
+X            break;
+X          case ButtonPress:
+X            if (waitState == WaitingForMouseDown) {
+X                waitState = NotWaiting;
+X                XMReleaseClient();
+X            }
+X            break;
+X          case ButtonRelease:
+X            if (waitState == WaitingForMouseUp) {
+X                waitState = NotWaiting;
+X                XMReleaseClient();
+X            }
+X            break;
+X        }
+X    }
+X    return (TRUE);
+X}
+X
+X/*
+X * Function: XDCheckForRedraw
+X * --------------------------
+X * This function allows the client to specify that a quiescent point
+X * has been achieved and that it would be a good time to redraw the
+X * window.  A redraw occurs only if graphics updates have been made.
+X */
+X
+Xvoid XDCheckForRedraw(void)
+X{
+X    if (redraw) ForceRedraw();
+X}
+X
+X/*
+X * Function: XDSetRedrawFlag
+X * -------------------------
+X * This function allows the client to indicate that the display has
+X * changed and that a redraw operation should be performed when the
+X * next call to XDCheckForRedraw occurs.  This mechanism currently
+X * sets a single flag and should at some point be redesigned to
+X * maintain the update region.
+X */
+X
+Xvoid XDSetRedrawFlag(void)
+X{
+X    redraw = TRUE;
+X}
+X
+X/*
+X * Function: XDClearDisplay
+X * ------------------------
+X * This function erases the entire display by filling with the
+X * erase color.
+X */
+X
+Xvoid XDClearDisplay(void)
+X{
+X    int itemp;
+X    unsigned int width, height, utemp;
+X    Window wtemp;
+X
+X    if (XGetGeometry(disp, osWindow, &wtemp, &itemp, &itemp,
+X                     &width, &height, &utemp, &utemp) == 0) return;
+X    XFillRectangle(disp, osWindow, eraseGC, 0, 0, width, height);
+X}
+X
+X/*
+X * Function: XDDrawLine
+X * --------------------
+X * This function draws the requested line unless a region is in
+X * progress, in which case it adds the line segment to the polygon.
+X */
+X
+Xvoid XDDrawLine(double x, double y, double dx, double dy)
+X{
+X    int x0, y0, x1, y1;
+X
+X    x0 = ScaleX(x);
+X    y0 = ScaleY(y);
+X    x1 = ScaleX(x + dx);
+X    y1 = ScaleY(y + dy);
+X    if (regionStarted) {
+X        AddSegment(x0, y0, x1, y1);
+X    } else {
+X        XDrawLine(disp, osWindow, (eraseMode) ? eraseGC : drawGC,
+X                  x0, y0, x1, y1);
+X    }
+X}
+X
+X/*
+X * Function: XDDrawArc
+X * -------------------
+X * This function ordinarily scales its arguments and uses them
+X * to draw an arc using the standard XDrawArc call.  If, however,
+X * a region has been started, that arc must be rendered using
+X * line segments, which is handled by RenderArc.
+X */
+X
+Xvoid XDDrawArc(double x, double y, double rx, double ry,
+X                double start, double sweep)
+X{
+X    int ixc, iyc, irx, iry, istart, isweep;
+X
+X    if (regionStarted) {
+X        RenderArc(x, y, rx, ry, start, sweep);
+X    } else {
+X        ixc = ScaleX(x);
+X        iyc = ScaleY(y);
+X        irx = PixelsX(rx);
+X        iry = PixelsY(ry);
+X        istart = GLRound(start);
+X        isweep = GLRound(sweep);
+X        if (isweep < 0) {
+X            isweep = -isweep;
+X            istart -= isweep;
+X        }
+X        if (istart < 0) {
+X            istart = 360 - (-istart % 360);
+X        }
+X        istart %= 360;
+X        XDrawArc(disp, osWindow, (eraseMode) ? eraseGC : drawGC,
+X                 ixc - irx, iyc - iry, 2 * irx, 2 * iry,
+X                 64 * istart, 64 * isweep);
+X    }
+X}
+X
+X/*
+X * Function: XDDrawText
+X * --------------------
+X * This function transforms the client arguments and makes the
+X * appropriate X call to display text on the screen.
+X */
+X
+Xvoid XDDrawText(double x, double y, string text)
+X{
+X    int ix, iy;
+X
+X    ix = ScaleX(x);
+X    iy = ScaleY(y);
+X    XDrawString(disp, osWindow, (eraseMode) ? eraseGC : drawGC,
+X                ix, iy, text, strlen(text));
+X}
+X
+X/*
+X * Function: XDTextWidth
+X * ---------------------
+X * This function simply calls the XTextWidth function to compute the
+X * width of the displayed text and scales it to the client coordinate
+X * system.
+X */
+X
+Xdouble XDTextWidth(string text)
+X{
+X    return (InchesX(XTextWidth(fontInfo, text, strlen(text))));
+X}
+X
+X/*
+X * Function: XDSetFont
+X * -------------------
+X * This function searches the font names table for a font that matches
+X * the argument characteristics as closely as possible.  As required
+X * by the extgraph.h client interface, the function does not change
+X * the font if no such font exists and selects the closest existing
+X * size.
+X */
+X
+Xstring XDSetFont(string font, int size, int style)
+X{
+X    char fontbuf[MaxFontName + 30];
+X    string fontName, *fontList;
+X    int i, nFonts, bestIndex, bestSize, thisSize;
+X    bool ok;
+X
+X    fontName = ConvertToLowerCase(font);
+X    if (StringEqual(fontName, "default")) {
+X        sprintf(fontbuf, "*-%s-*", DefaultFont);
+X    } else {
+X        sprintf(fontbuf, "*-%s-*", fontName);
+X    }
+X    FreeBlock(fontName);
+X    fontList = XListFonts(disp, fontbuf, MaxFontList, &nFonts);
+X    if (nFonts != 0) {
+X        bestIndex = -1;
+X        for (i = 1; i < nFonts; i++) {
+X            fontName = fontList[i];
+X            ok = TRUE;
+X            if (style & Bold) {
+X                ok &= FindString("-bold-", fontName, 0) != -1;
+X            } else {
+X                ok &= FindString("-medium-", fontName, 0) != -1;
+X            }
+X            if (style & Italic) {
+X                ok &= FindString("-i-", fontName, 0) != -1;
+X            } else {
+X                ok &= FindString("-r-", fontName, 0) != -1;
+X            }
+X            if (ok) {
+X                thisSize = SizeFromFontName(fontName);
+X                if (bestIndex == -1 || abs(size - thisSize)
+X                                        < abs(size - bestSize)) {
+X                    bestSize = thisSize;
+X                    bestIndex = i;
+X                }
+X            }
+X        }
+X        if (bestIndex != -1) {
+X            if (fontInfo != NULL) XFreeFont(disp, fontInfo);
+X            fontInfo = XLoadQueryFont(disp, fontList[bestIndex]);
+X            if (fontInfo == NULL) {
+X                Error("Internal error: Can't find font");
+X            }
+X            XSetFont(disp, drawGC, fontInfo->fid);
+X            XSetFont(disp, eraseGC, fontInfo->fid);
+X            XFreeFontNames(fontList);
+X            currentFont = CopyString(font);
+X            currentSize = bestSize;
+X            currentStyle = style;
+X        }
+X    }
+X    sprintf(fontbuf, "%d %d %s", currentSize, currentStyle, currentFont);
+X    return (CopyString(fontbuf));
+X}
+X
+X/*
+X * Function: DisplayFontMetrics
+X * ----------------------------
+X * This function returns the necessary font metric information through
+X * its argument pointers.
+X */
+X
+Xvoid DisplayFontMetrics(double *pAscent, double *pDescent, double *pHeight)
+X{
+X    *pAscent = InchesY(fontInfo->max_bounds.ascent);
+X    *pDescent = InchesY(fontInfo->max_bounds.descent);
+X    *pHeight = InchesY(fontInfo->ascent + fontInfo->descent);
+X}
+X
+X/*
+X * Function: XDSetTitle
+X * --------------------
+X * This function copies the user-supplied string into the window and
+X * icon name.
+X */
+X
+Xvoid XDSetTitle(string title)
+X{
+X    XTextProperty tp;
+X
+X    XStringListToTextProperty(&title, 1, &tp);
+X    XSetWMIconName(disp, mainWindow, &tp);
+X    XSetWMName(disp, mainWindow, &tp);
+X}
+X
+X/*
+X * Function: XDSetEraseMode
+X * ------------------------
+X * This function sets the internal state of the display logic so
+X * that it maintains the correct state of the eraseMode flag.  In
+X * the rest of the code, the eraseMode flag is used to control
+X * which colors are used.
+X */
+X
+Xvoid XDSetEraseMode(bool flag)
+X{
+X    eraseMode = flag;
+X}
+X
+X/*
+X * Function: XDStartRegion
+X * -----------------------
+X * This function changes the state of the package so that subsequent
+X * calls to XDDrawLine and XDDrawArc are used to add segments to a
+X * polygonal region instead of having them appear on the display.
+X * See the code for StartPolygon, AddSegment, and DisplayPolygon for
+X * details.
+X */
+X
+Xvoid XDStartRegion(double grayScale)
+X{
+X    regionStarted = TRUE;
+X    regionGrayScale = grayScale;
+X    StartPolygon();
+X}
+X
+X/*
+X * Function: XDEndRegion
+X * ---------------------
+X * This function closes the region opened by XDStartRegion
+X * and displays the assembled polygon.
+X */
+X
+Xvoid XDEndRegion(void)
+X{
+X    DisplayPolygon();
+X    regionStarted = FALSE;
+X}
+X
+X/*
+X * Function: XDGetMouse
+X * --------------------
+X * This function returns the current mouse state through the
+X * argument pointers.
+X */
+X
+Xvoid XDGetMouse(bool *buttonStateP, double *xp, double *yp)
+X{
+X    Window root, child;
+X    int rootX, rootY, winX, winY;
+X    unsigned int buttons;
+X
+X    (void) XQueryPointer(disp, mainWindow, &root, &child,
+X                         &rootX, &rootY, &winX, &winY, &buttons);
+X    *buttonStateP = (buttons != 0);
+X    *xp = InchesX(winX);
+X    *yp = windowHeight - InchesY(winY);
+X}
+X
+X/*
+X * Function: XDWaitForMouse
+X * ------------------------
+X * This function waits for the mouse to enter the state given
+X * by down.
+X */
+X
+Xvoid XDWaitForMouse(bool buttonState)
+X{
+X    bool currentState;
+X    double x, y;
+X
+X    XDGetMouse(&currentState, &x, &y);
+X    if (buttonState == currentState) {
+X        XMReleaseClient();
+X    } else {
+X        waitState = (buttonState) ? WaitingForMouseDown : WaitingForMouseUp;
+X    }
+X}
+X
+X/*
+X * Function: XDSetColor
+X * --------------------
+X * This function sets the pen color as specified by the arguments.
+X */
+X
+Xvoid XDSetColor(double red, double green, double blue)
+X{
+X    XColor color;
+X
+X    color.red = red * 65535;
+X    color.green = green * 65535;
+X    color.blue = blue * 65535;
+X    if (XAllocColor(disp, colormap, &color) != 0) {
+X        drawColor = color.pixel;
+X        XSetForeground(disp, drawGC, drawColor);
+X    }
+X}
+X
+X/*
+X * Function: XDSetWindowSize
+X * -------------------------
+X * This function sets the width and height values of the window.
+X */
+X
+Xvoid XDSetWindowSize(double width, double height)
+X{
+X    windowWidth = width;
+X    windowHeight = height;
+X}
+X
+X/*
+X * Function: XDGetScreenSize
+X * -------------------------
+X * This function returns the screen size and may be called
+X * prior to the XDOpenDisplay call or from the client fork.
+X */
+X
+Xvoid XDGetScreenSize(double *pScreenWidth, double *pScreenHeight)
+X{
+X    StartToOpenDisplay();
+X    *pScreenWidth = screenWidth;
+X    *pScreenHeight = screenHeight;
+X}
+X
+X/*
+X * Function: XDGetResolution
+X * -------------------------
+X * This function returns the screen resolution, possibly modified by
+X * the scale reduction.
+X */
+X
+Xvoid XDGetResolution(double *pXDPI, double *pYDPI)
+X{
+X    StartToOpenDisplay();
+X    *pXDPI = xdpi;
+X    *pYDPI = ydpi;
+X}
+X
+X/*
+X * Function: XDGetNColors
+X * ----------------------
+X * This function returns the number of colors supported by the screen.
+X */
+X
+Xint XDGetNColors(void)
+X{
+X    StartToOpenDisplay();
+X    return (1 << pixelDepth);
+X}
+X
+X/* Private functions */
+X
+X/*
+X * Function: StartToOpenDisplay
+X * Usage: StartToOpenDisplay();
+X * ----------------------------
+X * This function checks to see if the display is open and, if
+X * not, does just enough work to ensure that the fixed parameters
+X * are set.
+X */
+X
+Xstatic void StartToOpenDisplay(void)
+X{
+X    int scnum;
+X    Screen *screen;
+X
+X    if (displayIsOpen) return;
+X    if ((disp = XOpenDisplay(NULL)) == NULL) {
+X        Error("Can't open display");
+X    }
+X    scnum = DefaultScreen(disp);
+X    screen = ScreenOfDisplay(disp, scnum);
+X    pixelDepth = DefaultDepth(disp, scnum);
+X    screenWidth = WidthMMOfScreen(screen) / 25.4;
+X    screenHeight = HeightMMOfScreen(screen) / 25.4;
+X    xdpi = WidthOfScreen(screen) / screenWidth;
+X    ydpi = HeightOfScreen(screen) / screenHeight;
+X    displayIsOpen = TRUE;
+X}
+X
+X/*
+X * Function: InitGC
+X * Usage: InitGC();
+X * ----------------
+X * This function is used as part of the initialization and creates
+X * all of the GC structures used for drawing.
+X */
+X
+Xstatic void InitGC(void)
+X{
+X    XGCValues gcv;
+X    Window root;
+X    int i;
+X
+X    gcv.foreground = eraseColor;
+X    gcv.background = eraseColor;
+X    eraseGC = XCreateGC(disp, osWindow, GCFgBg, &gcv);
+X    gcv.foreground = drawColor;
+X    mainGC = XCreateGC(disp, mainWindow, GCFgBg, &gcv);
+X    drawGC = XCreateGC(disp, osWindow, GCFgBg, &gcv);
+X    gcv.fill_style = FillOpaqueStippled;
+X    root = DefaultRootWindow(disp);
+X    for (i = 0; i < NGrays; i++) {
+X        grayStipple[i] = gcv.stipple =
+X           XCreateBitmapFromData(disp, root, grayList[i], 8, 8);
+X        grayGC[i] = XCreateGC(disp, osWindow,
+X                              GCFgBg | GCStipple | GCFillStyle, &gcv);
+X    }
+X}
+X
+X/*
+X * Function: ForceRedraw
+X * Usage: ForceRedraw();
+X * ---------------------
+X * This function forces the screen to update itself by sending an
+X * Expose event for the window.
+X */
+X
+Xstatic void ForceRedraw(void)
+X{
+X    XEvent event;
+X
+X    event.type = Expose;
+X    event.xany.window = mainWindow;
+X    event.xexpose.count = 0;
+X    XSendEvent(disp, mainWindow, False, 0, &event);
+X    XFlush(disp);
+X}
+X
+X/*
+X * Function: RedrawWindow
+X * Usage: RedrawWindow();
+X * ----------------------
+X * This function redraws the active display window by copying bits
+X * from the offscreen bitmap.
+X */
+X
+Xstatic void RedrawWindow(void)
+X{
+X    int itemp;
+X    unsigned int width, height, utemp;
+X    Window wtemp;
+X
+X    if (XGetGeometry(disp, mainWindow, &wtemp, &itemp, &itemp,
+X                     &width, &height, &utemp, &utemp) == 0) return;
+X    XCopyArea(disp, osWindow, mainWindow, mainGC, 0, 0, width, height,
+X              0, 0);
+X    redraw = FALSE;
+X}
+X
+X/*
+X * Functions: StartPolygon, AddSegment, EndPolygon
+X * Usage: StartPolygon();
+X *        AddSegment(x0, y0, x1, y1);
+X *        AddSegment(x1, y1, x2, y2);
+X *        . . .
+X *        DisplayPolygon();
+X * -----------------------------------------------
+X * These functions implement the notion of a region in the X
+X * world, where the easiest shape to fill is a polygon.  Calling
+X * StartPolygon initializes the array polygonPoints so that
+X * subsequent calls to AddSegment will add points to it.
+X * The points in the polygon are assumed to be contiguous,
+X * because the client interface checks for this property.
+X * Because polygons involving arcs can be quite large, the
+X * AddSegment code extends the polygonPoints list if needed
+X * by doubling the size of the array.  All storage is freed
+X * after calling DisplayPolygon, which uses the XFillPolygon
+X * call to generate the display.
+X */
+X
+Xstatic void StartPolygon(void)
+X{
+X    polygonPoints = NewArray(PStartSize, XPoint);
+X    polygonSize = PStartSize;
+X    nPolygonPoints = 0;
+X}
+X
+Xstatic void AddSegment(int x0, int y0, int x1, int y1)
+X{
+X    XPoint *newPolygon;
+X    int i;
+X
+X    if (nPolygonPoints >= polygonSize) {
+X        polygonSize *= 2;
+X        newPolygon = NewArray(polygonSize, XPoint);
+X        for (i = 0; i < nPolygonPoints; i++) {
+X            newPolygon[i] = polygonPoints[i];
+X        }
+X        FreeBlock(polygonPoints);
+X        polygonPoints = newPolygon;
+X    }
+X    if (nPolygonPoints == 0) {
+X        polygonPoints[nPolygonPoints].x = x0;
+X        polygonPoints[nPolygonPoints].y = y0;
+X        nPolygonPoints++;
+X    }
+X    polygonPoints[nPolygonPoints].x = x1;
+X    polygonPoints[nPolygonPoints].y = y1;
+X    nPolygonPoints++;
+X}
+X
+Xstatic void DisplayPolygon(void)
+X{
+X    GC fillGC;
+X    int i, px;
+X
+X    if (eraseMode) {
+X        fillGC = eraseGC;
+X    } else {
+X        px = regionGrayScale * (NGrays - 1) + 0.5 - Epsilon;
+X        fillGC = grayGC[px];
+X        XSetForeground(disp, fillGC, drawColor);
+X    }
+X    if (polygonPoints[0].x != polygonPoints[nPolygonPoints-1].x
+X        || polygonPoints[0].y != polygonPoints[nPolygonPoints-1].y) {
+X        polygonPoints[nPolygonPoints++] = polygonPoints[0];
+X    }
+X    XFillPolygon(disp, osWindow, fillGC,
+X                 polygonPoints, nPolygonPoints,
+X                 Complex, CoordModeOrigin);
+X    FreeBlock(polygonPoints);
+X}
+X
+X/*
+X * Function: RenderArc
+X * Usage: RenderArc(x, y, rx, ry, start, sweep);
+X * ---------------------------------------------
+X * This function is identical to the XDDrawArc function except
+X * that the arc is rendered using line segments as part of a
+X * polygonal region.
+X */
+X
+Xstatic void RenderArc(double x, double y, double rx, double ry,
+X                      double start, double sweep)
+X{
+X    double t, mint, maxt, dt;
+X    int ix0, iy0, ix1, iy1;
+X
+X    if (sweep < 0) {
+X        start += sweep;
+X        sweep = -sweep;
+X    }
+X    dt = atan2(InchesY(1), GLMaxF(fabs(rx), fabs(ry)));
+X    mint = GLRadians(start);
+X    maxt = GLRadians(start + sweep);
+X    ix0 = ScaleX(x + rx * cos(mint));
+X    iy0 = ScaleY(y + ry * sin(mint));
+X    for (t = mint + dt; t < maxt; t += dt) {
+X        if (t > maxt - dt / 2) t = maxt;
+X        ix1 = ScaleX(x + rx * cos(t));
+X        iy1 = ScaleY(y + ry * sin(t));
+X        AddSegment(ix0, iy0, ix1, iy1);
+X        ix0 = ix1;
+X        iy0 = iy1;
+X    }
+X}
+X
+X/*
+X * Function: SizeFromFontName
+X * Usage: SizeFromFontName();
+X * --------------------------
+X * This function is a simple utility for XDSetFont that returns
+X * the font size from an X font name.
+X */
+X
+Xstatic int SizeFromFontName(string fontName)
+X{
+X    char *sizePtr;
+X
+X    sizePtr = strstr(fontName, "--");
+X    if (sizePtr == NULL) return (-1);
+X    return (atoi(sizePtr + 2));
+X}
+X
+X/* Low-level conversion functions */
+X
+X/*
+X * Functions: InchesX, InchesY
+X * Usage: inches = InchesX(pixels);
+X *        inches = InchesY(pixels);
+X * --------------------------------
+X * These functions convert distances measured in pixels to inches.
+X * Because the resolution may not be uniform in the horizontal and
+X * vertical directions, the coordinates are treated separately.
+X */
+X
+Xstatic double InchesX(int x)
+X{
+X    return ((double) x / xdpi);
+X}
+X
+Xstatic double InchesY(int y)
+X{
+X    return ((double) y / ydpi);
+X}
+X
+X/*
+X * Functions: PixelsX, PixelsY
+X * Usage: pixels = PixelsX(inches);
+X *        pixels = PixelsY(inches);
+X * --------------------------------
+X * These functions convert distances measured in inches to pixels.
+X */
+X
+Xstatic int PixelsX(double x)
+X{
+X    return (GLRound(x * xdpi + Epsilon));
+X}
+X
+Xstatic int PixelsY(double y)
+X{
+X    return (GLRound(y * ydpi + Epsilon));
+X}
+X
+X/*
+X * Functions: ScaleX, ScaleY
+X * Usage: pixels = ScaleX(inches);
+X *        pixels = ScaleY(inches);
+X * -------------------------------
+X * These functions are like PixelsX and PixelsY but convert coordinates
+X * rather than lengths.  The difference is that y-coordinate values must
+X * be inverted top to bottom to support the cartesian coordinates of
+X * the graphics.h model.
+X */
+X
+Xstatic int ScaleX(double x)
+X{
+X    return (PixelsX(x));
+X}
+X
+Xstatic int ScaleY(double y)
+X{
+X    return (PixelsY(windowHeight - y));
+X}
+END_OF_FILE
+if test 28069 -ne `wc -c <'cslib/xdisplay.c'`; then
+    echo shar: \"'cslib/xdisplay.c'\" unpacked with wrong size!
+fi
+# end of 'cslib/xdisplay.c'
+fi
+if test -f 'cslib/xdisplay.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/xdisplay.h'\"
+else
+echo shar: Extracting \"'cslib/xdisplay.h'\" \(7271 characters\)
+sed "s/^X//" >'cslib/xdisplay.h' <<'END_OF_FILE'
+X/*
+X * File: xdisplay.h
+X * Version: 3.0
+X * Last modified on Sat Oct  1 12:25:08 1994 by eroberts
+X * -----------------------------------------------------
+X * This interface is responsible for the actual display operations
+X * of the X manager phase of the graphics.c implementation.  In many
+X * cases, the functions in this interface are similar to those in
+X * the client interface to the graphics library.  The graphics.h
+X * interface, for example, contains DrawLine and DrawArc; this
+X * interface exports XDDrawLine and XDDrawArc.  The difference
+X * is that the graphics.h functions simply send commands down a
+X * communication channel, while the xdisplay.h functions actually
+X * perform the rendering operations for the X window manager.
+X */
+X
+X#ifndef _xdisplay_h
+X#define _xdisplay_h
+X
+X#include "genlib.h"
+X
+X/*
+X * Function: XDOpenDisplay
+X * Usage: XDOpenDisplay(title);
+X * ----------------------------
+X * This function creates a display window and performs all the
+X * necessary initialization for the X system.  The title string
+X * is displayed in the title bar.
+X */
+X
+Xvoid XDOpenDisplay(string title);
+X
+X/*
+X * Function: XDCloseDisplay
+X * Usage: XDCloseDisplay();
+X * ------------------------
+X * This function closes the graphics window and frees all of the
+X * X storage.
+X */
+X
+Xvoid XDCloseDisplay(void);
+X
+X/*
+X * Function: XDDisplayFD
+X * Usage: fd = XDDisplayFD();
+X * --------------------------
+X * This function returns the Unix file descriptor of the X
+X * connection to the graphics window display.
+X */
+X
+Xint XDDisplayFD(void);
+X
+X/*
+X * Function: XDProcessXEvent
+X * Usage: if (XDProcessXEvent()) . . .
+X * -----------------------------------
+X * This function checks to see if there is a pending X event
+X * and, if so, processes that event.  The function returns
+X * TRUE if an event was detected and FALSE if no events were
+X * pending so that the client can set a timeout before testing
+X * again for another event.
+X */
+X
+Xbool XDProcessXEvent(void);
+X
+X/*
+X * Function: XDCheckForRedraw
+X * Usage: XDCheckForRedraw();
+X * --------------------------
+X * This function checks to see if the window needs redrawing and,
+X * if so, issues the X commands to update the screen.
+X */
+X
+Xvoid XDCheckForRedraw(void);
+X
+X/*
+X * Function: XDSetRedrawFlag
+X * Usage: XDSetRedrawFlag();
+X * -------------------------
+X * This function informs the X display module that the screen needs
+X * to be redrawn.
+X */
+X
+Xvoid XDSetRedrawFlag(void);
+X
+X/*
+X * Function: XDClearDisplay
+X * Usage: XDClearDisplay();
+X * ------------------------
+X * XDClearDisplay erases the entire contents of the graphics window.
+X */
+X
+Xvoid XDClearDisplay(void);
+X
+X/*
+X * Function: XDDrawLine
+X * Usage: XDDrawLine(x, y, dx, dy);
+X * --------------------------------
+X * This function draws a line from (x, y) to (x+dx, y+dy).
+X */
+X
+Xvoid XDDrawLine(double x, double y, double dx, double dy);
+X
+X/*
+X * Function: XDDrawArc
+X * Usage: XDDrawArc(x, y, rx, ry, start, sweep);
+X * ---------------------------------------------
+X * This function draws an elliptical arc segment centered at
+X * (x, y) with cartesian radii rx and ry.  Note that the
+X * interpretation of (x, y) is not the current point as
+X * it is in the DrawArc call.  The start and sweep parameters
+X * are interpreted as they are in DrawArc.
+X */
+X
+Xvoid XDDrawArc(double x, double y, double rx, double ry,
+X                double start, double sweep);
+X
+X/*
+X * Function: XDDrawText
+X * Usage: XDDrawText(x, y, text);
+X * ------------------------------
+X * This function displays the string text at (x, y) using the
+X * current font and size.
+X */
+X
+Xvoid XDDrawText(double x, double y, string text);
+X
+X/*
+X * Function: XDTextWidth
+X * Usage: width = XDTextWidth(text);
+X * ---------------------------------
+X * This function returns the width of the text string at the
+X * current font and size.
+X */
+X
+Xdouble XDTextWidth(string text);
+X
+X/*
+X * Function: XDSetFont
+X * Usage: str = XDSetFont(font, size, style);
+X * ------------------------------------------
+X * This function finds the appropriate font/size/style combination
+X * based on the user's request and returns a string consisting of
+X * the size, style, and font names each separated by a space.
+X */
+X
+Xstring XDSetFont(string font, int size, int style);
+X
+X/*
+X * Function: XDSetTitle
+X * Usage: XDSetTitle(title);
+X * -------------------------
+X * This function sets the title bar for the window.
+X */
+X
+Xvoid XDSetTitle(string title);
+X
+X/*
+X * Function: XDSetEraseMode
+X * Usage: XDSetEraseMode(flag);
+X * ----------------------------
+X * This function sets the erase mode setting according to the
+X * Boolean flag.
+X */
+X
+Xvoid XDSetEraseMode(bool flag);
+X
+X/*
+X * Function: XDStartRegion
+X * Usage: XDStartRegion(grayScale);
+X * --------------------------------
+X * The XDStartRegion function sets the internal state so
+X * that subsequent calls to XDDrawLine and XDDrawArc (which
+X * have already been checked by the client to ensure that they
+X * form a connected path) are used to create a fillable polygon.
+X * The region is displayed by the corresponding XDEndRegion.
+X */
+X
+Xvoid XDStartRegion(double grayScale);
+X
+X/*
+X * Function: XDEndRegion
+X * Usage: XDEndRegion();
+X * ---------------------
+X * This function closes the region opened by XDStartRegion.
+X */
+X
+Xvoid XDEndRegion(void);
+X
+X/*
+X * Function: XDGetMouse
+X * Usage: XDGetMouse(&buttonState, &x, &y);
+X * ----------------------------------------
+X * This function returns the current mouse state through the
+X * argument pointers.
+X */
+X
+Xvoid XDGetMouse(bool *buttonStateP, double *xp, double *yp);
+X
+X/*
+X * Function: XDWaitForMouse
+X * Usage: XDWaitForMouse(buttonState);
+X * -----------------------------------
+X * This function waits for the mouse to enter the specified
+X * state (down = TRUE);
+X */
+X
+Xvoid XDWaitForMouse(bool buttonState);
+X
+X/*
+X * Function: XDSetWindowSize
+X * Usage: XDSetWindowSize(width, height);
+X * --------------------------------------
+X * This function sets the width and height values of the window
+X * and must be called prior to XDOpenDisplay.
+X */
+X
+Xvoid XDSetWindowSize(double width, double height);
+X
+X/*
+X * Function: XDGetScreenSize
+X * Usage: XDGetScreenSize(&screenWidth, &screenHeight);
+X * ----------------------------------------------------
+X * This function returns the screen size and may be called in the
+X * following circumstances, each of which is unusual:
+X *   (a) prior to the XDOpenDisplay call
+X *   (b) from the client fork
+X */
+X
+Xvoid XDGetScreenSize(double *pScreenWidth, double *pScreenHeight);
+X
+X/*
+X * Function: XDGetResolution
+X * Usage: XDGetResolution(&xdpi, &ydpi);
+X * -------------------------------------
+X * This function returns the screen resolution, possibly modified by
+X * the scale reduction.  Like XDGetScreenSize, this function
+X * can be called prior to the XDOpenDisplay call or from the client
+X * fork.
+X */
+X
+Xvoid XDGetResolution(double *pXDPI, double *pYDPI);
+X
+X/*
+X * Function: XDGetNColors
+X * Usage: ncolors = XDGetNColors();
+X * --------------------------------
+X * This function returns the number of colors supported by the screen.
+X * This function can be called prior to the XDOpenDisplay call or from
+X * the client fork.
+X */
+X
+Xint XDGetNColors(void);
+X
+X/*
+X * Function: XDSetColor
+X * Usage: XDSetColor(red, green, blue);
+X * ------------------------------------
+X * This function sets the pen color as specified by the arguments.
+X */
+X
+Xvoid XDSetColor(double red, double green, double blue);
+X
+X#endif
+END_OF_FILE
+if test 7271 -ne `wc -c <'cslib/xdisplay.h'`; then
+    echo shar: \"'cslib/xdisplay.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/xdisplay.h'
+fi
+if test -f 'cslib/xmanager.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/xmanager.c'\"
+else
+echo shar: Extracting \"'cslib/xmanager.c'\" \(11760 characters\)
+sed "s/^X//" >'cslib/xmanager.c' <<'END_OF_FILE'
+X/*
+X * File: xmanager.c
+X * Version: 3.0
+X * Last modified on Sat Oct  1 12:28:02 1994 by eroberts
+X * -----------------------------------------------------
+X * This file implements the xmanager.h interface, which is responsible
+X * for the X side of the communication between the graphics client and
+X * the X manager.  The xmanager module handles the process management
+X * and intermodule communication.  All work involving actual structures
+X * is performed by the xdisplay module.
+X */
+X
+X/*
+X * General implementation notes
+X * ----------------------------
+X * As with all implementations of the graphics library, the X
+X * implementation is complicated by the change in model.  The X
+X * programming paradigm is based on the idea of an "event loop,"
+X * in which the application program continually calls XNextEvent
+X * to determine whether any activity is required.  This strategy
+X * runs counter to the more conventional view of a main program
+X * as the highest level in the problem decomposition.  In the
+X * context of teaching programming, we want the main program and
+X * its subprograms to draw the figures -- a strategy which is not
+X * easy directly compatible with the X paradigm.
+X *
+X * To solve this problem, the X implementation creates two forks:
+X * one to poll for X events and manage the screen and the other
+X * to run the user program.  These processes are established by
+X * the first call to InitGraphics and remain in place until the
+X * program terminates.  So that program termination can be
+X * handled correctly, the child process is the one that returns
+X * to the InitGraphics caller where it runs the client program.
+X * The parent process, which is called the X manager process,
+X * never returns from InitGraphics.  After initializing the
+X * display, the X manager process runs an event loop waiting
+X * simultaneously for graphical events and commands from the
+X * client process.  All of this mechanism is invisible to the
+X * client.
+X *
+X * The two processes communicate by means of pipes running in
+X * each direction.  The client communicates with the X manager by
+X * sending commands over its output pipe.  The command format
+X * consists of ASCII text lines in the following format:
+X *
+X *       LLLCC XXXXXX
+X *
+X * where LLL is a three-digit length field giving the length of
+X * the entire line (including the newline), CC is a two-digit
+X * field specifying the command number and XXXXXX is an arbitrary
+X * text string specifying arguments to the command.  The length
+X * of the text string can be determined from the line length
+X * indicator.
+X *
+X * Some client operations require a response from the X manager.
+X * These operations call XMGetResponse() to read a line from the
+X * client.  Because this operation is synchronous, there is no
+X * need for the more cumbersome form used in the opposite
+X * direction.
+X *
+X * This interface is used by both the client side (graphics.c)
+X * and the X manager side (xmanager.c), but it is important to
+X * remember that the two are running in different forks.  For
+X * each fork, the inPipe and outPipe variables correspond to
+X * the local perspective.  Thus, reading is always performed
+X * on inPipe and writing is performed on outPipe.  The ends
+X * of the pipe are crossed between the processes so that data
+X * that is written to outPipe by one fork appears in inPipe
+X * on the other side.
+X */
+X
+X#include <stdio.h>
+X#include <stdlib.h>
+X#include <string.h>
+X#include <signal.h>
+X#include <sys/time.h>
+X#include <sys/types.h>
+X
+X#include "genlib.h"
+X#include "exception.h"
+X#include "simpio.h"
+X#include "xmanager.h"
+X#include "xdisplay.h"
+X#include "xcompat.h"
+X#include "glibrary.h"
+X
+X/* Constants */
+X
+X#define ClientTimeout 0.05
+X
+X/* Private state variables */
+X
+Xstatic FILE *inPipe, *outPipe;
+Xstatic int infd;
+Xstatic pid_t child;
+X
+Xstatic char cmdBuffer[CommandBufferSize];
+X
+Xstatic bool exitGraphicsFlag;
+X
+X/* Private function prototypes */
+X
+Xstatic void MainEventLoop(void);
+Xstatic bool ReadMessage(void);
+Xstatic void ProcessMessage(void);
+Xstatic void LineMessage(string args);
+Xstatic void ArcMessage(string args);
+Xstatic void TextMessage(string args);
+Xstatic void WidthMessage(string args);
+Xstatic void FontMetricsMessage(string args);
+Xstatic void SetEraseMessage(string args);
+Xstatic void StartRegionMessage(string args);
+Xstatic void EndRegionMessage(string args);
+Xstatic void ClearMessage(string args);
+Xstatic void UpdateMessage(string args);
+Xstatic void SetTitleMessage(string args);
+Xstatic void SetFontMessage(string args);
+Xstatic void GetMouseMessage(string args);
+Xstatic void WaitForMouseMessage(string args);
+Xstatic void SetColorMessage(string args);
+X
+X/* Exported entries */
+X
+Xvoid XMInitialize(string title)
+X{
+X    int p1[2], p2[2];
+X
+X    XDOpenDisplay(title);
+X    pipe(p1);
+X    pipe(p2);
+X    if ((child = fork()) == 0) {
+X        close(p1[0]);
+X        close(p2[1]);
+X        inPipe = fdopen(p2[0], "r");
+X        if (inPipe == NULL) Error("Can't open pipe from X client");
+X        outPipe = fdopen(p1[1], "w");
+X        if (outPipe == NULL) Error("Can't open pipe to X client");
+X    } else {
+X        close(p1[1]);
+X        close(p2[0]);
+X        infd = p1[0];
+X        outPipe = fdopen(p2[1], "w");
+X        if (outPipe == NULL) Error("Can't open output pipe in X client");
+X        exitGraphicsFlag = FALSE;
+X        try {
+X            MainEventLoop();
+X          except(ErrorException)
+X            fprintf(stderr, "Error: %s\n", (string) GetExceptionValue());
+X            XDCloseDisplay();
+X            kill(child, SIGKILL);
+X            exit(1);
+X        } endtry
+X        (void) waitpid(child, NULL, 0);
+X        if (!exitGraphicsFlag) {
+X            printf("Press return to exit.\n");
+X            infd = 0;
+X            MainEventLoop();
+X        }
+X        XDCloseDisplay();
+X        exit(0);
+X    }
+X}
+X
+Xvoid XMSendCommand(commandT cmd, string args)
+X{
+X    int len;
+X
+X    len = strlen(args) + 4;
+X    fprintf(outPipe, "%3d%2d %s\n", len, (int) cmd, args);
+X    fflush(outPipe);
+X}
+X
+Xvoid XMGetResponse(char buffer[])
+X{
+X    fgets(buffer, CommandBufferSize - 1, inPipe);
+X}
+X
+Xvoid XMReleaseClient(void)
+X{
+X    fprintf(outPipe, "\n");
+X    fflush(outPipe);
+X}
+X
+X/* Private functions */
+X
+Xstatic void MainEventLoop(void)
+X{
+X    struct timeval tv, *tvp;
+X    int xfd, width, sc;
+X    fd_set readmask, readset;
+X    string message;
+X
+X    xfd = XDDisplayFD();
+X    tv.tv_sec = ClientTimeout;
+X    tv.tv_usec = ((int) (ClientTimeout * 1000000)) % 1000000;
+X    FD_ZERO(&readmask);
+X    FD_SET(xfd, &readmask);
+X    FD_SET(infd, &readmask);
+X    width = GLMax(xfd, infd) + 1;
+X    tvp = &tv;
+X    while (TRUE) {
+X        if (XDProcessXEvent()) {
+X            tvp = &tv;
+X        } else {
+X            readset = readmask;
+X            sc = select(width, &readset, NULL, NULL, tvp);
+X            tvp = (sc == 0) ? NULL : &tv;
+X            if (sc == 0) {
+X                XDCheckForRedraw();
+X            } else if (FD_ISSET(infd, &readset)) {
+X                if (!ReadMessage()) {
+X                    XDCheckForRedraw();
+X                    return;
+X                }
+X                ProcessMessage();
+X                XDSetRedrawFlag();
+X            }
+X        }
+X    }
+X}
+X
+Xstatic bool ReadMessage(void)
+X{
+X    int len;
+X    char lbuf[4];
+X
+X    if (infd == 0) {
+X        FreeBlock(GetLine());
+X        return (FALSE);
+X    }
+X    if (read(infd, lbuf, 3) == 0) return (FALSE);
+X    lbuf[3] = '\0';
+X    len = atoi(lbuf);
+X    if (read(infd, cmdBuffer, len) != len) {
+X        Error("Unexpected end of file");
+X    }
+X    if (cmdBuffer[len-1] != '\n') {
+X        Error("Unexpected end of command");
+X    }
+X    cmdBuffer[len-1] = '\0';
+X    return (TRUE);
+X}
+X
+Xstatic void ProcessMessage(void)
+X{
+X    int id;
+X    string args;
+X
+X    args = cmdBuffer + 3;
+X    sscanf(cmdBuffer, "%d", &id);
+X    switch ((commandT) id) {
+X      case LineCmd: LineMessage(args); break;
+X      case ArcCmd: ArcMessage(args); break;
+X      case TextCmd: TextMessage(args); break;
+X      case WidthCmd: WidthMessage(args); break;
+X      case FontMetricsCmd: FontMetricsMessage(args); break;
+X      case SetEraseCmd: SetEraseMessage(args); break;
+X      case StartRegionCmd: StartRegionMessage(args); break;
+X      case EndRegionCmd: EndRegionMessage(args); break;
+X      case ClearCmd: ClearMessage(args); break;
+X      case UpdateCmd: UpdateMessage(args); break;
+X      case SetTitleCmd: SetTitleMessage(args); break;
+X      case SetFontCmd: SetFontMessage(args); break;
+X      case GetMouseCmd: GetMouseMessage(args); break;
+X      case WaitForMouseCmd: WaitForMouseMessage(args); break;
+X      case SetColorCmd: SetColorMessage(args); break;
+X      case ExitGraphicsCmd: exitGraphicsFlag = TRUE; break;
+X      default: Error("Internal error: Illegal command"); break;
+X    }
+X}
+X
+Xstatic void LineMessage(string args)
+X{
+X    int n;
+X    double x, y, dx, dy;
+X
+X    n = sscanf(args, "%lg %lg %lg %lg", &x, &y, &dx, &dy);
+X    if (n != 4) {
+X        Error("Internal error: Bad arguments to LineCmd");
+X    }
+X    XDDrawLine(x, y, dx, dy);
+X}
+X
+Xstatic void ArcMessage(string args)
+X{
+X    int n;
+X    double x, y, rx, ry, start, sweep;
+X
+X    n = sscanf(args, "%lg %lg %lg %lg %lg %lg",
+X               &x, &y, &rx, &ry, &start, &sweep);
+X    if (n != 6) {
+X        Error("Internal error: Bad arguments to ArcCmd");
+X    }
+X    XDDrawArc(x, y, rx, ry, start, sweep);
+X}
+X
+Xstatic void TextMessage(string args)
+X{
+X    int n;
+X    char *space;
+X    double x, y;
+X
+X    n = sscanf(args, "%lg %lg", &x, &y);
+X    if (n != 2) {
+X        Error("Internal error: Bad arguments to TextCmd");
+X    }
+X    space = strchr(strchr(args, ' ') + 1, ' ');
+X    if (space == NULL) {
+X        Error("Internal error: Bad arguments to TextCmd");
+X    }
+X    XDDrawText(x, y, space + 1);
+X}
+X
+Xstatic void WidthMessage(string args)
+X{
+X    double width;
+X
+X    width = XDTextWidth(args);
+X    fprintf(outPipe, "%.12g\n", width);
+X    fflush(outPipe);
+X}
+X
+Xstatic void FontMetricsMessage(string args)
+X{
+X    double ascent, descent, height;
+X
+X    DisplayFontMetrics(&ascent, &descent, &height);
+X    fprintf(outPipe, "%.12g %.12g %.12g\n", ascent, descent, height);
+X    fflush(outPipe);
+X}
+X
+Xstatic void SetEraseMessage(string args)
+X{
+X    int n, flag;
+X
+X    n = sscanf(args, "%d", &flag);
+X    if (n != 1) {
+X        Error("Internal error: Bad arguments to SetEraseCmd");
+X    }
+X    XDSetEraseMode((bool) flag);
+X}
+X
+Xstatic void StartRegionMessage(string args)
+X{
+X    int n;
+X    double grayScale;
+X
+X    n = sscanf(args, "%lg", &grayScale);
+X    if (n != 1) {
+X        Error("Internal error: Bad arguments to SetEraseCmd");
+X    }
+X    XDStartRegion(grayScale);
+X}
+X
+Xstatic void EndRegionMessage(string args)
+X{
+X    XDEndRegion();
+X}
+X
+Xstatic void ClearMessage(string args)
+X{
+X    XDClearDisplay();
+X}
+X
+Xstatic void UpdateMessage(string args)
+X{
+X    XDSetRedrawFlag();
+X    XDCheckForRedraw();
+X}
+X
+Xstatic void SetTitleMessage(string args)
+X{
+X    XDSetTitle(args);
+X}
+X
+Xstatic void SetFontMessage(string args)
+X{
+X    int n, size, style;
+X    char *space;
+X
+X    n = sscanf(args, "%d %d", &size, &style);
+X    if (n != 2) {
+X        Error("Internal error: Bad arguments to SetFontCmd");
+X    }
+X    space = strchr(args, ' ');
+X    if (space == NULL) {
+X        Error("Internal error: Bad arguments to TextCmd");
+X    }
+X    space = strchr(space + 1, ' ');
+X    if (space == NULL) {
+X        Error("Internal error: Bad arguments to TextCmd");
+X    }
+X    fprintf(outPipe, "%s\n", XDSetFont(space + 1, size, style));
+X    fflush(outPipe);
+X}
+X
+Xstatic void GetMouseMessage(string args)
+X{
+X    bool down;
+X    double x, y;
+X
+X    XDGetMouse(&down, &x, &y);
+X    fprintf(outPipe, "%d, %.12g, %.12g\n", down, x, y);
+X    fflush(outPipe);
+X}
+X
+Xstatic void WaitForMouseMessage(string args)
+X{
+X    XDWaitForMouse(StringEqual(args, "D"));
+X}
+X
+Xstatic void SetColorMessage(string args)
+X{
+X    double red, green, blue;
+X    int n;
+X
+X    n = sscanf(args, "%lg %lg %lg", &red, &green, &blue);
+X    if (n != 3) {
+X        Error("Internal error: Bad arguments to SetColorCmd");
+X    }
+X    XDSetColor(red, green, blue);
+X}
+END_OF_FILE
+if test 11760 -ne `wc -c <'cslib/xmanager.c'`; then
+    echo shar: \"'cslib/xmanager.c'\" unpacked with wrong size!
+fi
+# end of 'cslib/xmanager.c'
+fi
+if test -f 'cslib/xmanager.h' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'cslib/xmanager.h'\"
+else
+echo shar: Extracting \"'cslib/xmanager.h'\" \(2314 characters\)
+sed "s/^X//" >'cslib/xmanager.h' <<'END_OF_FILE'
+X/*
+X * File: xmanager.h
+X * Version: 3.0
+X * Last modified on Sat Oct  1 12:25:07 1994 by eroberts
+X * -----------------------------------------------------
+X * This file is the interface to the xmanager module, which is the
+X * portion of the graphics implementation responsible for all of the
+X * interaction with X.
+X */
+X
+X#ifndef _xmanager_h
+X#define _xmanager_h
+X
+X#include "genlib.h"
+X
+X/*
+X * Constants
+X * ---------
+X * CommandBufferSize  -- Size of internal command buffer
+X * MaxFontName        -- Maximum length of font name
+X * MaxTextString      -- Length limit for DrawTextString
+X */
+X
+X#define CommandBufferSize   200
+X#define MaxFontName          25
+X#define MaxTextString       120
+X
+X/*
+X * Type: commandT
+X * --------------
+X * The client side of the graphics implementation and the X side of
+X * the implementation communicate by means of commands sent across a
+X * communication pipe.  This enumeration type defines the command
+X * codes.
+X */
+X
+Xtypedef enum {
+X   LineCmd,
+X   ArcCmd,
+X   TextCmd,
+X   WidthCmd,
+X   FontMetricsCmd,
+X   SetEraseCmd,
+X   StartRegionCmd,
+X   EndRegionCmd,
+X   ClearCmd,
+X   UpdateCmd,
+X   SetFontCmd,
+X   SetTitleCmd,
+X   GetWidthCmd,
+X   GetHeightCmd,
+X   GetMouseCmd,
+X   WaitForMouseCmd,
+X   SetColorCmd,
+X   ExitGraphicsCmd
+X} commandT;
+X
+X/*
+X * Function: XMInitialize
+X * Usage: XMInitialize(title);
+X * ---------------------------
+X * This function starts the X manager process.  The title argument is
+X * a string to use as the title bar for the new window.
+X */
+X
+Xvoid XMInitialize(string title);
+X
+X/*
+X * Function: XMSendCommand
+X * Usage: XMSendCommand(cmd, args);
+X * --------------------------------
+X * This function sends the specified command to the X manager
+X * process along with an argument string.
+X */
+X
+Xvoid XMSendCommand(commandT cmd, string args);
+X
+X/*
+X * Function: XMGetResponse
+X * Usage: XMGetResponse(buffer);
+X * -----------------------------
+X * This function reads a line from the X manager in response to
+X * a command message.  The string is stored in the buffer provided
+X * by the client, which must be at least CommandBufferSize bytes.
+X */
+X
+Xvoid XMGetResponse(char buffer[]);
+X
+X/*
+X * Function: XMReleaseClient
+X * Usage: XMReleaseClient();
+X * -------------------------
+X * This function is used by the X display code to release a
+X * client waiting on an event.
+X */
+X
+Xvoid XMReleaseClient(void);
+X
+X#endif
+END_OF_FILE
+if test 2314 -ne `wc -c <'cslib/xmanager.h'`; then
+    echo shar: \"'cslib/xmanager.h'\" unpacked with wrong size!
+fi
+# end of 'cslib/xmanager.h'
+fi
+echo shar: End of shell archive.
+exit 0
