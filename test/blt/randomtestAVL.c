@@ -28,9 +28,13 @@ main()
 
   i=0;
   while(i<99970){
-    n = RandomInteger(0, 100000);
-    if(FindBSTNode(bst, &array[n])!=NULL){
+    n = RandomInteger(0, 500000);
+    /*if(FindBSTNode(bst, &array[n])!=NULL){
       DeleteBSTNode(bst, &array[n]);
+      i++;
+    }*/
+    if(FindBSTNode(bst, &n)!=NULL){
+      DeleteBSTNode(bst, &n);
       i++;
     }
   }

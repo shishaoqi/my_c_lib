@@ -148,6 +148,86 @@ static int RecInsertNode(bstADT bst, treeT *tptr, void *kp, void *clientData)
     }
 }
 
+void *DeleteBSTNode(bstADT bst, void *kp)
+{
+    return RecDeleteNode(bst, &bst->root, kp);
+}
+
+static void *RecDeleteNode(bstADT bst, treeT *tptr, void *kp)
+{
+    bstDataT *dp, *cdp, *lcdp, *rcdp;
+    treeT target, newTarget, ctr;
+    int sign, height, delta;
+
+    target = *tptr;
+    if (target == NULL) {
+        return 0;
+    }
+
+    sign = bst->cmpFn(kp, target);
+    dp = BSTData(bst, target);
+    if (sign == 0) {
+        target = (DeleteTargetNode(bst, tptr));
+    } else if (sign < 0) {
+        target = RecDeleteNode(bst, &dp->left, kp);
+    } else if (sign > 0) {
+        target = RecDeleteNode(bst, &dp->right, kp); 
+    }
+
+    //dp->bf = GetHeight(bst, dp->right) - GetHeight(bst, dp->left) + 1;
+    dp->height = Max(GetHeight(bst, dp->left), GetHeight(bst, dp->right)) + 1;
+
+    ssize_t heightDelta = GetHeight(bst, dp->left) - GetHeight(bst, dp->right);
+    if(heightDelta == 2){
+        lcdp = BSTData(bst, dp->left);
+        if(GetHeight(bst, lcdp->left) >= GetHeight(bst, lcdp->right))
+            FixLeftImbalance(bst, tptr);
+        else
+            FixLeftImbalance(bst, tptr);
+    }else if(heightDelta == -2){
+        rcdp = BSTData(bst, dp->right);
+        if(GetHeight(bst, rcdp->left) >= GetHeight(bst, rcdp->right))
+            FixRightImbalance(bst, tptr);
+        else
+            FixRightImbalance(bst, tptr);
+    }
+
+    return target;
+}
+
+static void *DeleteTargetNode(bstADT bst, treeT *tptr)
+{
+    treeT target, cptr;
+    bstDataT *tdp, *cdp;
+
+    target = *tptr;
+    tdp = BSTData(bst, target);
+
+    if (tdp->left == NULL) {
+        *tptr = tdp->right;
+    } else if (tdp->right == NULL) {
+        *tptr = tdp->left;
+    } else {
+        cptr = tdp->left;
+        cdp = BSTData(bst, cptr);
+        while (cdp->right != NULL) {
+            cptr = cdp->right;
+            cdp = BSTData(bst, cptr);
+        }
+
+        *tptr = cptr;
+        //cptr = cdp->left;
+        RecDeleteNode(bst, &tdp->left, cptr);
+        cdp->bf = tdp->bf;
+        //cdp->height = tdp->height;
+        cdp->height = Max(GetHeight(bst, tdp->left), GetHeight(bst, tdp->right)) + 1;
+        cdp->left = tdp->left;
+        cdp->right = tdp->right;
+    }
+
+    return target;
+}
+
 static void FixLeftImbalance(bstADT bst, treeT *tptr)
 {
     treeT t, parent, child, *cptr;
@@ -278,89 +358,6 @@ static void RotateRight(bstADT bst, treeT *tptr)
 
     pdp->height = Max(GetHeight(bst, pdp->left), GetHeight(bst, pdp->right)) + 1;
     cdp->height = Max(GetHeight(bst, cdp->left), GetHeight(bst, cdp->right)) + 1;
-}
-
-void *DeleteBSTNode(bstADT bst, void *kp)
-{
-    return RecDeleteNode(bst, &bst->root, kp);
-}
-
-static void *RecDeleteNode(bstADT bst, treeT *tptr, void *kp)
-{
-    bstDataT *dp, *cdp, *lcdp, *rcdp;
-    treeT target, newTarget, ctr;
-    int sign, height, isChange;
-
-    target = *tptr;
-    if (target == NULL) {
-        return 0;
-    }
-
-    sign = bst->cmpFn(kp, target);
-    dp = BSTData(bst, target);
-    if (sign == 0) {
-        newTarget = (DeleteTargetNode(bst, tptr));
-        if (newTarget != NULL) {
-            RecDeleteNode(bst, &dp->left, newTarget);
-        }  
-    } else if (sign < 0) {
-        RecDeleteNode(bst, &dp->left, kp);
-    } else if (sign > 0) {
-        RecDeleteNode(bst, &dp->right, kp); 
-    }
-
-    //dp->bf = GetHeight(bst, dp->right) - GetHeight(bst, dp->left) + 1;
-    dp->height = Max(GetHeight(bst, dp->left), GetHeight(bst, dp->right)) + 1;
-
-    ssize_t heightDelta = GetHeight(bst, dp->left) - GetHeight(bst, dp->right);
-    if(heightDelta == 2){
-        lcdp = BSTData(bst, dp->left);
-        if(GetHeight(bst, lcdp->left) >= GetHeight(bst, lcdp->right))
-            FixRightImbalance(bst, tptr);
-        else
-            FixLeftImbalance(bst, tptr);
-    }else if(heightDelta == -2){
-        rcdp = BSTData(bst, dp->right);
-        if(GetHeight(bst, rcdp->left) >= GetHeight(bst, rcdp->right))
-            FixLeftImbalance(bst, tptr);
-        else
-            FixRightImbalance(bst, tptr);
-    }
-
-    return target;
-}
-
-static void *DeleteTargetNode(bstADT bst, treeT *tptr)
-{
-    treeT target, cptr;
-    bstDataT *tdp, *cdp;
-
-    target = *tptr;
-    tdp = BSTData(bst, target);
-
-    if (tdp->left == NULL) {
-        *tptr = tdp->right;
-        return NULL;
-    } else if (tdp->right == NULL) {
-        *tptr = tdp->left;
-        return NULL;
-    } else {
-        cptr = tdp->left;
-        cdp = BSTData(bst, cptr);
-        while (cdp->right != NULL) {
-            cptr = cdp->right;
-            cdp = BSTData(bst, cptr);
-        }
-
-        *tptr = cptr;
-        //cptr = cdp->left;
-        cdp->bf = tdp->bf;
-        cdp->height = tdp->height;
-        cdp->left = tdp->left;
-        cdp->right = tdp->right;
-
-        return cptr;
-    }
 }
 
 void MapBST(nodeFnT fn, bstADT bst, OrderT order, void *clientData)

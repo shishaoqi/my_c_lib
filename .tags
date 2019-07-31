@@ -5,6 +5,12 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 ANY	.\exception.c	/^exception ANY = { "ANY" };$/;"	v
+AVLData	.\avl.c	/^static avlDataT *AVLData(avlADT avl, treeT t)$/;"	f	file:
+AVLLeftChild	.\avl.c	/^void *AVLLeftChild(avlADT avl, void *np)$/;"	f
+AVLRightChild	.\avl.c	/^void *AVLRightChild(avlADT avl, void *np)$/;"	f
+AVLRoot	.\avl.c	/^void *AVLRoot(avlADT avl)$/;"	f
+AVL_CANCEL	.\test\avl\avl\avl.h	7;"	d
+AVL_H	.\test\avl\avl\avl.h	2;"	d
 AddArrayToSet	.\set.c	/^void AddArrayToSet(setADT set, void *array, int n)$/;"	f
 AddERef	.\set.c	/^static void AddERef(setADT set, void *ep)$/;"	f	file:
 AddElementToIterator	.\set.c	/^static void AddElementToIterator(void *np, void *clientData)$/;"	f	file:
@@ -15,14 +21,14 @@ AddSegment	.\xdisplay.c	/^static void AddSegment(int x0, int y0, int x1, int y1)
 AddToIteratorList	.\iterator2.c	/^void AddToIteratorList(iteratorADT iterator, void *ep)$/;"	f
 ArcCmd	.\xmanager.h	/^   ArcCmd,$/;"	e	enum:__anon14
 ArcMessage	.\xmanager.c	/^static void ArcMessage(string args)$/;"	f	file:
+BSTData	.\blt.c	/^static bstDataT *BSTData(bstADT bst, treeT t)$/;"	f	file:
 BSTData	.\bst.c	/^static bstDataT *BSTData(bstADT bst, treeT t)$/;"	f	file:
-BSTData	.\bst_save.c	/^static bstDataT *BSTData(bstADT bst, treeT t)$/;"	f	file:
+BSTLeftChild	.\blt.c	/^void *BSTLeftChild(bstADT bst, void *np)$/;"	f
 BSTLeftChild	.\bst.c	/^void *BSTLeftChild(bstADT bst, void *np)$/;"	f
-BSTLeftChild	.\bst_save.c	/^void *BSTLeftChild(bstADT bst, void *np)$/;"	f
+BSTRightChild	.\blt.c	/^void *BSTRightChild(bstADT bst, void *np)$/;"	f
 BSTRightChild	.\bst.c	/^void *BSTRightChild(bstADT bst, void *np)$/;"	f
-BSTRightChild	.\bst_save.c	/^void *BSTRightChild(bstADT bst, void *np)$/;"	f
+BSTRoot	.\blt.c	/^void *BSTRoot(bstADT bst)$/;"	f
 BSTRoot	.\bst.c	/^void *BSTRoot(bstADT bst)$/;"	f
-BSTRoot	.\bst_save.c	/^void *BSTRoot(bstADT bst)$/;"	f
 Bold	.\extgraph.h	149;"	d
 BorderPixels	.\xdisplay.c	49;"	d	file:
 CharCmpFn	.\cmpfn.c	/^int CharCmpFn(const void *p1, const void *p2)$/;"	f
@@ -40,15 +46,15 @@ CreateString	.\strlib.c	/^static string CreateString(int len)$/;"	f	file:
 DefaultFont	.\xdisplay.c	52;"	d	file:
 DefaultSize	.\graphics.c	46;"	d	file:
 DefineColor	.\graphics.c	/^void DefineColor(string name,$/;"	f
-DeleteBSTNode	.\bst.c	/^bool DeleteBSTNode(bstADT bst, void *kp)$/;"	f
-DeleteBSTNode	.\bst_save.c	/^bool DeleteBSTNode(bstADT bst, void *kp)$/;"	f
+DeleteAVLNode	.\avl.c	/^void *DeleteAVLNode(avlADT avl, void *kp)$/;"	f
+DeleteBSTNode	.\blt.c	/^void *DeleteBSTNode(bstADT bst, void *kp)$/;"	f
+DeleteBSTNode	.\bst.c	/^void *DeleteBSTNode(bstADT bst, void *kp)$/;"	f
 DeleteERef	.\set.c	/^static void DeleteERef(setADT set, void *ep)$/;"	f	file:
 DeleteIntElement	.\set.c	/^void DeleteIntElement(setADT set, int element)$/;"	f
 DeletePtrElement	.\set.c	/^void DeletePtrElement(setADT set, void *element)$/;"	f
-Delete_FixLeftImbalance	.\bst.c	/^static int Delete_FixLeftImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
-Delete_FixLeftImbalance	.\bst_save.c	/^static int Delete_FixLeftImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
-Delete_FixRightImbalance	.\bst.c	/^static int Delete_FixRightImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
-Delete_FixRightImbalance	.\bst_save.c	/^static int Delete_FixRightImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+DeleteTargetNode	.\avl.c	/^static void *DeleteTargetNode(avlADT avl, treeT *tptr)$/;"	f	file:
+DeleteTargetNode	.\blt.c	/^static void *DeleteTargetNode(bstADT bst, treeT *tptr)$/;"	f	file:
+DeleteTargetNode	.\bst.c	/^static void *DeleteTargetNode(bstADT bst, treeT *tptr)$/;"	f	file:
 Dequeue	.\queue.c	/^queueElementT Dequeue(queueADT queue){$/;"	f
 Dequeue	.\queuelist.c	/^queueElementT Dequeue(queueADT queue){$/;"	f
 DesiredHeight	.\graphics.c	45;"	d	file:
@@ -80,7 +86,7 @@ ErrorExitStatus	.\genlib.c	23;"	d	file:
 ExitGraphics	.\graphics.c	/^void ExitGraphics(void)$/;"	f
 ExitGraphicsCmd	.\xmanager.h	/^   ExitGraphicsCmd$/;"	e	enum:__anon14
 ExpandStack	.\stack.c	/^static void ExpandStack(stackADT stack)$/;"	f	file:
-FALSE	.\genlib.h	/^       typedef enum {FALSE, TRUE} bool;$/;"	e	enum:__anon15
+FALSE	.\genlib.h	/^        typedef enum {FALSE, TRUE} bool;$/;"	e	enum:__anon5
 FALSE	.\genlib.h	58;"	d
 FD_CLR	.\xcompat.h	39;"	d
 FD_CLR	.\xcompat.h	45;"	d
@@ -91,28 +97,28 @@ FD_SET	.\xcompat.h	44;"	d
 FD_ZERO	.\xcompat.h	37;"	d
 FD_ZERO	.\xcompat.h	43;"	d
 FOPEN_MAX	.\xcompat.h	33;"	d
+FindAVLNode	.\avl.c	/^void *FindAVLNode(avlADT avl, void *kp)$/;"	f
+FindBSTNode	.\blt.c	/^void *FindBSTNode(bstADT bst, void *kp)$/;"	f
 FindBSTNode	.\bst.c	/^void *FindBSTNode(bstADT bst, void *kp)$/;"	f
-FindBSTNode	.\bst_save.c	/^void *FindBSTNode(bstADT bst, void *kp)$/;"	f
 FindCell	.\symtab.c	/^static cellT *FindCell(cellT *cp, string key)$/;"	f	file:
 FindChar	.\strlib.c	/^int FindChar(char ch, string text, int start)$/;"	f
 FindColorName	.\graphics.c	/^static int FindColorName(string name)$/;"	f	file:
 FindHandler	.\exception.c	/^static context_block *FindHandler(exception *e)$/;"	f	file:
 FindString	.\strlib.c	/^int FindString(string str, string text, int start)$/;"	f
-FixLeftImbalance	.\bst.c	/^static void FixLeftImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
-FixLeftImbalance	.\bst_save.c	/^static void FixLeftImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
-FixRightImbalance	.\bst.c	/^static void FixRightImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
-FixRightImbalance	.\bst_save.c	/^static void FixRightImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+FixLeftImbalance	.\blt.c	/^static void FixLeftImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
+FixRightImbalance	.\blt.c	/^static void FixRightImbalance(bstADT bst, treeT *tptr)$/;"	f	file:
 FloatCmpFn	.\cmpfn.c	/^int FloatCmpFn(const void *p1, const void *p2)$/;"	f
 FloatExchFn	.\cmpfn.c	/^void FloatExchFn(void *p1, void *p2)$/;"	f
 FontMetricsCmd	.\xmanager.h	/^   FontMetricsCmd,$/;"	e	enum:__anon14
 FontMetricsMessage	.\xmanager.c	/^static void FontMetricsMessage(string args)$/;"	f	file:
 ForceRedraw	.\xdisplay.c	/^static void ForceRedraw(void)$/;"	f	file:
+FreeAVL	.\avl.c	/^void FreeAVL(avlADT avl, nodeFnT freeNodeFn)$/;"	f
+FreeBST	.\blt.c	/^void FreeBST(bstADT bst, nodeFnT freeNodeFn)$/;"	f
 FreeBST	.\bst.c	/^void FreeBST(bstADT bst, nodeFnT freeNodeFn)$/;"	f
-FreeBST	.\bst_save.c	/^void FreeBST(bstADT bst, nodeFnT freeNodeFn)$/;"	f
 FreeBlock	.\genlib.c	/^void FreeBlock(void *ptr)$/;"	f
 FreeBucketChain	.\symtab.c	/^static void FreeBucketChain(cellT *cp)$/;"	f	file:
-FreeIterator	.\iterator1.c	/^void FreeIterator(iteratorADT iterator)$/;"	f
 FreeIterator	.\iterator2.c	/^void FreeIterator(iteratorADT iterator)$/;"	f
+FreeIterator_1	.\iterator1.c	/^void FreeIterator_1(iteratorADT iterator)$/;"	f
 FreeNodeFn	.\set.c	/^static void FreeNodeFn(void *np, void *clientData)$/;"	f	file:
 FreeQueue	.\queue.c	/^void FreeQueue(queueADT queue){$/;"	f
 FreeQueue	.\queuelist.c	/^void FreeQueue(queueADT queue){$/;"	f
@@ -143,6 +149,8 @@ GetFontDescent	.\graphics.c	/^double GetFontDescent(void)$/;"	f
 GetFontHeight	.\graphics.c	/^double GetFontHeight(void)$/;"	f
 GetFullScreenHeight	.\graphics.c	/^double GetFullScreenHeight(void)$/;"	f
 GetFullScreenWidth	.\graphics.c	/^double GetFullScreenWidth(void)$/;"	f
+GetHeight	.\avl.c	/^static int GetHeight(avlADT avl, treeT t)$/;"	f	file:
+GetHeight	.\blt.c	/^static ssize_t GetHeight(bstADT bst, treeT t)$/;"	f	file:
 GetHeightCmd	.\xmanager.h	/^   GetHeightCmd,$/;"	e	enum:__anon14
 GetInteger	.\simpio.c	/^int GetInteger(void)$/;"	f
 GetLine	.\simpio.c	/^string GetLine(void)$/;"	f
@@ -170,8 +178,11 @@ GetYResolution	.\graphics.c	/^double GetYResolution(void)$/;"	f
 HandlerExists	.\exception.c	/^bool HandlerExists(exception *e)$/;"	f
 HasColor	.\graphics.c	/^bool HasColor(void)$/;"	f
 Hash	.\symtab.c	/^static int Hash(string s, int nBuckets)$/;"	f	file:
-IgnoreSpaces	.\scanadt.h	/^typedef enum {PreserveSpaces, IgnoreSpaces} spaceOptionT;$/;"	e	enum:__anon3
-InOrder	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	e	enum:__anon1
+IgnoreSpaces	.\scanadt.h	/^typedef enum {PreserveSpaces, IgnoreSpaces} spaceOptionT;$/;"	e	enum:__anon9
+InOrder	.\avl.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	e	enum:__anon15
+InOrder	.\blt.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	e	enum:__anon17
+InOrder	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	e	enum:__anon2
+InOrder	.\rbt.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	e	enum:__anon19
 InchesX	.\xdisplay.c	/^static double InchesX(int x)$/;"	f	file:
 InchesY	.\xdisplay.c	/^static double InchesY(int y)$/;"	f	file:
 InitCheck	.\graphics.c	/^static void InitCheck(void)$/;"	f	file:
@@ -183,13 +194,59 @@ InitGraphicsState	.\graphics.c	/^static void InitGraphicsState(void)$/;"	f	file:
 InitSetNodeFn	.\set.c	/^static void InitSetNodeFn(void *np, void *kp, void *clientData)$/;"	f	file:
 InitialBufferSize	.\simpio.c	22;"	d	file:
 InitialStackSize	.\stack.c	9;"	d	file:
-InsertBSTNode	.\bst.c	/^int InsertBSTNode(bstADT bst, void *kp, void *clientData)$/;"	f
-InsertBSTNode	.\bst_save.c	/^int InsertBSTNode(bstADT bst, void *kp, void *clientData)$/;"	f
+InsertAVLNode	.\avl.c	/^int InsertAVLNode(avlADT avl, void *kp, void *clientData)$/;"	f
+InsertBSTNode	.\blt.c	/^int InsertBSTNode(bstADT bst, void *kp, void *clientData)$/;"	f
+InsertBSTNode	.\bst.c	/^void *InsertBSTNode(bstADT bst, void *kp, void *clientData)$/;"	f
 InsertKey	.\iterator1.c	/^static void InsertKey(string key, void *value, void *clientData)$/;"	f	file:
+InsertRBTNode	.\rbt.c	/^void *InsertRBTNode(rbtADT rbt, void *kp, void *clientData)$/;"	f
 InstallFont	.\graphics.c	/^static void InstallFont(void)$/;"	f	file:
 IntCmpFn	.\cmpfn.c	/^int IntCmpFn(const void *p1, const void *p2)$/;"	f
 IntExchFn	.\cmpfn.c	/^void IntExchFn(void *p1, void *p2)$/;"	f
-IntSet	.\set.h	/^typedef enum { IntSet, PtrSet } setClassT;$/;"	e	enum:__anon12
+IntNodeInit	.\test\avl\AVLTest.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\avl\randomtestAVL.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\delAVLTest.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height2\L_l=-1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height2\L_l=0.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height2\L_l=1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height2\R_r=-1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height2\R_r=0.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height2\R_r=1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==-1\L_l=-1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==-1\L_l=0.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==-1\L_l=1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==0\1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==0\2.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==0\3.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==0\4.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==0\5.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==0\6.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==0\7.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==0\8.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==0\9.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==1\L_r=-1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==1\L_r=0.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\L==1\L_r=1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==-1\R_l=-1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==-1\R_l=0.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==-1\R_l=1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==0\1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==0\2.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==0\3.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==0\4.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==0\5.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==0\6.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==0\7.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==0\8.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==0\9.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==1\R_r=-1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==1\R_r=0.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height3\R==1\R_r=1.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height4\L=0_7.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height4\L=0_9.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\height4\R=0_3.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\randomtestAVL.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntNodeInit	.\test\blt\randomtestAVL_Left.c	/^void IntNodeInit(void *np, void *kp, void *clientData)$/;"	f
+IntSet	.\set.h	/^typedef enum { IntSet, PtrSet } setClassT;$/;"	e	enum:__anon11
 IntegerToString	.\strlib.c	/^string IntegerToString(int n)$/;"	f
 Intersection	.\set.c	/^setADT Intersection(setADT s1, setADT s2)$/;"	f
 IsIntElement	.\set.c	/^bool IsIntElement(setADT set, int element)$/;"	f
@@ -198,16 +255,21 @@ IsSubset	.\set.c	/^bool IsSubset(setADT s1, setADT s2)$/;"	f
 Italic	.\extgraph.h	150;"	d
 IteratorPassword	.\iterator2.c	23;"	d	file:
 IthChar	.\strlib.c	/^char IthChar(string s, int i)$/;"	f
+LeftRightRotate	.\avl.c	/^static void LeftRightRotate(avlADT avl, treeT *tptr) {$/;"	f	file:
 LineCmd	.\xmanager.h	/^   LineCmd,$/;"	e	enum:__anon14
 LineMessage	.\xmanager.c	/^static void LineMessage(string args)$/;"	f	file:
 LongCmpFn	.\cmpfn.c	/^int LongCmpFn(const void *p1, const void *p2)$/;"	f
 LongExchFn	.\cmpfn.c	/^void LongExchFn(void *p1, void *p2)$/;"	f
 LonglongCmpFn	.\cmpfn.c	/^int LonglongCmpFn(const void *p1, const void *p2)$/;"	f
 Lookup	.\symtab.c	/^void *Lookup(symtabADT table, string key)$/;"	f
+MAXSTRING	.\set.h	26;"	d
 MainEventLoop	.\xmanager.c	/^static void MainEventLoop(void)$/;"	f	file:
-MapBST	.\bst.c	/^void MapBST(nodeFnT fn, bstADT bst, OrderT order, void *clientData)$/;"	f
-MapBST	.\bst_save.c	/^void MapBST(nodeFnT fn, bstADT bst, OrderT order, void *clientData)$/;"	f
+MapAVL	.\avl.c	/^void MapAVL(nodeFnT fn, avlADT avl, traversalOrderT order, void *clientData)$/;"	f
+MapBST	.\blt.c	/^void MapBST(nodeFnT fn, bstADT bst, OrderT order, void *clientData)$/;"	f
+MapBST	.\bst.c	/^void MapBST(nodeFnT fn, bstADT bst, traversalOrderT order,$/;"	f
 MapSymbolTable	.\symtab.c	/^void MapSymbolTable(symtabFnT fn, symtabADT table, void *clientData)$/;"	f
+Max	.\avl.c	47;"	d	file:
+Max	.\blt.c	41;"	d	file:
 MaxColors	.\graphics.c	47;"	d	file:
 MaxDigits	.\strlib.c	34;"	d	file:
 MaxExceptionsPerScope	.\exception.h	151;"	d
@@ -225,16 +287,18 @@ NBuckets	.\symtab.c	17;"	d	file:
 NElements	.\set.c	/^int NElements(setADT set)$/;"	f
 NGrays	.\xdisplay.c	80;"	d	file:
 New	.\genlib.h	153;"	d
+NewAVL	.\avl.c	/^avlADT NewAVL(int size, cmpFnT cmpFn, nodeInitFnT nodeInitFn)$/;"	f
 NewArray	.\genlib.h	163;"	d
+NewBST	.\blt.c	/^bstADT NewBST(int size, cmpFnT cmpFn, nodeInitFnT nodeInitFn)$/;"	f
 NewBST	.\bst.c	/^bstADT NewBST(int size, cmpFnT cmpFn, nodeInitFnT nodeInitFn)$/;"	f
-NewBST	.\bst_save.c	/^bstADT NewBST(int size, cmpFnT cmpFn, nodeInitFnT nodeInitFn)$/;"	f
 NewIntSet	.\set.c	/^setADT NewIntSet(void)$/;"	f
-NewIterator	.\iterator1.c	/^iteratorADT NewIterator(symtabADT table)$/;"	f
 NewIterator	.\iterator2.c	/^iteratorADT NewIterator(void *collection)$/;"	f
 NewIteratorList	.\iterator2.c	/^iteratorADT NewIteratorList(int size, cmpFnT cmpFn)$/;"	f
-NewPtrSet	.\set.c	/^setADT NewPtrSet(cmpFnT cmpFn)$/;"	f
+NewIterator_1	.\iterator1.c	/^iteratorADT NewIterator_1(symtabADT table)$/;"	f
+NewPtrSet	.\set.c	/^setADT NewPtrSet(int size, cmpFnT cmpFn)$/;"	f
 NewQueue	.\queue.c	/^queueADT NewQueue(void){$/;"	f
 NewQueue	.\queuelist.c	/^queueADT NewQueue(void){$/;"	f
+NewRBT	.\rbt.c	/^rbtADT NewRBT(int size, cmpFnT cmpFn, nodeInitFnT nodeInitFn)$/;"	f
 NewRefBool	.\ref.c	/^void *NewRefBool(bool value)$/;"	f
 NewRefChar	.\ref.c	/^void *NewRefChar(char value)$/;"	f
 NewRefDouble	.\ref.c	/^void *NewRefDouble(double value)$/;"	f
@@ -246,30 +310,36 @@ NewRefUnsignedChar	.\ref.c	/^void *NewRefUnsignedChar(unsigned char value)$/;"	f
 NewRefUnsignedLong	.\ref.c	/^void *NewRefUnsignedLong(unsigned long value)$/;"	f
 NewRefUnsignedShort	.\ref.c	/^void *NewRefUnsignedShort(unsigned short value)$/;"	f
 NewScanner	.\scanadt.c	/^scannerADT NewScanner(void)$/;"	f
-NewSet	.\set.c	/^static setADT NewSet(setClassT class, cmpFnT cmpFn)$/;"	f	file:
+NewSet	.\set.c	/^static setADT NewSet(int size, setClassT class, cmpFnT cmpFn)$/;"	f	file:
 NewSetIterator	.\set.c	/^static iteratorADT NewSetIterator(void *collection)$/;"	f	file:
 NewStack	.\stack.c	/^stackADT NewStack(void)$/;"	f
 NewStack	.\stacklist.c	/^stackADT NewStack(void)$/;"	f
 NewSymbolTable	.\symtab.c	/^symtabADT NewSymbolTable(void)$/;"	f
 NewSymtabIterator	.\symtab.c	/^static iteratorADT NewSymtabIterator(void *collection)$/;"	f	file:
-NoRegion	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon8	file:
+NoRegion	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon6	file:
 Normal	.\extgraph.h	148;"	d
-NotWaiting	.\xdisplay.c	/^    NotWaiting,$/;"	e	enum:__anon2	file:
-OrderT	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	t	typeref:enum:__anon1
+NotWaiting	.\xdisplay.c	/^    NotWaiting,$/;"	e	enum:__anon13	file:
+OrderT	.\blt.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	t	typeref:enum:__anon17
 PStartSize	.\xdisplay.c	51;"	d	file:
 Pause	.\graphics.c	/^void Pause(double seconds)$/;"	f
-PenHasMoved	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon8	file:
+PenHasMoved	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon6	file:
 Pi	.\glibrary.c	16;"	d	file:
 PixelsX	.\xdisplay.c	/^static int PixelsX(double x)$/;"	f	file:
 PixelsY	.\xdisplay.c	/^static int PixelsY(double y)$/;"	f	file:
 Pop	.\stack.c	/^stackElementT Pop(stackADT stack)$/;"	f
 Pop	.\stacklist.c	/^stackElementT Pop(stackADT stack)$/;"	f
-PostOrder	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	e	enum:__anon1
-PreOrder	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	e	enum:__anon1
-PreserveSpaces	.\scanadt.h	/^typedef enum {PreserveSpaces, IgnoreSpaces} spaceOptionT;$/;"	e	enum:__anon3
+PostOrder	.\avl.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	e	enum:__anon15
+PostOrder	.\blt.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	e	enum:__anon17
+PostOrder	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	e	enum:__anon2
+PostOrder	.\rbt.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	e	enum:__anon19
+PreOrder	.\avl.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	e	enum:__anon15
+PreOrder	.\blt.h	/^typedef enum { InOrder, PreOrder, PostOrder } OrderT;$/;"	e	enum:__anon17
+PreOrder	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	e	enum:__anon2
+PreOrder	.\rbt.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	e	enum:__anon19
+PreserveSpaces	.\scanadt.h	/^typedef enum {PreserveSpaces, IgnoreSpaces} spaceOptionT;$/;"	e	enum:__anon9
 ProcessMessage	.\xmanager.c	/^static void ProcessMessage(void)$/;"	f	file:
 ProtectVariable	.\gcalloc.h	35;"	d
-PtrSet	.\set.h	/^typedef enum { IntSet, PtrSet } setClassT;$/;"	e	enum:__anon12
+PtrSet	.\set.h	/^typedef enum { IntSet, PtrSet } setClassT;$/;"	e	enum:__anon11
 Push	.\stack.c	/^void Push(stackADT stack, stackElementT element)$/;"	f
 Push	.\stacklist.c	/^void Push(stackADT stack, stackElementT element)$/;"	f
 QueueArraySize	.\queue.c	19;"	d	file:
@@ -279,8 +349,6 @@ QueueIsFull	.\queue.c	/^bool QueueIsFull(queueADT queue){$/;"	f
 QueueIsFull	.\queuelist.c	/^bool QueueIsFull(queueADT queue){$/;"	f
 QueueLength	.\queue.c	/^int QueueLength (queueADT queue){$/;"	f
 QueueLength	.\queuelist.c	/^int QueueLength(queueADT queue)$/;"	f
-R	.\bst.c	/^    int R;$/;"	m	struct:deleteE	file:
-R	.\bst_save.c	/^  int R;$/;"	m	struct:deleteE	file:
 RAND_MAX	.\random.h	26;"	d
 RaiseException	.\exception.c	/^void RaiseException(exception *e, string name, void *value)$/;"	f
 RandomChance	.\random.c	/^bool RandomChance(double p)$/;"	f
@@ -291,14 +359,19 @@ ReadLine	.\simpio.c	/^string ReadLine(FILE *infile)$/;"	f
 ReadMessage	.\xmanager.c	/^static bool ReadMessage(void)$/;"	f	file:
 ReadToken	.\scanadt.c	/^string ReadToken(scannerADT scanner)$/;"	f
 RealToString	.\strlib.c	/^string RealToString(double d)$/;"	f
-RecDeleteNode	.\bst.c	/^static deleteT RecDeleteNode(bstADT bst, treeT *tptr, void *kp, deleteT delta)$/;"	f	file:
-RecDeleteNode	.\bst_save.c	/^static deleteT RecDeleteNode(bstADT bst, treeT *tptr, void *kp, deleteT delta)$/;"	f	file:
-RecFindNode	.\bst.c	/^static treeT RecFindNode(bstADT bst, treeT t, void *kp)$/;"	f	file:
-RecFindNode	.\bst_save.c	/^static treeT RecFindNode(bstADT bst, treeT t, void *kp)$/;"	f	file:
-RecInsertNode	.\bst.c	/^static int RecInsertNode(bstADT bst, treeT *tptr, void *kp, void *clientData)$/;"	f	file:
-RecInsertNode	.\bst_save.c	/^static int RecInsertNode(bstADT bst, treeT *tptr, void *kp, void *clientData)$/;"	f	file:
-RecMapBST	.\bst.c	/^static void RecMapBST(nodeFnT fn, bstADT bst, treeT t, OrderT order, void *clientData)$/;"	f	file:
-RecMapBST	.\bst_save.c	/^static void RecMapBST(nodeFnT fn, bstADT bst, treeT t,$/;"	f	file:
+RecDeleteNode	.\avl.c	/^static void *RecDeleteNode(avlADT avl, treeT *tptr, void *kp)$/;"	f	file:
+RecDeleteNode	.\blt.c	/^static void *RecDeleteNode(bstADT bst, treeT *tptr, void *kp)$/;"	f	file:
+RecDeleteNode	.\bst.c	/^static void *RecDeleteNode(bstADT bst, treeT *tptr, void *kp)$/;"	f	file:
+RecFindNode	.\avl.c	/^static treeT RecFindNode(avlADT avl, treeT t, void *kp)$/;"	f	file:
+RecFindNode	.\blt.c	/^static treeT RecFindNode(bstADT bst, treeT t, void *kp)$/;"	f	file:
+RecFindNode	.\bst.c	/^static treeT *RecFindNode(bstADT bst, treeT t, void *kp)$/;"	f	file:
+RecInsertNode	.\avl.c	/^static int RecInsertNode(avlADT avl, treeT *tptr, void *kp, void *clientData)$/;"	f	file:
+RecInsertNode	.\blt.c	/^static int RecInsertNode(bstADT bst, treeT *tptr, void *kp, void *clientData)$/;"	f	file:
+RecInsertNode	.\bst.c	/^static void *RecInsertNode(bstADT bst, treeT *tptr, void *kp,$/;"	f	file:
+RecInsertNode	.\rbt.c	/^static void *RecInsertNode(rbtADT rbt, treeT *tptr, void *kp,$/;"	f	file:
+RecMapAVL	.\avl.c	/^static void RecMapAVL(nodeFnT fn, avlADT avl, treeT t, traversalOrderT order, void *clientData)$/;"	f	file:
+RecMapBST	.\blt.c	/^static void RecMapBST(nodeFnT fn, bstADT bst, treeT t, OrderT order, void *clientData)$/;"	f	file:
+RecMapBST	.\bst.c	/^static void RecMapBST(nodeFnT fn, bstADT bst, treeT t,$/;"	f	file:
 RedrawWindow	.\xdisplay.c	/^static void RedrawWindow(void)$/;"	f	file:
 RefToBool	.\ref.c	/^bool RefToBool(void *ref) $/;"	f
 RefToChar	.\ref.c	/^char RefToChar(void *ref)$/;"	f
@@ -311,15 +384,16 @@ RefToUnsigned	.\ref.c	/^unsigned RefToUnsigned(void *ref)$/;"	f
 RefToUnsignedChar	.\ref.c	/^unsigned char RefToUnsignedChar(void *ref)$/;"	f
 RefToUnsignedLong	.\ref.c	/^unsigned long RefToUnsignedLong(void *ref)$/;"	f
 RefToUnsignedShort	.\ref.c	/^unsigned short RefToUnsignedShort(void *ref)$/;"	f
-RegionActive	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon8	file:
-RegionStarting	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon8	file:
+RegionActive	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon6	file:
+RegionStarting	.\graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anon6	file:
 RenderArc	.\xdisplay.c	/^static void RenderArc(double x, double y, double rx, double ry,$/;"	f	file:
 RequiredMargin	.\xdisplay.c	48;"	d	file:
 RestoreGraphicsState	.\graphics.c	/^void RestoreGraphicsState(void)$/;"	f
-RotateLeft	.\bst.c	/^static void RotateLeft(bstADT bst, treeT *tptr)$/;"	f	file:
-RotateLeft	.\bst_save.c	/^static void RotateLeft(bstADT bst, treeT *tptr)$/;"	f	file:
-RotateRight	.\bst.c	/^static void RotateRight(bstADT bst, treeT *tptr)$/;"	f	file:
-RotateRight	.\bst_save.c	/^static void RotateRight(bstADT bst, treeT *tptr)$/;"	f	file:
+RightLeftRotate	.\avl.c	/^static void RightLeftRotate(avlADT avl, treeT *tptr) {$/;"	f	file:
+RotateLeft	.\avl.c	/^static void RotateLeft(avlADT avl, treeT *tptr)$/;"	f	file:
+RotateLeft	.\blt.c	/^static void RotateLeft(bstADT bst, treeT *tptr)$/;"	f	file:
+RotateRight	.\avl.c	/^static void RotateRight(avlADT avl, treeT *tptr)$/;"	f	file:
+RotateRight	.\blt.c	/^static void RotateRight(bstADT bst, treeT *tptr)$/;"	f	file:
 SaveGraphicsState	.\graphics.c	/^void SaveGraphicsState(void)$/;"	f
 SaveToken	.\scanadt.c	/^void SaveToken(scannerADT scanner, string token)$/;"	f
 ScaleX	.\xdisplay.c	/^static int ScaleX(double x)$/;"	f	file:
@@ -363,8 +437,8 @@ StartRegionCmd	.\xmanager.h	/^   StartRegionCmd,$/;"	e	enum:__anon14
 StartRegionMessage	.\xmanager.c	/^static void StartRegionMessage(string args)$/;"	f	file:
 StartToOpenDisplay	.\xdisplay.c	/^static void StartToOpenDisplay(void)$/;"	f	file:
 StepForEach	.\foreach.c	/^bool StepForEach(void *ep)$/;"	f
-StepIterator	.\iterator1.c	/^bool StepIterator(iteratorADT iterator, string *pKey)$/;"	f
 StepIterator	.\iterator2.c	/^bool StepIterator(iteratorADT iterator, void *ep)$/;"	f
+StepIterator_1	.\iterator1.c	/^bool StepIterator_1(iteratorADT iterator, string *pKey)$/;"	f
 Str	.\cmpfn.h	/^struct Str{$/;"	s
 StringBox	.\cmpfn.h	/^typedef struct Str *StringBox;$/;"	t	typeref:struct:Str
 StringCmpFn	.\cmpfn.c	/^int StringCmpFn(const void *p1, const void *p2)$/;"	f
@@ -377,7 +451,7 @@ StringMatch	.\graphics.c	/^static bool StringMatch(string s1, string s2)$/;"	f	f
 StringToInteger	.\strlib.c	/^int StringToInteger(string s)$/;"	f
 StringToReal	.\strlib.c	/^double StringToReal(string s)$/;"	f
 SubString	.\strlib.c	/^string SubString(string s, int p1, int p2)$/;"	f
-TRUE	.\genlib.h	/^       typedef enum {FALSE, TRUE} bool;$/;"	e	enum:__anon15
+TRUE	.\genlib.h	/^        typedef enum {FALSE, TRUE} bool;$/;"	e	enum:__anon5
 TRUE	.\genlib.h	59;"	d
 TestERef	.\set.c	/^static bool TestERef(setADT set, void *ep)$/;"	f	file:
 TextCmd	.\xmanager.h	/^   TextCmd,$/;"	e	enum:__anon14
@@ -401,8 +475,8 @@ WaitForMouseCmd	.\xmanager.h	/^   WaitForMouseCmd,$/;"	e	enum:__anon14
 WaitForMouseDown	.\graphics.c	/^void WaitForMouseDown(void)$/;"	f
 WaitForMouseMessage	.\xmanager.c	/^static void WaitForMouseMessage(string args)$/;"	f	file:
 WaitForMouseUp	.\graphics.c	/^void WaitForMouseUp(void)$/;"	f
-WaitingForMouseDown	.\xdisplay.c	/^    WaitingForMouseDown,$/;"	e	enum:__anon2	file:
-WaitingForMouseUp	.\xdisplay.c	/^    WaitingForMouseUp$/;"	e	enum:__anon2	file:
+WaitingForMouseDown	.\xdisplay.c	/^    WaitingForMouseDown,$/;"	e	enum:__anon13	file:
+WaitingForMouseUp	.\xdisplay.c	/^    WaitingForMouseUp$/;"	e	enum:__anon13	file:
 WidthCmd	.\xmanager.h	/^   WidthCmd,$/;"	e	enum:__anon14
 WidthMessage	.\xmanager.c	/^static void WidthMessage(string args)$/;"	f	file:
 XDCheckForRedraw	.\xdisplay.c	/^void XDCheckForRedraw(void)$/;"	f
@@ -432,7 +506,9 @@ XMGetResponse	.\xmanager.c	/^void XMGetResponse(char buffer[])$/;"	f
 XMInitialize	.\xmanager.c	/^void XMInitialize(string title)$/;"	f
 XMReleaseClient	.\xmanager.c	/^void XMReleaseClient(void)$/;"	f
 XMSendCommand	.\xmanager.c	/^void XMSendCommand(commandT cmd, string args)$/;"	f
-_GCControlBlock	.\gcalloc.h	/^} *_GCControlBlock;$/;"	t	typeref:struct:__anon11
+_GCControlBlock	.\gcalloc.h	/^} *_GCControlBlock;$/;"	t	typeref:struct:__anon4
+_avl_h	.\avl.h	10;"	d
+_blt_h	.\blt.h	10;"	d
 _bst_h	.\bst.h	10;"	d
 _cmpfn_h	.\cmpfn.h	9;"	d
 _exception_h	.\exception.h	12;"	d
@@ -449,6 +525,7 @@ _itertype_h	.\itertype.h	10;"	d
 _queue_h	.\queue.h	11;"	d
 _queuelist_h	.\queuelist.h	11;"	d
 _random_h	.\random.h	11;"	d
+_rbt_h	.\rbt.h	10;"	d
 _ref_h	.\ref.h	8;"	d
 _scanadt_h	.\scanadt.h	13;"	d
 _set_h	.\set.h	21;"	d
@@ -460,29 +537,38 @@ _symtab_h	.\symtab.h	8;"	d
 _xcompat_h	.\xcompat.h	26;"	d
 _xdisplay_h	.\xdisplay.h	18;"	d
 _xmanager_h	.\xmanager.h	12;"	d
-allocMethod	.\gcalloc.h	/^    void *(*allocMethod)(size_t nbytes);$/;"	m	struct:__anon11
+allocMethod	.\gcalloc.h	/^    void *(*allocMethod)(size_t nbytes);$/;"	m	struct:__anon4
 argC	.\xdisplay.c	/^static int argC = sizeof argV \/ sizeof argV[0];$/;"	v	file:
 argV	.\xdisplay.c	/^static string argV[] = { "xdisplay" };$/;"	v	file:
 array	.\exception.h	/^    exception *array[MaxExceptionsPerScope];$/;"	m	struct:ctx_block
-bf	.\bst.c	/^    int bf;$/;"	m	struct:__anon7	file:
-bf	.\bst_save.c	/^  int bf;$/;"	m	struct:__anon5	file:
-blue	.\graphics.c	/^    double red, green, blue;$/;"	m	struct:__anon9	file:
-bool	.\genlib.h	/^       typedef enum {FALSE, TRUE} bool;$/;"	t	typeref:enum:__anon15
-bool	.\genlib.h	/^   typedef int bool;$/;"	t
+avlADT	.\avl.h	/^typedef struct avlCDT *avlADT;$/;"	t	typeref:struct:avlCDT
+avlCDT	.\avl.c	/^struct avlCDT {$/;"	s	file:
+avlDataT	.\avl.c	/^} avlDataT;$/;"	t	typeref:struct:__anon16	file:
+avl_delete	.\test\avl\avl\avl.c	/^struct avl_node* avl_delete(struct avl_node* root, void* val,$/;"	f
+avl_insert	.\test\avl\avl\avl.c	/^struct avl_node* avl_insert(struct avl_node* root, void* val,$/;"	f
+avl_node	.\test\avl\avl\avl.h	/^struct avl_node$/;"	s
+avl_node_count	.\test\avl\avl\avl.c	/^size_t avl_node_count(struct avl_node* root)$/;"	f
+avl_search	.\test\avl\avl\avl.c	/^struct avl_node* avl_search(struct avl_node* root, void* val,$/;"	f
+bf	.\blt.c	/^    int bf;$/;"	m	struct:__anon18	file:
+black	.\rbt.c	/^typedef enum { black, red } colorT;$/;"	e	enum:__anon20	file:
+blue	.\graphics.c	/^    double red, green, blue;$/;"	m	struct:__anon7	file:
+bool	.\genlib.h	/^        typedef enum {FALSE, TRUE} bool;$/;"	t	typeref:enum:__anon5
+bool	.\genlib.h	/^    typedef int bool;$/;"	t
 bool	.\genlib.h	54;"	d
-bst	.\set.c	/^	bstADT bst;$/;"	m	struct:setCDT	file:
+bst	.\set.c	/^    bstADT bst;$/;"	m	struct:setCDT	file:
+bstADT	.\blt.h	/^typedef struct bstCDT *bstADT;$/;"	t	typeref:struct:bstCDT
 bstADT	.\bst.h	/^typedef struct bstCDT *bstADT;$/;"	t	typeref:struct:bstCDT
+bstCDT	.\blt.c	/^struct bstCDT {$/;"	s	file:
 bstCDT	.\bst.c	/^struct bstCDT {$/;"	s	file:
-bstCDT	.\bst_save.c	/^struct bstCDT {$/;"	s	file:
-bstDataT	.\bst.c	/^} bstDataT;$/;"	t	typeref:struct:__anon7	file:
-bstDataT	.\bst_save.c	/^} bstDataT;$/;"	t	typeref:struct:__anon5	file:
+bstDataT	.\blt.c	/^} bstDataT;$/;"	t	typeref:struct:__anon18	file:
+bstDataT	.\bst.c	/^} bstDataT;$/;"	t	typeref:struct:__anon1	file:
 buckets	.\symtab.c	/^  cellT *buckets[NBuckets];$/;"	m	struct:symtabCDT	file:
 cellT	.\foreach.c	/^typedef struct cellT {$/;"	s	file:
 cellT	.\foreach.c	/^} cellT;$/;"	t	typeref:struct:cellT	file:
 cellT	.\iterator1.c	/^typedef struct cellT{$/;"	s	file:
 cellT	.\iterator1.c	/^} cellT;$/;"	t	typeref:struct:cellT	file:
-cellT	.\iterator2.c	/^typedef struct cellT{$/;"	s	file:
-cellT	.\iterator2.c	/^}cellT;$/;"	t	typeref:struct:cellT	file:
+cellT	.\iterator2.c	/^typedef struct cellT {$/;"	s	file:
+cellT	.\iterator2.c	/^} cellT;$/;"	t	typeref:struct:cellT	file:
 cellT	.\queuelist.c	/^typedef struct cellT{$/;"	s	file:
 cellT	.\queuelist.c	/^} cellT;$/;"	t	typeref:struct:cellT	file:
 cellT	.\stacklist.c	/^typedef struct cellT{$/;"	s	file:
@@ -490,17 +576,21 @@ cellT	.\stacklist.c	/^} cellT; $/;"	t	typeref:struct:cellT	file:
 cellT	.\symtab.c	/^typedef struct cellT{$/;"	s	file:
 cellT	.\symtab.c	/^}cellT;$/;"	t	typeref:struct:cellT	file:
 child	.\xmanager.c	/^static pid_t child;$/;"	v	file:
-class	.\set.c	/^	setClassT class;$/;"	m	struct:setCDT	file:
+class	.\set.c	/^    setClassT class;$/;"	m	struct:setCDT	file:
 cmdBuffer	.\graphics.c	/^static char cmdBuffer[CommandBufferSize];$/;"	v	file:
 cmdBuffer	.\xmanager.c	/^static char cmdBuffer[CommandBufferSize];$/;"	v	file:
+cmpFn	.\avl.c	/^    cmpFnT cmpFn;$/;"	m	struct:avlCDT	file:
+cmpFn	.\blt.c	/^    cmpFnT cmpFn;$/;"	m	struct:bstCDT	file:
 cmpFn	.\bst.c	/^    cmpFnT cmpFn;$/;"	m	struct:bstCDT	file:
-cmpFn	.\bst_save.c	/^  cmpFnT cmpFn;$/;"	m	struct:bstCDT	file:
 cmpFn	.\iterator2.c	/^	cmpFnT cmpFn;$/;"	m	struct:iteratorCDT	file:
-cmpFn	.\set.c	/^	cmpFnT cmpFn;$/;"	m	struct:setCDT	file:
+cmpFn	.\rbt.c	/^    cmpFnT cmpFn;$/;"	m	struct:rbtCDT	file:
+cmpFn	.\set.c	/^    cmpFnT cmpFn;$/;"	m	struct:setCDT	file:
 cmpFnT	.\cmpfn.h	/^typedef int (*cmpFnT) (const void *p1, const void *p2);$/;"	t
 color	.\graphics.c	/^    int color;$/;"	m	struct:graphicsStateT	file:
-colorEntryT	.\graphics.c	/^} colorEntryT;$/;"	t	typeref:struct:__anon9	file:
+color	.\rbt.c	/^    colorT color;$/;"	m	struct:__anon21	file:
+colorEntryT	.\graphics.c	/^} colorEntryT;$/;"	t	typeref:struct:__anon7	file:
 colorOK	.\graphics.c	/^static bool colorOK;$/;"	v	file:
+colorT	.\rbt.c	/^typedef enum { black, red } colorT;$/;"	t	typeref:enum:__anon20	file:
 colorTable	.\graphics.c	/^static colorEntryT colorTable[MaxColors];$/;"	v	file:
 colormap	.\xdisplay.c	/^static Colormap colormap;$/;"	v	file:
 commandT	.\xmanager.h	/^} commandT;$/;"	t	typeref:enum:__anon14
@@ -515,15 +605,56 @@ cx	.\graphics.c	/^    double cx, cy;$/;"	m	struct:graphicsStateT	file:
 cx	.\graphics.c	/^static double cx, cy;$/;"	v	file:
 cy	.\graphics.c	/^    double cx, cy;$/;"	m	struct:graphicsStateT	file:
 cy	.\graphics.c	/^static double cx, cy;$/;"	v	file:
-deleteE	.\bst.c	/^struct deleteE {$/;"	s	file:
-deleteE	.\bst_save.c	/^struct deleteE{$/;"	s	file:
-deleteT	.\bst.h	/^typedef struct deleteE *deleteT;$/;"	t	typeref:struct:deleteE
+deleteT	.\blt.h	/^typedef struct deleteE *deleteT;$/;"	t	typeref:struct:deleteE
 disp	.\xdisplay.c	/^static Display *disp;$/;"	v	file:
+display	.\set.c	/^static void display(void *np, void *clientData)$/;"	f	file:
+display	.\test\avl\AVLTest.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\delAVLTest.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height2\L_l=-1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height2\L_l=0.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height2\L_l=1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height2\R_r=-1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height2\R_r=0.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height2\R_r=1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==-1\L_l=-1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==-1\L_l=0.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==-1\L_l=1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==0\1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==0\2.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==0\3.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==0\4.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==0\5.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==0\6.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==0\7.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==0\8.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==0\9.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==1\L_r=-1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==1\L_r=0.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\L==1\L_r=1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==-1\R_l=-1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==-1\R_l=0.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==-1\R_l=1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==0\1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==0\2.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==0\3.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==0\4.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==0\5.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==0\6.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==0\7.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==0\8.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==0\9.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==1\R_r=-1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==1\R_r=0.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height3\R==1\R_r=1.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height4\L=0_7.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height4\L=0_9.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\height4\R=0_3.c	/^void display(void *np, void *clientData)$/;"	f
+display	.\test\blt\randomtestAVL_Left.c	/^void display(void *np, void *clientData)$/;"	f
 displayIsOpen	.\xdisplay.c	/^static bool displayIsOpen = FALSE;$/;"	v	file:
 drawColor	.\xdisplay.c	/^static unsigned long drawColor, eraseColor;$/;"	v	file:
 drawGC	.\xdisplay.c	/^static GC mainGC, drawGC, eraseGC;$/;"	v	file:
 element	.\stacklist.c	/^  stackElementT element;$/;"	m	struct:cellT	file:
-elementSize	.\iterator2.c	/^	int elementSize; $/;"	m	struct:iteratorCDT	file:
+elementSize	.\iterator2.c	/^	int elementSize;$/;"	m	struct:iteratorCDT	file:
 elements	.\queue.c	/^	queueElementT elements[QueueArraySize];$/;"	m	struct:queueCDT	file:
 elements	.\stack.c	/^	stackElementT* elements;$/;"	m	struct:stackCDT	file:
 endtry	.\exception.h	249;"	d
@@ -534,101 +665,177 @@ eraseGC	.\xdisplay.c	/^static GC mainGC, drawGC, eraseGC;$/;"	v	file:
 eraseMode	.\graphics.c	/^static bool eraseMode;$/;"	v	file:
 eraseMode	.\xdisplay.c	/^static bool eraseMode;$/;"	v	file:
 except	.\exception.h	238;"	d
-exception	.\exception.h	/^typedef struct { string name; } exception;$/;"	t	typeref:struct:__anon4
+exception	.\exception.h	/^typedef struct { string name; } exception;$/;"	t	typeref:struct:__anon3
 exceptionStack	.\exception.c	/^context_block *exceptionStack = NULL;$/;"	v
 exchFnT	.\cmpfn.h	/^typedef void (*exchFnT) (void *p1, void *p2);$/;"	t
 exitGraphicsFlag	.\xmanager.c	/^static bool exitGraphicsFlag;$/;"	v	file:
-fdSetT	.\xcompat.h	/^} fdSetT;$/;"	t	typeref:struct:__anon10
+fdSetT	.\xcompat.h	/^} fdSetT;$/;"	t	typeref:struct:__anon12
 fd_set	.\xcompat.h	36;"	d
 fd_set	.\xcompat.h	42;"	d
-fds	.\xcompat.h	/^    char fds[FOPEN_MAX];$/;"	m	struct:__anon10
+fds	.\xcompat.h	/^    char fds[FOPEN_MAX];$/;"	m	struct:__anon12
 font	.\graphics.c	/^    string font;$/;"	m	struct:graphicsStateT	file:
 fontChanged	.\graphics.c	/^static bool fontChanged;$/;"	v	file:
 fontInfo	.\xdisplay.c	/^static XFontStruct *fontInfo;$/;"	v	file:
 foreach	.\foreach.h	28;"	d
-freeMethod	.\gcalloc.h	/^    void (*freeMethod)(void *ptr);$/;"	m	struct:__anon11
+freeMethod	.\gcalloc.h	/^    void (*freeMethod)(void *ptr);$/;"	m	struct:__anon4
+get_height	.\test\avl\avl\avl.c	11;"	d	file:
 graphicsStateT	.\graphics.c	/^typedef struct graphicsStateT {$/;"	s	file:
 graphicsStateT	.\graphics.c	/^} *graphicsStateT;$/;"	t	typeref:struct:graphicsStateT	file:
 grayGC	.\xdisplay.c	/^static GC grayGC[NGrays];$/;"	v	file:
 grayList	.\xdisplay.c	/^static char grayList[][8] = {$/;"	v	file:
 grayStipple	.\xdisplay.c	/^static Pixmap grayStipple[NGrays];$/;"	v	file:
-green	.\graphics.c	/^    double red, green, blue;$/;"	m	struct:__anon9	file:
+green	.\graphics.c	/^    double red, green, blue;$/;"	m	struct:__anon7	file:
 head	.\iterator2.c	/^	cellT *head, *tail;$/;"	m	struct:iteratorCDT	file:
 head	.\queue.c	/^	int head;$/;"	m	struct:queueCDT	file:
 head	.\queuelist.c	/^	cellT *head;$/;"	m	struct:queueCDT	file:
-header	.\set.c	/^	iteratorHeaderT header;$/;"	m	struct:setCDT	file:
+header	.\set.c	/^    iteratorHeaderT header;$/;"	m	struct:setCDT	file:
 header	.\symtab.c	/^  iteratorHeaderT header;$/;"	m	struct:symtabCDT	file:
+height	.\avl.c	/^    int height; \/\/ssize_t fail $/;"	m	struct:__anon16	file:
+height	.\blt.c	/^    ssize_t height;$/;"	m	struct:__anon18	file:
+height	.\test\avl\avl\avl.h	/^    ssize_t height;$/;"	m	struct:avl_node
 id	.\exception.h	/^    exception *id;$/;"	m	struct:ctx_block
 in	.\foreach.h	27;"	d
 inPipe	.\xmanager.c	/^static FILE *inPipe, *outPipe;$/;"	v	file:
 infd	.\xmanager.c	/^static int infd;$/;"	v	file:
 initialized	.\graphics.c	/^static bool initialized = FALSE;$/;"	v	file:
-intRep	.\set.c	/^	int intRep;$/;"	m	union:__anon6	file:
+intRep	.\set.c	/^    int intRep;$/;"	m	union:__anon10	file:
 iterator	.\foreach.c	/^    iteratorADT iterator;$/;"	m	struct:cellT	file:
 iteratorADT	.\iterator1.h	/^typedef struct iteratorCDT *iteratorADT;$/;"	t	typeref:struct:iteratorCDT
 iteratorADT	.\iterator2.h	/^typedef struct iteratorCDT *iteratorADT;$/;"	t	typeref:struct:iteratorCDT
 iteratorCDT	.\iterator1.c	/^struct iteratorCDT{$/;"	s	file:
-iteratorCDT	.\iterator2.c	/^struct iteratorCDT{$/;"	s	file:
-iteratorHeaderT	.\itertype.h	/^}iteratorHeaderT;$/;"	t	typeref:struct:__anon13
+iteratorCDT	.\iterator2.c	/^struct iteratorCDT {$/;"	s	file:
+iteratorElementT	.\iterator2.h	/^typedef void* iteratorElementT;$/;"	t
+iteratorHeaderT	.\itertype.h	/^}iteratorHeaderT;$/;"	t	typeref:struct:__anon8
 iteratorList	.\foreach.c	/^static cellT *iteratorList = NULL;$/;"	v	file:
 jmp	.\exception.h	/^    jmp_buf jmp;$/;"	m	struct:ctx_block
 key	.\iterator1.c	/^	string key;$/;"	m	struct:cellT	file:
 key	.\symtab.c	/^	string key;$/;"	m	struct:cellT	file:
 lastColor	.\graphics.c	/^static int lastColor;$/;"	v	file:
-left	.\bst.c	/^    treeT left, right;$/;"	m	struct:__anon7	file:
-left	.\bst_save.c	/^  treeT left, right;$/;"	m	struct:__anon5	file:
+left	.\avl.c	/^    treeT left, right;$/;"	m	struct:__anon16	file:
+left	.\blt.c	/^    treeT left, right;$/;"	m	struct:__anon18	file:
+left	.\bst.c	/^    treeT left, right;$/;"	m	struct:__anon1	file:
+left	.\rbt.c	/^    treeT left, right;$/;"	m	struct:__anon21	file:
+left	.\test\avl\avl\avl.h	/^    struct avl_node* left;$/;"	m	struct:avl_node	typeref:struct:avl_node::avl_node
 len	.\scanadt.c	/^	int len;$/;"	m	struct:scannerCDT	file:
 link	.\exception.h	/^    struct ctx_block *link;$/;"	m	struct:ctx_block	typeref:struct:ctx_block::ctx_block
 link	.\foreach.c	/^    struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
 link	.\graphics.c	/^    struct graphicsStateT *link;$/;"	m	struct:graphicsStateT	typeref:struct:graphicsStateT::graphicsStateT	file:
 link	.\iterator1.c	/^	struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
-link	.\iterator2.c	/^  struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
+link	.\iterator2.c	/^	struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
 link	.\queuelist.c	/^	struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
 link	.\stacklist.c	/^  struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
 link	.\symtab.c	/^	struct cellT *link;$/;"	m	struct:cellT	typeref:struct:cellT::cellT	file:
+ll_rotate	.\test\avl\avl\avl.c	/^static struct avl_node* ll_rotate(struct avl_node* k2)$/;"	f	file:
+lr_rotate	.\test\avl\avl\avl.c	/^static struct avl_node* lr_rotate(struct avl_node* k3)$/;"	f	file:
+main	.\b+t.c	/^int main() {$/;"	f
+main	.\test\avl\AVLTest.c	/^main()$/;"	f
+main	.\test\avl\randomtestAVL.c	/^main()$/;"	f
+main	.\test\blt\delAVLTest.c	/^main()$/;"	f
+main	.\test\blt\height2\L_l=-1.c	/^main()$/;"	f
+main	.\test\blt\height2\L_l=0.c	/^main()$/;"	f
+main	.\test\blt\height2\L_l=1.c	/^main()$/;"	f
+main	.\test\blt\height2\R_r=-1.c	/^main()$/;"	f
+main	.\test\blt\height2\R_r=0.c	/^main()$/;"	f
+main	.\test\blt\height2\R_r=1.c	/^main()$/;"	f
+main	.\test\blt\height3\L==-1\L_l=-1.c	/^main()$/;"	f
+main	.\test\blt\height3\L==-1\L_l=0.c	/^main()$/;"	f
+main	.\test\blt\height3\L==-1\L_l=1.c	/^main()$/;"	f
+main	.\test\blt\height3\L==0\1.c	/^main()$/;"	f
+main	.\test\blt\height3\L==0\2.c	/^main()$/;"	f
+main	.\test\blt\height3\L==0\3.c	/^main()$/;"	f
+main	.\test\blt\height3\L==0\4.c	/^main()$/;"	f
+main	.\test\blt\height3\L==0\5.c	/^main()$/;"	f
+main	.\test\blt\height3\L==0\6.c	/^main()$/;"	f
+main	.\test\blt\height3\L==0\7.c	/^main()$/;"	f
+main	.\test\blt\height3\L==0\8.c	/^main()$/;"	f
+main	.\test\blt\height3\L==0\9.c	/^main()$/;"	f
+main	.\test\blt\height3\L==1\L_r=-1.c	/^main()$/;"	f
+main	.\test\blt\height3\L==1\L_r=0.c	/^main()$/;"	f
+main	.\test\blt\height3\L==1\L_r=1.c	/^main()$/;"	f
+main	.\test\blt\height3\R==-1\R_l=-1.c	/^main()$/;"	f
+main	.\test\blt\height3\R==-1\R_l=0.c	/^main()$/;"	f
+main	.\test\blt\height3\R==-1\R_l=1.c	/^main()$/;"	f
+main	.\test\blt\height3\R==0\1.c	/^main()$/;"	f
+main	.\test\blt\height3\R==0\2.c	/^main()$/;"	f
+main	.\test\blt\height3\R==0\3.c	/^main()$/;"	f
+main	.\test\blt\height3\R==0\4.c	/^main()$/;"	f
+main	.\test\blt\height3\R==0\5.c	/^main()$/;"	f
+main	.\test\blt\height3\R==0\6.c	/^main()$/;"	f
+main	.\test\blt\height3\R==0\7.c	/^main()$/;"	f
+main	.\test\blt\height3\R==0\8.c	/^main()$/;"	f
+main	.\test\blt\height3\R==0\9.c	/^main()$/;"	f
+main	.\test\blt\height3\R==1\R_r=-1.c	/^main()$/;"	f
+main	.\test\blt\height3\R==1\R_r=0.c	/^main()$/;"	f
+main	.\test\blt\height3\R==1\R_r=1.c	/^main()$/;"	f
+main	.\test\blt\height4\L=0_7.c	/^main()$/;"	f
+main	.\test\blt\height4\L=0_9.c	/^main()$/;"	f
+main	.\test\blt\height4\R=0_3.c	/^main()$/;"	f
+main	.\test\blt\randomtestAVL.c	/^main()$/;"	f
+main	.\test\blt\randomtestAVL_Left.c	/^main()$/;"	f
+main	.\test\random\randomTest.c	/^int main() {$/;"	f
 mainGC	.\xdisplay.c	/^static GC mainGC, drawGC, eraseGC;$/;"	v	file:
 mainWindow	.\xdisplay.c	/^static Window mainWindow;$/;"	v	file:
+max	.\test\avl\avl\avl.c	13;"	d	file:
 nColors	.\graphics.c	/^static int nColors;$/;"	v	file:
-nElements	.\set.c	/^	int nElements;$/;"	m	struct:setCDT	file:
+nElements	.\set.c	/^    int nElements;$/;"	m	struct:setCDT	file:
 nPolygonPoints	.\xdisplay.c	/^static int nPolygonPoints;$/;"	v	file:
 name	.\exception.h	/^    string name;$/;"	m	struct:ctx_block
-name	.\exception.h	/^typedef struct { string name; } exception;$/;"	m	struct:__anon4
-name	.\graphics.c	/^    string name;$/;"	m	struct:__anon9	file:
-newFn	.\itertype.h	/^	newIteratorFnT newFn;$/;"	m	struct:__anon13
+name	.\exception.h	/^typedef struct { string name; } exception;$/;"	m	struct:__anon3
+name	.\graphics.c	/^    string name;$/;"	m	struct:__anon7	file:
+newFn	.\itertype.h	/^	newIteratorFnT newFn;$/;"	m	struct:__anon8
 newIteratorFnT	.\itertype.h	/^typedef iteratorADT (*newIteratorFnT) (void *collection);$/;"	t
-nodeFnT	.\bst.h	/^typedef void (*nodeFnT) (void *np, void *clientData);$/;"	t
+nodeFnT	.\avl.h	/^typedef void (*nodeFnT)(void *np, void *clientData);$/;"	t
+nodeFnT	.\blt.h	/^typedef void (*nodeFnT) (void *np, void *clientData);$/;"	t
+nodeFnT	.\bst.h	/^typedef void (*nodeFnT)(void *np, void *clientData);$/;"	t
+nodeFnT	.\rbt.h	/^typedef void (*nodeFnT)(void *np, void *clientData);$/;"	t
+nodeInitFn	.\avl.c	/^    nodeInitFnT nodeInitFn;$/;"	m	struct:avlCDT	file:
+nodeInitFn	.\blt.c	/^    nodeInitFnT nodeInitFn;$/;"	m	struct:bstCDT	file:
 nodeInitFn	.\bst.c	/^    nodeInitFnT nodeInitFn;$/;"	m	struct:bstCDT	file:
-nodeInitFn	.\bst_save.c	/^  nodeInitFnT nodeInitFn;$/;"	m	struct:bstCDT	file:
-nodeInitFnT	.\bst.h	/^typedef void (*nodeInitFnT) (void *np, void *kp, void *clientData);$/;"	t
+nodeInitFn	.\rbt.c	/^    nodeInitFnT nodeInitFn;$/;"	m	struct:rbtCDT	file:
+nodeInitFnT	.\avl.h	/^typedef void (*nodeInitFnT)(void *np, void *kp, void *clientData);$/;"	t
+nodeInitFnT	.\blt.h	/^typedef void (*nodeInitFnT) (void *np, void *kp, void *clientData);$/;"	t
+nodeInitFnT	.\bst.h	/^typedef void (*nodeInitFnT)(void *np, void *kp, void *clientData);$/;"	t
+nodeInitFnT	.\rbt.h	/^typedef void (*nodeInitFnT)(void *np, void *kp, void *clientData);$/;"	t
 nx	.\exception.h	/^    int nx;$/;"	m	struct:ctx_block
 osWindow	.\xdisplay.c	/^static Pixmap osWindow;$/;"	v	file:
 outPipe	.\xmanager.c	/^static FILE *inPipe, *outPipe;$/;"	v	file:
-password	.\itertype.h	/^	unsigned long password;$/;"	m	struct:__anon13
+password	.\itertype.h	/^	unsigned long password;$/;"	m	struct:__anon8
 penColor	.\graphics.c	/^static int penColor;$/;"	v	file:
 pixelDepth	.\xdisplay.c	/^static int pixelDepth;$/;"	v	file:
 pointSize	.\graphics.c	/^static int pointSize;$/;"	v	file:
 polygonPoints	.\xdisplay.c	/^static XPoint *polygonPoints;$/;"	v	file:
 polygonSize	.\xdisplay.c	/^static int polygonSize;$/;"	v	file:
-protectMethod	.\gcalloc.h	/^    void (*protectMethod)(void *ptr, size_t nbytes);$/;"	m	struct:__anon11
-ptrRep	.\set.c	/^	void *ptrRep;$/;"	m	union:__anon6	file:
+protectMethod	.\gcalloc.h	/^    void (*protectMethod)(void *ptr, size_t nbytes);$/;"	m	struct:__anon4
+ptrRep	.\set.c	/^    void *ptrRep;$/;"	m	union:__anon10	file:
 queueADT	.\queue.h	/^typedef struct queueCDT *queueADT;$/;"	t	typeref:struct:queueCDT
 queueADT	.\queuelist.h	/^typedef struct queueCDT *queueADT;$/;"	t	typeref:struct:queueCDT
 queueCDT	.\queue.c	/^struct queueCDT{$/;"	s	file:
 queueCDT	.\queuelist.c	/^struct queueCDT{$/;"	s	file:
 queueElementT	.\queue.h	/^typedef void *queueElementT;$/;"	t
-queueElementT	.\queuelist.h	/^typedef char queueElementT;$/;"	t
+queueElementT	.\queuelist.h	/^typedef void *queueElementT;$/;"	t
 raise	.\exception.h	222;"	d
-red	.\graphics.c	/^    double red, green, blue;$/;"	m	struct:__anon9	file:
+rbtADT	.\rbt.h	/^typedef struct rbtCDT *rbtADT;$/;"	t	typeref:struct:rbtCDT
+rbtCDT	.\rbt.c	/^struct rbtCDT {$/;"	s	file:
+rbtDataT	.\rbt.c	/^} rbtDataT;$/;"	t	typeref:struct:__anon21	file:
+red	.\graphics.c	/^    double red, green, blue;$/;"	m	struct:__anon7	file:
+red	.\rbt.c	/^typedef enum { black, red } colorT;$/;"	e	enum:__anon20	file:
 redraw	.\xdisplay.c	/^static bool redraw = FALSE;$/;"	v	file:
 regionGrayScale	.\xdisplay.c	/^static double regionGrayScale;$/;"	v	file:
 regionStarted	.\xdisplay.c	/^static bool regionStarted;$/;"	v	file:
 regionState	.\graphics.c	/^static regionStateT regionState;$/;"	v	file:
-regionStateT	.\graphics.c	/^} regionStateT;$/;"	t	typeref:enum:__anon8	file:
+regionStateT	.\graphics.c	/^} regionStateT;$/;"	t	typeref:enum:__anon6	file:
 repeat	.\genlib.h	204;"	d
-right	.\bst.c	/^    treeT left, right;$/;"	m	struct:__anon7	file:
-right	.\bst_save.c	/^  treeT left, right;$/;"	m	struct:__anon5	file:
+right	.\avl.c	/^    treeT left, right;$/;"	m	struct:__anon16	file:
+right	.\blt.c	/^    treeT left, right;$/;"	m	struct:__anon18	file:
+right	.\bst.c	/^    treeT left, right;$/;"	m	struct:__anon1	file:
+right	.\rbt.c	/^    treeT left, right;$/;"	m	struct:__anon21	file:
+right	.\test\avl\avl\avl.h	/^    struct avl_node* right;$/;"	m	struct:avl_node	typeref:struct:avl_node::avl_node
+rl_rotate	.\test\avl\avl\avl.c	/^static struct avl_node* rl_rotate(struct avl_node* k3)$/;"	f	file:
+root	.\avl.c	/^    treeT root;$/;"	m	struct:avlCDT	file:
+root	.\blt.c	/^    treeT root;$/;"	m	struct:bstCDT	file:
 root	.\bst.c	/^    treeT root;$/;"	m	struct:bstCDT	file:
-root	.\bst_save.c	/^  treeT root;$/;"	m	struct:bstCDT	file:
+root	.\rbt.c	/^    treeT root;$/;"	m	struct:rbtCDT	file:
+rr_rotate	.\test\avl\avl\avl.c	/^static struct avl_node* rr_rotate(struct avl_node* k2)$/;"	f	file:
 s	.\cmpfn.h	/^  string s;$/;"	m	struct:Str
 savedToken	.\scanadt.c	/^	string savedToken;$/;"	m	struct:scannerCDT	file:
 scannerADT	.\scanadt.h	/^typedef struct scannerCDT *scannerADT;$/;"	t	typeref:struct:scannerCDT
@@ -637,13 +844,14 @@ screenHeight	.\xdisplay.c	/^static double screenWidth, screenHeight;$/;"	v	file:
 screenWidth	.\xdisplay.c	/^static double screenWidth, screenHeight;$/;"	v	file:
 select	.\xcompat.h	52;"	d
 setADT	.\set.h	/^typedef struct setCDT *setADT;$/;"	t	typeref:struct:setCDT
-setCDT	.\set.c	/^struct setCDT{$/;"	s	file:
-setClassT	.\set.h	/^typedef enum { IntSet, PtrSet } setClassT;$/;"	t	typeref:enum:__anon12
-setElementT	.\set.c	/^}setElementT;$/;"	t	typeref:union:__anon6	file:
+setCDT	.\set.c	/^struct setCDT {$/;"	s	file:
+setClassT	.\set.h	/^typedef enum { IntSet, PtrSet } setClassT;$/;"	t	typeref:enum:__anon11
+setElementSize	.\set.c	/^    int setElementSize;\/\/新增(setElementT内存空间大小)$/;"	m	struct:setCDT	file:
+setElementT	.\set.c	/^} setElementT;$/;"	t	typeref:union:__anon10	file:
 size	.\graphics.c	/^    int size;$/;"	m	struct:graphicsStateT	file:
 size	.\stack.c	/^	int size;$/;"	m	struct:stackCDT	file:
 spaceOption	.\scanadt.c	/^	spaceOptionT spaceOption;$/;"	m	struct:scannerCDT	file:
-spaceOptionT	.\scanadt.h	/^typedef enum {PreserveSpaces, IgnoreSpaces} spaceOptionT;$/;"	t	typeref:enum:__anon3
+spaceOptionT	.\scanadt.h	/^typedef enum {PreserveSpaces, IgnoreSpaces} spaceOptionT;$/;"	t	typeref:enum:__anon9
 stackADT	.\stack.h	/^typedef struct stackCDT *stackADT;$/;"	t	typeref:struct:stackCDT
 stackADT	.\stacklist.h	/^typedef struct stackCDT *stackADT;$/;"	t	typeref:struct:stackCDT
 stackCDT	.\stack.c	/^struct stackCDT{$/;"	s	file:
@@ -663,29 +871,82 @@ symtabFnT	.\symtab.h	/^typedef void (*symtabFnT) (string key, void *value, void 
 tail	.\iterator2.c	/^	cellT *head, *tail;$/;"	m	struct:iteratorCDT	file:
 tail	.\queue.c	/^	int tail;$/;"	m	struct:queueCDT	file:
 tail	.\queuelist.c	/^	cellT *tail;$/;"	m	struct:queueCDT	file:
-target	.\bst.c	/^    void *target;$/;"	m	struct:deleteE	file:
-target	.\bst_save.c	/^  void *target;$/;"	m	struct:deleteE	file:
 textFont	.\graphics.c	/^static string textFont;$/;"	v	file:
 textStyle	.\graphics.c	/^static int textStyle;$/;"	v	file:
+totalSize	.\avl.c	/^    int userSize, totalSize;$/;"	m	struct:avlCDT	file:
+totalSize	.\blt.c	/^    int userSize, totalSize;$/;"	m	struct:bstCDT	file:
 totalSize	.\bst.c	/^    int userSize, totalSize;$/;"	m	struct:bstCDT	file:
-totalSize	.\bst_save.c	/^  int userSize, totalSize;$/;"	m	struct:bstCDT	file:
+totalSize	.\rbt.c	/^    int userSize, totalSize;$/;"	m	struct:rbtCDT	file:
+traversalOrderT	.\avl.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	t	typeref:enum:__anon15
+traversalOrderT	.\bst.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	t	typeref:enum:__anon2
+traversalOrderT	.\rbt.h	/^typedef enum { InOrder, PreOrder, PostOrder } traversalOrderT;$/;"	t	typeref:enum:__anon19
+treeT	.\avl.c	/^typedef void *treeT;$/;"	t	file:
+treeT	.\blt.c	/^typedef void *treeT;$/;"	t	file:
 treeT	.\bst.c	/^typedef void *treeT;$/;"	t	file:
-treeT	.\bst_save.c	/^typedef void *treeT;$/;"	t	file:
-tree_height	.\bst.c	/^static int tree_height(bstADT bst, treeT root, int height)$/;"	f	file:
-tree_height	.\bst_save.c	/^static int tree_height(bstADT bst, treeT root, int height)$/;"	f	file:
+treeT	.\rbt.c	/^typedef void *treeT;$/;"	t	file:
 try	.\exception.h	224;"	d
 undefined_object	.\genlib.c	/^char undefined_object[] = "UNDEFINED";$/;"	v
+userSize	.\avl.c	/^    int userSize, totalSize;$/;"	m	struct:avlCDT	file:
+userSize	.\blt.c	/^    int userSize, totalSize;$/;"	m	struct:bstCDT	file:
 userSize	.\bst.c	/^    int userSize, totalSize;$/;"	m	struct:bstCDT	file:
-userSize	.\bst_save.c	/^  int userSize, totalSize;$/;"	m	struct:bstCDT	file:
+userSize	.\rbt.c	/^    int userSize, totalSize;$/;"	m	struct:rbtCDT	file:
+val	.\test\avl\avl\avl.h	/^    void* val;$/;"	m	struct:avl_node
 value	.\exception.h	/^    void *value;$/;"	m	struct:ctx_block
 value	.\queuelist.c	/^	queueElementT value;$/;"	m	struct:cellT	file:
 value	.\symtab.c	/^	void *value;$/;"	m	struct:cellT	file:
 waitState	.\xdisplay.c	/^static waitStateT waitState;$/;"	v	file:
-waitStateT	.\xdisplay.c	/^} waitStateT;$/;"	t	typeref:enum:__anon2	file:
+waitStateT	.\xdisplay.c	/^} waitStateT;$/;"	t	typeref:enum:__anon13	file:
 windowHeight	.\graphics.c	/^static double windowHeight = DesiredHeight;$/;"	v	file:
 windowHeight	.\xdisplay.c	/^static double windowWidth, windowHeight;$/;"	v	file:
 windowTitle	.\graphics.c	/^static string windowTitle = "Graphics Window";$/;"	v	file:
 windowWidth	.\graphics.c	/^static double windowWidth = DesiredWidth;$/;"	v	file:
 windowWidth	.\xdisplay.c	/^static double windowWidth, windowHeight;$/;"	v	file:
+write	.\test\avl\AVLTest.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\avl\randomtestAVL.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\delAVLTest.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height2\L_l=-1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height2\L_l=0.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height2\L_l=1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height2\R_r=-1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height2\R_r=0.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height2\R_r=1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==-1\L_l=-1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==-1\L_l=0.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==-1\L_l=1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==0\1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==0\2.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==0\3.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==0\4.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==0\5.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==0\6.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==0\7.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==0\8.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==0\9.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==1\L_r=-1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==1\L_r=0.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\L==1\L_r=1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==-1\R_l=-1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==-1\R_l=0.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==-1\R_l=1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==0\1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==0\2.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==0\3.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==0\4.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==0\5.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==0\6.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==0\7.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==0\8.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==0\9.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==1\R_r=-1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==1\R_r=0.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height3\R==1\R_r=1.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height4\L=0_7.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height4\L=0_9.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\height4\R=0_3.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\randomtestAVL.c	/^void write(void *np, void *fp)$/;"	f
+write	.\test\blt\randomtestAVL_Left.c	/^void write(void *np, void *fp)$/;"	f
+writeEnter	.\test\avl\randomtestAVL.c	/^void writeEnter(void *fp)$/;"	f
+writeEnter	.\test\blt\randomtestAVL.c	/^void writeEnter(void *fp)$/;"	f
+writeEnter	.\test\blt\randomtestAVL_Left.c	/^void writeEnter(void *fp)$/;"	f
 xdpi	.\xdisplay.c	/^static double xdpi, ydpi;$/;"	v	file:
 ydpi	.\xdisplay.c	/^static double xdpi, ydpi;$/;"	v	file:

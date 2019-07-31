@@ -145,4 +145,6 @@ void *RBTRoot(rbtADT rbt);
 void *RBTLeftChild(rbtADT rbt, void *np);
 void *RBTRightChild(rbtADT rbt, void *np);
 
+typedef enum { black, red } colorT;
+
 #endif

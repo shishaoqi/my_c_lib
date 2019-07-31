@@ -2,7 +2,7 @@
 * @Author: shishao
 * @Date:   2019-07-19 18:10:06
 * @Last Modified by:   shishao
-* @Last Modified time: 2019-07-23 00:53:00
+* @Last Modified time: 2019-07-23 01:26:14
 */
 
 /*
@@ -169,11 +169,11 @@ static void *RecDeleteNode(avlADT avl, treeT *tptr, void *kp)
     sign = avl->cmpFn(kp, target);
     dp = AVLData(avl, target);
     if (sign == 0){
-        DeleteTargetNode(avl, tptr);
+        target = DeleteTargetNode(avl, tptr);
     } else if (sign < 0) {
-        RecDeleteNode(avl, &dp->left, kp);
+        target = RecDeleteNode(avl, &dp->left, kp);
     } else if (sign > 0) {
-        RecDeleteNode(avl, &dp->right, kp);
+        target = RecDeleteNode(avl, &dp->right, kp);
     }
     dp->height = Max(GetHeight(avl, dp->left), GetHeight(avl, dp->right)) + 1;
 
@@ -206,10 +206,8 @@ static void *DeleteTargetNode(avlADT avl, treeT *tptr)
 
     if (tdp->left == NULL) {
         *tptr = tdp->right;
-        return NULL;
     } else if (tdp->right == NULL) {
         *tptr = tdp->left;
-        return NULL;
     } else {
         cptr = tdp->left;
         cdp = AVLData(avl, cptr);
@@ -225,6 +223,8 @@ static void *DeleteTargetNode(avlADT avl, treeT *tptr)
         cdp->height = Max(GetHeight(avl, tdp->left), GetHeight(avl, tdp->right)) + 1;
         cdp->left = tdp->left;
         cdp->right = tdp->right;
+
+        //target = newTarget;//调试结果证明，递归下不需要。
 
         //此注释掉的，经测试不能加上。（网上的参照不对吧）
         //将 target 看做根结点，删除的元素在左子树，此时判断左子树与右子树的高度差是不是>=2
@@ -244,7 +244,7 @@ static void *DeleteTargetNode(avlADT avl, treeT *tptr)
         }*/
     }
 
-    return tptr;
+    return target;
 }
 
 static void LeftRightRotate(avlADT avl, treeT *tptr) {

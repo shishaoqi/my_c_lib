@@ -2,7 +2,7 @@
 * @Author: shishao
 * @Date:   2019-07-16 13:36:23
 * @Last Modified by:   shishao
-* @Last Modified time: 2019-07-23 00:41:36
+* @Last Modified time: 2019-07-23 01:08:16
 */
 
 #include "genlib.h"
@@ -18,6 +18,7 @@ main()
   FILE *fp;
   int i=0, temp, second;
   int n = 0;
+  int *delptr;
 
   //int num[30] = {30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
   int num[100000];
@@ -48,7 +49,7 @@ main()
     n = RandomInteger(0, 1000000);
     if(FindAVLNode(avl, &n)!=NULL){
       fprintf(fp, "%-8d", n);
-      DeleteAVLNode(avl, &n);
+      delptr = DeleteAVLNode(avl, &n);
       j++;
     }
   }
