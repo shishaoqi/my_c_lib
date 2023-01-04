@@ -75,10 +75,12 @@
 #include <signal.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#include <unistd.h>
 
 #include "genlib.h"
 #include "exception.h"
 #include "simpio.h"
+#include "strlib.h"
 #include "xmanager.h"
 #include "xdisplay.h"
 #include "xcompat.h"

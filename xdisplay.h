@@ -146,6 +146,8 @@ double XDTextWidth(string text);
 
 string XDSetFont(string font, int size, int style);
 
+void DisplayFontMetrics(double *pAscent, double *pDescent, double *pHeight);
+
 /*
  * Function: XDSetTitle
  * Usage: XDSetTitle(title);

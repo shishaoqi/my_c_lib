@@ -20,6 +20,7 @@
 #include <signal.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#include <ctype.h>
 
 #include "genlib.h"
 #include "gcalloc.h"
