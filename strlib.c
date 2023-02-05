@@ -213,8 +213,6 @@ string RealToString(double d)
     char buffer[MaxDigits];
 
     sprintf(buffer, "%G", d);  
-	//为什么是%G，而不是%lf 或 %le呢?  但测试没问题！
-	//测试中：若改为%lf,会使输出与d不同(比如d=3.14, 输出为3.140000 )
     return (CopyString(buffer));
 }
 
@@ -224,7 +222,7 @@ double StringToReal(string s)
     char dummy;
 
     if (s == NULL) Error("NULL string passed to StringToReal");
-    if (sscanf(s, " %lg %c", &result, &dummy) != 1)  //为什么是%lg，而不是%lf 或 %le呢? 但测试没问题！
+    if (sscanf(s, " %lg %c", &result, &dummy) != 1)  //为什么锟斤拷%lg锟斤拷锟斤拷锟斤拷锟斤拷%lf 锟斤拷 %le锟斤拷? 锟斤拷锟斤拷锟斤拷没锟斤拷锟解！
         Error("StringToReal called on illegal number %s", s);
 
     return (result);

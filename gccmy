@@ -1,5 +1,5 @@
 #! /bin/csh -f
-set INCLUDE = /www/my_c_lib
+set INCLUDE = /Users/shishao/Code/C/my_c_lib
 set CSLIB = $INCLUDE/libcs.a
 set LIBRARIES = ($CSLIB -lX11 -lm)
 foreach x ($*)

@@ -54,8 +54,7 @@ int GetInteger(void)
             printf("Please enter an integer\n");
             break;
         }
-        FreeBlock(line);
-        printf("Retry: ");
+          
     }
 }
 
